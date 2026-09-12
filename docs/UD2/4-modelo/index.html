@@ -1,0 +1,1894 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../3-creacion/">
+      
+      
+        <link rel="next" href="../5-restricciones/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>4. Modelo conceptual - Bases de datos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto,+sans-serif:300,300i,400,400i,700,700i%7CCourier+New,+monospace:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto, sans-serif";--md-code-font:"Courier New, monospace"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/styles.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-modelo-conceptual" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Bases de datos" class="md-header__button md-logo" aria-label="Bases de datos" data-md-component="logo">
+      
+  <img src="../../img/logo-bbdd.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bases de datos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Modelo conceptual
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Bases de datos" class="md-nav__button md-logo" aria-label="Bases de datos" data-md-component="logo">
+      
+  <img src="../../img/logo-bbdd.png" alt="logo">
+
+    </a>
+    Bases de datos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1. Introducción a las bases de datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1. Introducción a las bases de datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/1-sistemas-almac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Sistemas de almacenamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/2-ficheros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Ficheros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/3-bbdd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Bases de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/4-sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. SGBD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/5-arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Arquitectura de niveles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/6-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/ej1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1 - Práctica no evaluable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/ej2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2 - Práctica no evaluable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2. Modelo conceptual (E-R)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2. Modelo conceptual (E-R)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. ¿Qué es una base de datos?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Principales sistemas gestores de bases de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-creacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Creación de una base de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Modelo conceptual
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Modelo conceptual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Entidades
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-ocurrencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Ocurrencia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-relaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Relaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. Relaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-de-grado-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relaciones de grado 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-de-grado-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relaciones de grado 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-de-grado-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relaciones de grado 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-de-grado-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relaciones de grado n
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-participacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Participación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-cardinalidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Cardinalidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. Atributos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-restricciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Restricciones de integridad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-ent-debiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Entidades débiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7-er-ext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Modelo E-R ampliado. Generalización/Especialización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8-agregacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Agregación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ej1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1 - Actividad de clase
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ej2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2 - Práctica no evaluable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ej3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3 - Práctica no evaluable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anexo1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 1. Ejemplos de Participación y Cardinalidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anexo2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 2. Procedimiento del diseño conceptual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Entidades
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-ocurrencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Ocurrencia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-relaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Relaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. Relaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-de-grado-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relaciones de grado 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-de-grado-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relaciones de grado 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-de-grado-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relaciones de grado 3
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relaciones-de-grado-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relaciones de grado n
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-participacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Participación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-cardinalidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Cardinalidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-atributos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. Atributos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4-modelo-conceptual">4. Modelo conceptual</h1>
+<p>Para realizar el diseño conceptual utilizaremos el <strong>modelo Entidad-Relación</strong> (en adelante E-R). Este modelo fue introducido por Peter Chen en 1976 y se basa en el estudio de las entidades (objetos) que forman parte del sistema, de sus características y de las relaciones que existen entre esas entidades. Este estudio se plasmará de forma gráfica en unos diagramas E-R.</p>
+<p>Originalmente, el modelo E-R solo incluía los conceptos de entidad, atributo y relación. Más tarde, se añadieron otros conceptos, como los atributos compuestos, los atributos multivaluados y las jerarquías de generalización, en lo que se ha denominado modelo Entidad-Relación extendido.</p>
+<p>A continuación veremos los diferentes elementos que componen los diagramas E-R.</p>
+<h2 id="41-entidades">4.1. Entidades</h2>
+<p>El primer paso para elaborar nuestro modelo será descubrir las entidades.</p>
+<p>Una <strong>entidad</strong> es cualquier objeto concreto o abstracto del cual podremos almacenar información.</p>
+<p>Elementos concretos pueden ser: un coche, un socio de una biblioteca, un libro, un cliente, una mesa, etc. Otros elementos abstractos que pueden ser entidades son por ejemplo: una idea, un sueño, un proyecto que aún no se ha llevado a cabo, etc. También hay otros que, aunque pueden ser más tangibles, algunas veces no son tan evidentes. Por ejemplo: una inversión en bolsa, un divorcio, una sentencia judicial, una declaración de un testigo, etc.</p>
+<p>Las entidades usan sustantivos, tales como Pedido, Cliente, Venta, Articulo. Todo dependerá del contexto en el que estemos trabajando.</p>
+<p>Para cada elemento que encontremos debemos preguntarnos si nos interesa guardar información sobre él y, en caso afirmativo, lo incluiremos como una posible entidad. Puede ocurrir que al final no sea necesaria y la descartemos, pero aconsejamos que inicialmente sea incluido todo aquello que nos parezca oportuno, puesto que ya tendremos tiempo después de filtrarlo.</p>
+<div class="admonition question">
+<p class="admonition-title">Actividad 1</p>
+<p>¿Qué entidades se te ocurren que puedan existir en un centro educativo?</p>
+<details class="example">
+<summary>Solución</summary>
+<p>Posibles entidades: Alumnos, Profesores, Aulas, Asignaturas, Notas, etc.</p>
+</details>
+</div>
+<h2 id="42-ocurrencia">4.2. Ocurrencia</h2>
+<p>Una <strong>ocurrencia</strong> en una base de datos es cada instancia concreta de una entidad que se encuentra almacenada en una tabla. Es decir, representa un registro individual que cumple con la estructura definida por los campos de la tabla.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p>Supongamos una entidad Pedido formada por los pedidos realizados por los clientes a una empresa determinada. Por ejemplo, serían ocurrencias:</p>
+<ul>
+<li>El pedido número 1201 realizado por Pepe Ruiz el día 28/08/2023</li>
+<li>El pedido número 1202 realizado por Blanca García el día 29/08/2013</li>
+<li>Etc.</li>
+</ul>
+<p>Cada pedido es una ocurrencia de la entidad Pedido.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<p>Supongamos la entidad Clientes, que son los que realizan los pedidos a una empresa. Por ejemplo, serían ocurrencias:</p>
+<ul>
+<li>El cliente Pepe Ruiz es autónomo con sede fiscal en Polígono industrial Vara de Quart de Valencia y con CIF: B1234567890</li>
+<li>La cliente Blanca García es un particular con domicilio en Plaza Zocodóver 17 de Toledo y con el NIF: 123456789A</li>
+<li>Etc.</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Actividad 2</p>
+<p>Indica al menos una entidad y una ocurrencia de cada uno de los siguientes contextos:</p>
+<p>Una academia de estudios.
+Una liga de balonmano.
+Una agencia de viajes.
+Una frutería.
+Una empresa de alquiler de bicicletas.</p>
+<details class="example">
+<summary>Solución</summary>
+<ul>
+<li>Liga de balonmano. Entidad: Jugador; Ocurrencia: Paco López, que juega en la posición de pivote.</li>
+<li>Agencia de viajes. Entidad: Vuelo; Ocurrencia: VLC-MAD, con un precio de 120 euros.</li>
+<li>Frutería. Entidad: Producto; Ocurrencia: Naranjas navelate, con origen Valencia.</li>
+<li>Empresa de alquiler de bicicletas. Entidad: Bicicleta; Ocurrencia: BH de montaña, con frenos de disco.</li>
+</ul>
+</details>
+</div>
+<h2 id="43-relaciones">4.3. Relaciones</h2>
+<p>Una <strong>relación</strong>, también llamadas interrelación, representa una asociación o correspondencia entre entidades. Es el elemento que nos permitirá relacionar las ocurrencias de las diferentes entidades. La representación gráfica de una relación es un rombo y en su interior se escribe el nombre de la relación, que suele ser un verbo o una acción verbal.</p>
+<p>Por ejemplo: qué pedidos pertenecen a un cliente, qué coche ha sido vendido por qué comercial, etc.</p>
+<p>Se denomina <strong>grado de una relación</strong> al número de entidades que participan en esa relación.</p>
+<h3 id="relaciones-de-grado-2">Relaciones de grado 2</h3>
+<p>Veamos un ejemplo que aparece en la gran mayoría de las empresas en las que existen varios departamentos y cada uno de los empleados pertenece a un determinado departamento. Tenemos dos entidades: por un lado Empleado y por otro lado Departamento. La asociación que utilizamos en este caso es Pertenece; es decir, los empleados pertenecen a departamentos.</p>
+<p><img alt="Ejemplo de relación de grado 2" src="../img/relacion-g2.png" /></p>
+<p>En el ejemplo anterior hay dos entidades que están asociadas por una relación, por lo que en este caso estaríamos hablando de una relación de grado 2 (también llamadas <strong>Binarias</strong>). Lo más habitual es encontrar relaciones de grado 2; sin embargo, también podemos encontrar otros grados.</p>
+<h3 id="relaciones-de-grado-1">Relaciones de grado 1</h3>
+<p>También llamadas <strong>Reflexivas</strong> o Unarias. Son en las que una relación crea una correspondencia entre unas ocurrencias de una entidad con otras ocurrencias de la misma entidad. Por ejemplo, la relación "Es jefe de" con la entidad Empleado. Algunos empleados son jefes de otros empleados.</p>
+<p><img alt="Ejemplo de relación de grado 1" src="../img/relacion-g1.png" /></p>
+<h3 id="relaciones-de-grado-3">Relaciones de grado 3</h3>
+<p>También llamadas Ternarias. En estas relaciones intervienen tres entidades. Por ejemplo:</p>
+<p><img alt="Ejemplo de relación de grado 3" src="../img/relacion-g3.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>Es importante evitar generar una relación inexistente. Por ejemplo:</p>
+<p><img alt="Ternaria errónea" src="../img/ternaria-erronea.png" /></p>
+<p>En este ejemplo se puede observar que ambos modelos son conceptualmente diferentes y, además, que el segundo es incorrecto, puesto que la entidad "Editorial" y la entidad "Socio" no deberían estar relacionadas.</p>
+</div>
+<h3 id="relaciones-de-grado-n">Relaciones de grado n</h3>
+<p>Aunque es muy poco frecuente, podemos encontrarnos relaciones que asocien cuatro entidades. En ese caso sería una relación de grado 4 y así sucesivamente hasta grado n.</p>
+<div class="admonition question">
+<p class="admonition-title">Actividad 3</p>
+<p>En el ejercicio anterior se te pidieron entidades y ocurrencias, y ahora que sugieras, al menos, una entidad más por contexto y la relación entre esa entidad y la que propusiste. Indica el grado correspondiente para cada relación encontrada. </p>
+<p>Por ejemplo: Instituto (entidad: Profesor; entidad: Alumno; Relación: ImparteClase).</p>
+<details class="example">
+<summary>Solución</summary>
+<ul>
+<li>Una academia de estudios. Posibles entidades: profesores, estudios, cursos, asignaturas o módulos, alumnos, exámenes, etc.</li>
+<li>Una liga de balonmano. Posibles entidades: entrenadores, equipos, partidos, jugadores, goles, árbitros, tarjetas, etc.</li>
+<li>Una agencia de viajes. Posibles entidades: clientes, tipos de viajes, destinos, medios de transporte, hoteles, empresas de traslado, seguros, etc.</li>
+<li>Una frutería. Posibles entidades: productos, empleados, horarios de trabajo, tiques de compra, envíos a domicilio, etc.</li>
+<li>Una empresa de alquiler de bicicletas. Posibles entidades: gamas/modelos de bicicletas, bicicletas, revisiones, seguros, - clientes, precios, temporadas, etc.</li>
+</ul>
+</details>
+</div>
+<h2 id="44-participacion">4.4. Participación</h2>
+<p>Continuando con el modelo entidad relación, ahora, a partir de dos entidades relacionadas vamos a establecer su participación.</p>
+<p>La <strong>participación</strong> de una ocurrencia de una entidad indica, en una pareja de números, el mínimo y el máximo número de veces que puede aparecer en la relación asociada a otra ocurrencia de entidad.</p>
+<p>Las posibles participaciones son:</p>
+<table>
+<thead>
+<tr>
+<th>Participación</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(0,1)</td>
+<td>Mínimo 0, Máximo 1</td>
+</tr>
+<tr>
+<td>(1,1)</td>
+<td>Mínimo 1, Máximo 1</td>
+</tr>
+<tr>
+<td>(0,n)</td>
+<td>Mínimo 0, Máximo n o muchos</td>
+</tr>
+<tr>
+<td>(1,n)</td>
+<td>Mínimo 1, Máximo n o muchos</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo práctico</strong>:</p>
+<p>Supongamos que tenemos la entidad Empleado y la entidad Proyecto asociadas por la relación "Trabaja en". La participación nos mostrará el número mínimo y máximo de proyectos en los que un empleado puede trabajar y, por otro lado, indicará en un proyecto cuál es el número mínimo y máximo de empleados que pueden trabajar en él.</p>
+<p>Supongamos que preguntamos en la empresa quienes son sus empleados y nos dan 5 nombres (Juan, Ana, Pedro, Mario e Isabel) y por otro lado preguntamos cuántos proyectos tienen y nos dan 4 nombres de proyectos (Prometeo, Cuántico XXI, Hidráulicas Turia y Fibra óptica).</p>
+<p>Para ver la participación debemos (esto solo lo hacemos ahora para comprender el concepto, después saldrá de forma automática) preguntar al cliente en qué proyecto trabaja cada uno de los empleados y dibujar los dos conjuntos, así como las líneas que muestran la correspondencia de la relación "Trabaja en".</p>
+<p><img alt="Ejemplo proyecto" src="../img/empleado-proyecto.png" /></p>
+<p>Como podemos observar, Juan trabaja en un proyecto, Ana en dos, Pedro en tres, Mario en ninguno e Isabel en uno. Por otro lado, en Prometeo trabajan dos empleados, en Cuántico XXI otros dos empleados, en Hidráulicas Turia un empleado y en Fibra óptica dos empleados.</p>
+<p><img alt="Imagen conjuntos proyecto" src="../img/relaciones.png" /></p>
+<p>Una vez analizado el resultado debemos realizar las siguientes preguntas que responderemos nosotros con los conocimientos adquiridos de nuestras conversaciones con el cliente. En caso de duda, volveremos a preguntar al cliente o estudiaremos cómo ha funcionado la empresa, etc.</p>
+<p><strong>Empleados. Posibles preguntas</strong>:</p>
+<ul>
+<li>
+<p><em>¿Un empleado tiene que estar siempre trabajando en un proyecto o puede estar sin trabajar en ninguno?</em></p>
+<p>En este caso podemos observar que existe un empleado (Mario) que no trabaja en ningún proyecto. Siempre que realicemos estas preguntas debemos fijarnos en la escala temporal, no solo tenemos que preguntarnos por el momento actual, también por el pasado y por el futuro. Por ejemplo:</p>
+<ul>
+<li>Al contratar un nuevo empleado ¿tendrá o no tendrá ya un proyecto en el que trabajar?</li>
+<li>Cuando finalice un proyecto ¿los empleados de ese proyecto ya estarán trabajando en otro o podrá haber un tiempo mientras son reasignados a otro proyecto?</li>
+<li>Etc.</li>
+</ul>
+<p>De esta forma obtendremos la participación mínima: un 0 si el empleado puede estar en algún momento sin estar trabajando en un proyecto y un 1 si un empleado va a estar trabajando en uno como mínimo.</p>
+</li>
+<li>
+<p><em>¿Un empleado puede trabajar como máximo en un proyecto o puede trabajar en más de un proyecto?</em></p>
+<p>En nuestro diagrama está claro que Ana y Pedro están trabajando en más de un proyecto. Para obtener la participación máxima seleccionaremos un 1 si un empleado puede trabajar como máximo en un proyecto o n si puede trabajar en más de un proyecto.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Por tanto</p>
+<p>Después de estas preguntas obtendremos la participación de los empleados, en este caso será (0,n).</p>
+</div>
+<p><strong>Proyectos. Posibles preguntas</strong>:</p>
+<p>Ahora realizaremos unas preguntas similares para los proyectos.</p>
+<ul>
+<li>
+<p><em>En un proyecto ¿siempre tiene que haber al menos un empleado que trabaja en él?</em></p>
+<p>En nuestro caso, consideraremos que después de hablar con los clientes, nos han dicho que siempre antes de crear un proyecto se ha asignado un responsable que va a trabajar en él. Esto nos indica que todo proyecto siempre tendrá al menos un empleado que trabaja en él. La participación mínima en este caso será un 1.</p>
+</li>
+<li>
+<p><em>En un proyecto ¿solamente puede estar trabajando un empleado o puede haber proyectos en los que trabajen varios empleados?</em> </p>
+<p>Como podemos apreciar en los conjuntos, hay proyectos en los que están trabajando varios empleados. La participación máxima en este caso será n.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Por tanto</p>
+<p>Con la respuestas de estas preguntas obtendremos la participación de los proyectos, en este caso será (1,n).</p>
+</div>
+<p>Colocaremos la participación junto a nuestro diagrama E-R. La participación de los empleados respecto a los proyectos se colocará junto a la entidad Proyectos, y la participación de los proyectos respecto a los empleados se colocará junto a la entidad Empleados.</p>
+<p><img alt="Participaciones de las entidades" src="../img/empleado-proyecto-2.png" /></p>
+<p>Aunque parece que lo estamos colocando al revés, no es así; se coloca de esta forma para que su lectura sea sencilla. De este modo podemos leer de izquierda a derecha que un Empleado Trabaja en 0 o n Proyectos. Y de derecha a izquierda podemos leer que en un Proyecto Trabajan de 1 a n Empleados.</p>
+<h2 id="45-cardinalidad">4.5. Cardinalidad</h2>
+<p>La <strong>cardinalidad</strong> de una relación se calcula a través de las participaciones de sus ocurrencias en ella. Se toman el número máximo de participaciones de cada una de las entidades en la relación.</p>
+<p>Veamos el ejemplo del punto anterior. Para obtener la cardinalidad tomaremos el valor máximo de cada uno de los pares de las participaciones obtenidas separados por el símbolo dos puntos.</p>
+<ul>
+<li>Para la primera vemos cuál es el valor máximo de (1,n), en este caso será <strong>n</strong>.</li>
+<li>Para la segunda vemos cuál es el valor máximo de (0,n), en este caso será <strong>n</strong>.</li>
+<li>El valor de la cardinalidad serán los valores obtenidos separados por el símbolo dos puntos, N:N. No obstante, si dejamos los dos valores con n puede dar lugar a error, suponiendo que la cardinalidad debe ser la misma en toda correspondencia. Por ello en estos casos una de las n se cambia por m y <strong>la cardinalidad sería N:M</strong>.</li>
+</ul>
+<p>El resultado sería:</p>
+<p><img alt="Cardinalidad" src="../img/cardinalidad.png" /></p>
+<p>De modo que un empleado puede trabajar en m proyectos y en un proyecto pueden trabajar n empleados.</p>
+<h2 id="46-atributos">4.6. Atributos</h2>
+<p>Los <strong>atributos</strong> son las propiedades o características que deseamos guardar de una entidad o de una relación. Los atributos se representan como elipses conectadas al elemento al que pertenecen.</p>
+<p>Los atributos permiten representar las propiedades de los objetos del sistema de información así como de las asociaciones entre ellos. En el modelo E-R los atributos se representan con elipses nominadas unidas por un arco a la entidad o relación a la que describen.</p>
+<p>Podemos distinguir diferentes tipos.</p>
+<p><strong>Según su estructura</strong>:</p>
+<ul>
+<li>
+<p><strong>Simple</strong></p>
+<p><img alt="Atributo simple" class="imagen-izquierda" src="../img/atr-simple.png" /></p>
+</li>
+<li>
+<p><strong>Compuesto</strong> o Estructurado. Los valores se componen de otros valores (que pueden ser de cualquier tipo). Este caso se representa uniendo con arcos las elipses de los atributos con las elipses de los atributos que lo componen.</p>
+<p><img alt="Atributo compuesto" class="imagen-izquierda" src="../img/atr-compuesto.png" /></p>
+</li>
+</ul>
+<p><strong>Según el número máximo de valores que puede tomar el atributo para cada ocurrencia de entidad o de relación</strong>:</p>
+<ul>
+<li>
+<p><strong>Multivaluado</strong>. Puede tomar n valores como máximo. Se representa de 2 modos: etiquetando el arco con una n (o con una constante numérica si el máximo está limitado) y con una doble elipse. Por ejemplo, el Teléfono. Es posible que un empleado tenga más de un número de teléfono.</p>
+<div class="two-columns" markdown>
+<div markdown>
+<p><img alt="Atributo multivaluado 1" class="imagen-izquierda" src="../img/atr-multivaluado.png" /></p>
+</div>
+<div markdown>
+<p><img alt="Atributo multivaluado 2" class="imagen-izquierda" src="../img/atr-multivaluado2.png" /></p>
+</div>
+</div>
+</li>
+</ul>
+<p>Los atributos multivaluados pueden convertirse en una relación binaria si tienen entidad suficiente.</p>
+<p><strong>Dependiendo del tipo de información que representa</strong>:</p>
+<ul>
+<li>
+<p><strong>Derivado</strong>. Información que puede obtenerse a partir de otra información. Se representa con una elipse de trazos discontinuos.</p>
+<p><img alt="Atributo derivado" class="imagen-izquierda" src="../img/atr-derivado.png" /></p>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.annotate", "navigation.tracking", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
