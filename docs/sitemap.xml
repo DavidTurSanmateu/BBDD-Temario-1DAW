@@ -2,98 +2,110 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
+    </url>
+    <url>
+         <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/Soluciones/sol_ud2/sol-act2-noev/</loc>
+         <lastmod>2026-09-22</lastmod>
+    </url>
+    <url>
+         <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/Soluciones/sol_ud2/sol-act3-noev/</loc>
+         <lastmod>2026-09-22</lastmod>
+    </url>
+    <url>
+         <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/Soluciones/sol_ud2/sol-act4-bateria/</loc>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD1/1-sistemas-almac/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD1/2-ficheros/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD1/3-bbdd/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD1/4-sgbd/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD1/5-arquitectura/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD1/6-bibliografia/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD1/ej1/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD1/ej2/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/1-intro/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/2-sgbd/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/3-creacion/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/4-modelo/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/5-restricciones/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/6-ent-debiles/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/7-er-ext/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/8-agregacion/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/9-bibliografia/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/anexo1/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/anexo2/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/ej1/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/ej2/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/ej3/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
     <url>
          <loc>https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD2/ej4/</loc>
-         <lastmod>2026-09-16</lastmod>
+         <lastmod>2026-09-22</lastmod>
     </url>
 </urlset>
