@@ -4,6 +4,21 @@
  * @description Theme for the IES Conselleria presentation template
 */
 
+.solo-filas {
+  grid-template-columns: 1fr !important;
+}
+
+.discontinuo {
+  text-decoration: underline dashed;
+  text-underline-offset: 3px;
+}
+
+.doble {
+  text-decoration-line: underline;
+  text-decoration-style: double;
+  text-underline-offset: 3px;
+}
+
 /* Color encabezado tablas */
 
 .md-typeset table thead th {
