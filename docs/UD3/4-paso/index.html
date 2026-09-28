@@ -1,0 +1,3298 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD3/4-paso/">
+      
+      
+        <link rel="prev" href="../3-restricciones/">
+      
+      
+        <link rel="next" href="../5-dependencia-funcional/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>4. Paso del Modelo Conceptual al Lógico - Bases de datos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto,+sans-serif:300,300i,400,400i,700,700i%7CCourier+New,+monospace:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto, sans-serif";--md-code-font:"Courier New, monospace"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/styles.css">
+    
+      <link rel="stylesheet" href="../../css/toc-toggle.css">
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-paso-del-modelo-conceptual-al-logico" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Bases de datos" class="md-header__button md-logo" aria-label="Bases de datos" data-md-component="logo">
+      
+  <img src="../../img/logo-bbdd.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bases de datos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Paso del Modelo Conceptual al Lógico
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Bases de datos" class="md-nav__button md-logo" aria-label="Bases de datos" data-md-component="logo">
+      
+  <img src="../../img/logo-bbdd.png" alt="logo">
+
+    </a>
+    Bases de datos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1. Introducción a las bases de datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1. Introducción a las bases de datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/1-sistemas-almac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Sistemas de almacenamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/2-ficheros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Ficheros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/3-bbdd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Bases de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/4-sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. SGBD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/5-arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Arquitectura de niveles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/6-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/ej1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1 - Práctica no evaluable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/ej2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2 - Práctica no evaluable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2. Modelo conceptual (E-R)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2. Modelo conceptual (E-R)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/1-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. ¿Qué es una base de datos?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/2-sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Principales sistemas gestores de bases de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/3-creacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Creación de una base de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/4-modelo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Modelo conceptual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/5-restricciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Restricciones de integridad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/6-ent-debiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Entidades débiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/7-er-ext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Modelo E-R ampliado. Generalización/Especialización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/8-agregacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Agregación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/9-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ej1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad inicial - Actividad de clase
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ejA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ejB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ej3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad inicial - Agregación y Especialización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ejC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/anexo1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 1. Ejemplos de Participación y Cardinalidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/anexo2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 2. Procedimiento del diseño conceptual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/anexo3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 3. Resumen Modelo E-R
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 3. Modelo lógico relacional
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 3. Modelo lógico relacional
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Modelo lógico relacional
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-elementos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Elementos del modelo relacional
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-restricciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Restricciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Paso del Modelo Conceptual al Lógico
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Paso del Modelo Conceptual al Lógico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="En esta página">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-perdidas-semanticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Pérdidas semánticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-transformacion-de-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Transformación de Entidades
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-transformacion-de-relaciones-binarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Transformación de Relaciones BINARIAS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. Transformación de Relaciones BINARIAS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-cardinalidad-nm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1. Cardinalidad N:M
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-cardinalidad-1n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2. Cardinalidad 1:N
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433-entidades-debiles-en-1n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3. Entidades débiles en 1:N
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.3. Entidades débiles en 1:N">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependencia-de-existencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DEPENDENCIA DE EXISTENCIA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependencia-de-identificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DEPENDENCIA DE IDENTIFICACIÓN
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#434-cardinalidad-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.4. Cardinalidad 1:1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.4. Cardinalidad 1:1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-con-las-tres-soluciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo con las tres soluciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-transformacion-de-relaciones-reflexivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Transformación de Relaciones REFLEXIVAS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4. Transformación de Relaciones REFLEXIVAS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441-cardinalidad-1n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.1. Cardinalidad 1:N
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442-cardinalidad-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.2. Cardinalidad 1:1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#443-cardinalidad-nm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.3. Cardinalidad N:M
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-transformacion-de-relaciones-ternarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Transformación de Relaciones TERNARIAS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5. Transformación de Relaciones TERNARIAS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#451-perdida-semantica-en-ternarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.1. Pérdida semántica en TERNARIAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#452-cardinalidad-nmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.2. Cardinalidad N:M:P
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#453-cardinalidad-nm1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.3. Cardinalidad N:M:1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#454-cardinalidad-n11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.4. Cardinalidad N:1:1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#455-cardinalidad-111" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.5. Cardinalidad 1:1:1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-atributos-de-relacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. Atributos de relación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-transformacion-de-especializaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7. Transformación de especializaciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48-transformacion-de-agregaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8. Transformación de agregaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.8. Transformación de agregaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transformacion-de-relaciones-con-agregaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformación de relaciones con agregaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-dependencia-funcional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Dependencias funcionales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-normalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Normalización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7-ejemplo-normalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Ejemplo completo de normalización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../anexo1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 1. Resumen de las transformaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="En esta página">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-perdidas-semanticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Pérdidas semánticas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-transformacion-de-entidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Transformación de Entidades
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-transformacion-de-relaciones-binarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Transformación de Relaciones BINARIAS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. Transformación de Relaciones BINARIAS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-cardinalidad-nm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1. Cardinalidad N:M
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-cardinalidad-1n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2. Cardinalidad 1:N
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433-entidades-debiles-en-1n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3. Entidades débiles en 1:N
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.3. Entidades débiles en 1:N">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependencia-de-existencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DEPENDENCIA DE EXISTENCIA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependencia-de-identificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DEPENDENCIA DE IDENTIFICACIÓN
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#434-cardinalidad-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.4. Cardinalidad 1:1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3.4. Cardinalidad 1:1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-con-las-tres-soluciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo con las tres soluciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-transformacion-de-relaciones-reflexivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Transformación de Relaciones REFLEXIVAS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4. Transformación de Relaciones REFLEXIVAS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441-cardinalidad-1n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.1. Cardinalidad 1:N
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#442-cardinalidad-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.2. Cardinalidad 1:1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#443-cardinalidad-nm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.3. Cardinalidad N:M
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-transformacion-de-relaciones-ternarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Transformación de Relaciones TERNARIAS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.5. Transformación de Relaciones TERNARIAS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#451-perdida-semantica-en-ternarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.1. Pérdida semántica en TERNARIAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#452-cardinalidad-nmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.2. Cardinalidad N:M:P
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#453-cardinalidad-nm1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.3. Cardinalidad N:M:1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#454-cardinalidad-n11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.4. Cardinalidad N:1:1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#455-cardinalidad-111" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5.5. Cardinalidad 1:1:1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-atributos-de-relacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. Atributos de relación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#47-transformacion-de-especializaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7. Transformación de especializaciones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#48-transformacion-de-agregaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8. Transformación de agregaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.8. Transformación de agregaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transformacion-de-relaciones-con-agregaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformación de relaciones con agregaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4-paso-del-modelo-conceptual-al-logico">4. Paso del Modelo Conceptual al Lógico</h1>
+<h2 id="41-perdidas-semanticas">4.1. Pérdidas semánticas</h2>
+<p>El modelo (conceptual) E-R de Peter Chen es mucho más potente que el modelo (lógico) relacional de Edgar Codd. Esto provoca que haya realidades que podemos representar a nivel conceptual (E-R) que no podemos representar a nivel lógico (relacional), como son las mínimas de cualquier participación (1,n) y cualquier participación mínima 1 en las n-arias (ternarias, cuaternarias, etc.).</p>
+<p>Esta carencia la resolveremos con una <strong>restricción de integridad</strong> que consiste en describir, de momento en lenguaje natural, qué aspectos del modelo conceptual (E-R) estamos pasando por alto en el lógico (relacional) para que los tengamos en cuenta en el modelado físico (el que depende del SGBD elegido).</p>
+<p>Una <strong>pérdida semántica</strong> puede explicarse de muchas maneras:</p>
+<ul>
+<li>No podemos expresar solamente con tablas lo que nos indica gráficamente el diagrama ER</li>
+<li>No podemos expresar en la fase 2 lo que nos indican en la fase 1</li>
+<li>El modelo lógico no puede expresar todo lo que expresa el modelo conceptual</li>
+<li>El diagrama de Chen es más rico que el modelo de Codd</li>
+</ul>
+<p>En este punto vamos a estudiar, paso a paso, cómo transformar el modelo conceptual de datos en el modelo lógico, concretamente como pasar del modelo E-R al modelo relacional. Para ello iremos viendo cada uno de los elementos que forman el modelo E-R y cuál es su correspondencia en el modelo relacional.</p>
+<p>El primer paso será transformar las entidades del modelo E-R en sus relaciones (tablas) del modelo relacional. El segundo paso será transformar las relaciones del modelo E-R al modelo relacional, teniendo en cuenta que algunas formarán relaciones (tablas) mientras que otras simplemente modificarán las correspondientes a las entidades.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Recordad que una relación en el modelo E-R no es lo mismo que una relación (tabla) en el modelo relacional.</p>
+</div>
+<h2 id="42-transformacion-de-entidades">4.2. Transformación de Entidades</h2>
+<p>Las entidades se transformarán en una relación (tabla). Cada atributo de la entidad se transformará en un atributo o campo de la relación. Cada dominio de los atributos se transformará en el dominio del atributo o campo correspondiente de la Relación.</p>
+<p>La clave primaria o principal de la relación estará formada por la clave principal o identificador de la entidad que estamos transformando (simple o compuesto). Recuerda que la clave principal se indica en el modelo relacional subrayando los campos que la forman o mediante la cláusula CP/PK.</p>
+<p>Las claves ajenas o foráneas (recordamos, aquellos atributos o campos que son clave principal o candidata en otra Relación) son representadas de diferentes maneras, algunos autores las representan en cursiva, otros con subrayado punteado bajo el nombre, etc. Nosotros utilizaremos una flecha a la derecha del nombre o la cláusula CAj/FK, siempre indicando la tabla y atributos referenciados. Vemos más adelante cuando aparecen estas claves.</p>
+<p>Suponiendo una tabla CLIENTE con CP dni, la tabla de CUENTAS relacionadas con las 2 nomenclaturas mencionadas o incluso una combinación de las mismas sería:</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>CUENTA</strong> (num_cuenta, saldo, id_cliente)<br>
+    CP:  num_cuenta<br>
+    CF: id_cliente → CLIENTE {dni}<br>
+    VNN: saldo</p>
+</li>
+<li>
+<p><strong>CUENTA</strong> (<u>num_cuenta</u>, saldo*, <span class="discontinuo">id_cliente</span> → CLIENTE{dni})</p>
+</li>
+<li>
+<p><strong>CUENTA</strong> (<u>num_cuenta</u>, saldo*, <span class="discontinuo">id_cliente</span>)
+    CP:  num_cuenta<br>
+    CF: id_cliente → CLIENTE {dni}<br>
+    VNN: saldo</p>
+</li>
+</ul>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">importante</p>
+<p>Como ya deberías saber, escojas la notación que escojas, debes de ser coherente y aplicar siempre la misma en todo el modelado.</p>
+<p>Si usas una notación redundante, como la última mostrada, <strong>es muy importante que no entre en contradicciones</strong>, por ejemplo indicando atributos distintos para las claves en la primera fila y en los detalles posteriores.</p>
+</div>
+<p>En el modelado anterior podemos ver que la relación (tabla) se llama CUENTA, que la clave principal o primaria es num_cuenta y que tiene como clave foránea id_cliente (referenciando el dni de la tabla CLIENTE).</p>
+<p>Veamos ahora un ejemplo con atributos de distintos tipos:</p>
+<p><img alt="Persona_atributos" src="../img/persona-atributos.png" /></p>
+<ul>
+<li>Clave primaria → dni</li>
+<li>Compuestos → f_nac.dia, f_nac.mes, f_nac.anyo
+nombre, apellidos (este se ha puesto sin prefijo, ambas opciones son válidas)</li>
+<li>Multivaluados → {telefono}n</li>
+<li>Derivados → edad = fecha_actual.anyo – f_nac.anyo</li>
+<li>Compuestos multivaluados → {domicilio.direccion.calle, domicilio.direccion.numero, domicilio.direccion.piso, domicilio.direccion.puerta, domicilio.ciudad, domicilio.pais}n o directamente {calle, numero, piso, puerta, ciudad, pais}n</li>
+</ul>
+<p>Quedando la transformación de la siguiente manera:</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>PERSONA</strong> (<u>dni</u>, f_nac.dia, f_nac.mes, f_nac.anyo, {calle, numero, piso, puerta, ciudad, pais}<sup>n</sup>, {telefono}<sup>n</sup>, nombre, apellidos, edad*)</p>
+<p>edad = fecha_actual.anyo – f_nac.anyo (*)</p>
+</li>
+</ul>
+</div>
+<p>(*)También podemos escribir los campos derivados en lenguaje natural:</p>
+<p>edad = años transcurridos entre la fecha de hoy y su dia de nacimiento</p>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>Presta siempre mucha atención a cómo se transforman los atributos derivados, compuestos, multivaluados y compuestos-multivaluados.</p>
+</div>
+<h2 id="43-transformacion-de-relaciones-binarias">4.3. Transformación de Relaciones BINARIAS</h2>
+<h3 id="431-cardinalidad-nm">4.3.1. Cardinalidad N:M</h3>
+<p>Estas relaciones del modelo E-R <strong>se transformarán en una relación o tabla nueva del modelo relacional</strong>, que tendrán como campos los <strong>atributos propios de la relación (si hay)</strong> y las <strong>claves primarias de las 2 entidades que relacionan</strong>.</p>
+<ul>
+<li>Las CP de las entidades relacionadas serán obviamente claves foráneas en esta nueva tabla. Una clave foránea (simple o compuesta) distinta por cada entidad, por tanto 2 claves foráneas.</li>
+<li>La clave primaria es el conjunto de las 2 CP de las entidades relacionadas.</li>
+<li>Si algún atributo de la relación E/R era identificador (subrayado) también se añade a la clave principal.</li>
+<li>Las participaciones mínimas 1, no solo aquí, en toda participación (1,n) no pueden ser expresadas en modelo relacional (pérdida semántica) y necesitan una restricción adicional. Las 0 no necesitan ninguna actuación.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>Ante cualquier participación (1,n) en una relación binaria, indicamos mediante una restricción de integridad que todas las ocurrencias de esa entidad están obligados a participar en la relación.</p>
+</div>
+<p>Veamos un ejemplo: Supongamos que tenemos una academia de informática y en nuestro modelo de datos aparece una parte como la siguiente:</p>
+<p><img alt="Matriculado_N_M" src="../img/matriculado-n-m.png" /></p>
+<p>Por un lado tendremos la tabla ALUMNO, por otro la tabla CURSO y además aparecerá una nueva tabla, fruto de la relación N:M Estar matriculado, que podemos llamar MATRICULA. La transformación quedaría así (los atributos NO CLAVES son inventados, pues no aparecen en el ejemplo):</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>PERSONA</strong> (<u>dni</u>, nombre, fecha_nacimiento)</p>
+<p><strong>CURSO</strong> (<u>cod_curso</u>, nombre, tipo_curso, fecha_comienzo)</p>
+<p><strong>MATRICULA</strong> (<u>dni</u>, cod_curso)<br>
+CF: dni → ALUMNO<br>
+CF: cod_curso → CURSO<br>
+RESTRICCIÓN DE INTEGRIDAD (por pérdida semántica): Todo ALUMNO tiene al menos un CURSO asociado y viceversa.</p>
+</li>
+</ul>
+</div>
+<p>En este caso no se ha indicado el campo al que hacen referencia las CF por tener el mismo nombre en ambas tablas. Es habitual encontrar esta omisión incluso cuando los nombres no coincidan, aunque no es recomendable.</p>
+<p>Podemos observar cómo la clave principal de la nueva tabla MATRICULA está formada por la clave principal de ALUMNO más la clave principal de CURSO y además ambas a su vez son claves foráneas por ser claves principales en sus respectivas tablas.</p>
+<p>Por otro lado, puesto que la participación mínima es 1 en ambas entidades, se añade la restricción adicional por pérdida semántica indicando que todos los elementos de esas entidades están obligados a participar en la relación. Para las participaciones mínimas 0 no haría falta indicar nada.</p>
+<p>Para indicar en los campos que forman parte de la clave principal y al mismo tiempo son o forman parte de una clave foránea existen distintas opciones:</p>
+<ul>
+<li>Con las distintas cláusulas CP y CF ya comentadas, se añadan subrayados o no a los campos.</li>
+<li>Subrayado <strong>simple</strong> indicando que es CP y además una flecha indicando que es CF y señalando la tabla y campo a la que que hace referencia.</li>
+</ul>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>MATRICULA</strong> (<u>dni</u> → ALUMNO{dni}, <u>cod_curso</u> → CURSO{cod_curso})</li>
+</ul>
+</div>
+<ul>
+<li>Subrayado <strong>doble</strong> para indicar que es CP+CF, necesita igualmente una cláusula o la flecha con la indicación para saber a que tablas y atributo hace referencia.</li>
+</ul>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>MATRICULA</strong> (<u class="doble">dni</u> → ALUMNO{dni}, <u class="doble">cod_curso</u> → CURSO{cod_curso})</li>
+</ul>
+</div>
+<p>Para las claves foráneas se recomienda usar las cláusulas para no recargar la declaración de los campos, opcionalmente se puede añadir el subrayado, aunque resulte redundante</p>
+<div class="admonition danger">
+<p class="admonition-title">Importante</p>
+<p>Las <strong>claves principales múltiples</strong>, al igual que las foráneas, <strong>se marcan en una misma cláusula CP. Nunca hay más de una clave principal, como mucho una compuesta</strong>.</p>
+</div>
+<h3 id="432-cardinalidad-1n">4.3.2. Cardinalidad 1:N</h3>
+<p>Las relaciones del modelo E-R con cardinalidad <strong>1:N no se transforman en una nueva tabla</strong>. Lo que se hará será:</p>
+<ul>
+<li>Se <strong>añade a la tabla</strong> generada a partir de la entidad <strong>que actúa con cardinalidad N</strong>, un nuevo atributo que será <strong>la clave principal de la tabla</strong> generada a partir de la entidad <strong>que actúa con cardinalidad 1</strong>, donde pasará a actuar <strong>como clave foránea</strong>.</li>
+<li>Si existen atributos de relación, se añaden a la misma tabla.</li>
+</ul>
+<p>Veamos un ejemplo:</p>
+<p><img alt="Tutor_1_N" src="../img/tutor-1-n.png" /></p>
+<p>La transformación de este fragmento dará lugar a dos tablas, la tabla PROFESOR y la tabla ALUMNO, quedando de la siguiente forma:</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>PROFESOR</strong> (<u>dni_profesor</u>, nombre, fecha_incorporacion)</p>
+<p><strong>ALUMNO</strong> (<u>dni_alumno</u>, correo, telefono, <u class="discontinuo">dni_profesor_tutor</u>)<br>
+CF: dni_profesor_tutor → PROFESOR {dni_profesor}<br>
+VNN: dni_profesor_tutor<br>
+RESTRICCIÓN DE INTEGRIDAD (por pérdida semántica): Todo PROFESOR debe tutorizar a un ALUMNO como mínimo.</p>
+</li>
+</ul>
+</div>
+<p>Podemos apreciar que en la transformación, el dni_profesor ha sido añadido a la tabla ALUMNO con el nombre dni_profesor_tutor (para que sea más significativo lo que representa) y se ha marcado como clave foránea.</p>
+<p>Esta transformación nos permitirá en todo momento conocer los ALUMNOs tutelados a partir de un PROFESOR, para ello bastará con ver el dni del PROFESOR y buscar todos los ALUMNOs que tengan ese valor en el atributo dni_profesor_tutor. Por el contrario si queremos saber quién es el tutor de un ALUMNO, bastará con tomar el valor del campo dni_profesor_tutor y ver a qué tupla pertenece en la tabla PROFESOR.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Si nos fijamos en la participación del ALUMNO (1,1), por el 1 de la mínima debe llevar la restricción VNN, garantizando que todo alumno tiene tutor.</p>
+</div>
+<p>En cambio, la otra mínima 1, en la (1,n) es una <strong>pérdida semántica</strong>, con lo que añadimos la restricción de integridad de que todo PROFESOR debe ser tutor de al menos un ALUMNO</p>
+<h3 id="433-entidades-debiles-en-1n">4.3.3. Entidades débiles en 1:N</h3>
+<div class="admonition info">
+<p class="admonition-title">Recuerda</p>
+<p>Recuerda que una entidad débil es aquella que necesita de una fuerte para poder existir.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>En este curso no estudiaremos debilidades con cardinalidad N:M.</p>
+</div>
+<p>Al transformar una entidad débil estaremos aplicando una relación 1:N sobre la misma; eso significa que <strong>incluimos como clave foránea la CP de la entidad fuerte</strong>. Al ser débil además:</p>
+<ul>
+<li>La participación en la relación es (1, 1) con lo que <strong>la clave foránea referida a la entidad fuerte no puede ser nula</strong>.</li>
+<li>Se aplica una <strong>restricción de borrado en cascada a esta clave foránea</strong>.</li>
+</ul>
+<p>Además vimos que la relación entre la entidad Fuerte y la entidad Débil podía ser de dos tipos: de existencia o de identificación. La transformación de ambas es muy parecida, solo hay algún detalle que debemos tener en cuenta.</p>
+<h4 id="dependencia-de-existencia">DEPENDENCIA DE EXISTENCIA</h4>
+<p>Comencemos por una entidad débil con dependencia de existencia como puede ser la siguiente. CUENTA_BANCARIA es la entidad fuerte y MOVIMIENTO la débil, con <strong>dependencia de existencia, lo que significa que tiene una CP que la identifica de forma única</strong>. Obligatoriamente la participación a la izquierda es (1, 1) al ser MOVIMIENTO la entidad débil y esto obliga en caso de debilidades de existencia a marcar la <strong>CF</strong> referida a su entidad fuerte como <strong>VNN</strong>.</p>
+<p><img alt="Movimiento_DE" src="../img/movimiento-d-e.png" /></p>
+<p>Tenemos pues una tabla llamada CUENTA_BANCARIA cuya CP es el número de cuenta y otra llamada MOVIMIENTO cuya CP es la referencia del movimiento, que la identifica de manera única. El resto de campos nos son indiferentes ahora.</p>
+<p>La entidad CUENTA_BANCARIA se transforma con el mismo método del apartado anterior. A MOVIMIENTO, además, se le añade la clave de CUENTA_BANCARIA como <strong>clave foránea no nula</strong> y una <strong>restricción de borrado en cascada</strong>.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>CUENTA_BANC</strong> (<u>num_cuenta</u>, ...)</p>
+<p><strong>MOVIMIENTO</strong> (<u>ref_mov</u>, <u class="discontinuo">cuenta</u>, ...)<br>
+CF: cuenta → CUENTA_BANC {num_cuenta} B:C<br>
+VNN: cuenta<br></p>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>"cuenta" podría haberse llamado "num_cuenta" igual que en la otra tabla, de hecho es muy habitual, pero usamos un nombre distinto aquí para diferenciarlas bien y para evidenciar que puede hacerse.</p>
+</div>
+<p>Podemos ver que la CP de MOVIMIENTO es ref_mov, después tenemos cuenta que es una clave foránea que hace referencia a la CP de la entidad fuerte CUENTA_BANC (num_cuenta). Esta referencia (como toda CF) puede ser nula por defecto, así que <strong>al existir una debilidad de existencia tenemos que indicar expresamente VNN</strong>.</p>
+<p>Por otro lado, a la clave foránea cuenta hay que añadirle también una <strong>restricción de borrado en cascada (B:C)</strong>, aunque esto es independiente del tipo de debilidad.</p>
+<p>Como siempre, si la participación al otro lado fuese (1,n) esa participación mínima es una <strong>pérdida semántica</strong> y necesita su correspondiente restricción de integridad.</p>
+<h4 id="dependencia-de-identificacion">DEPENDENCIA DE IDENTIFICACIÓN</h4>
+<p>Transformaremos las entidades en sus correspondientes tablas y esta vez se añade a la entidad débil la CP de la entidad fuerte <strong>no solo como clave foránea sino también como parte de la clave principal</strong>, junto con los atributos identificadores (parciales) propios. Esta clave foránea llevará una restricción de borrado en cascada, pero esta vez <strong>no se necesita añadir específicamente la restricción VNN</strong>, esto es porque al formar parte de la clave principal de la entidad ya lleva esta restricción implícitamente.</p>
+<p>Al transformar una entidad débil con dependencia de identidad en una tabla, siempre incluiremos como CP de esta entidad débil una <strong>clave compuesta que contenga todos los campos de la CP de la entidad fuerte y todos los campos identificadores de la entidad débil.</strong></p>
+<p>Veamos ahora como transformar una debilidad de identificación (incluye existencia) mediante el siguiente caso:</p>
+<p><img alt="Lineas_DI" src="../img/lineas-d-i.png" /></p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>FACTURAS</strong> (<u>num_fac</u>, ...)</p>
+<p><strong>LINEAS_FACTURA</strong> (<u class="doble">num_factura</u>, <u>num_linea</u>, ...)<br>
+CP: {num_factura,num_linea}<br>
+CF: num_factura → FACTURAS {num_factura} B:C<br></p>
+</li>
+</ul>
+</div>
+<p>Tenemos pues una tabla llamada FACTURAS cuya CP será num_factura y otra llamada LINEAS_FACTURA que tiene un número de línea (num_linea) que aunque se marcaría como identificador subrayándolo en E/R <strong>no la identifica de manera única y no forma una CP</strong> (dependencia de identificación).</p>
+<p>Por tanto, se añade como clave foránea con restricción de borrado en cascada la CP de FACTURAS (num_factura). Por otro lado, la clave principal es compuesta, formada por esa CP proveniente de FACTURAS más los identificadores propios de LINEAS_FACTURA (num_linea): {num_factura, num_linea}</p>
+<p>Puesto que num_factura forma parte de la clave no necesitamos indicar expresamente la restricción VNN, sería redundante.</p>
+<h3 id="434-cardinalidad-11">4.3.4. Cardinalidad 1:1</h3>
+<p>Antes de transformar esta relación, vamos a analizar que pasa con sus participaciones mínimas.</p>
+<p>Una relación 1:1 significa que las filas se corresponden una a una entre las 2 tablas, pero las participaciones mínimas 0 hacen aparecer huecos. En una tabla con participación mínima 1 todas sus filas tienen una correspondencia con la otra, en cambio en una tabla con participación mínima 0 algunas filas no participan en la relación y por tanto no tienen correspondencia con la otra tabla.</p>
+<p>Una vez entendido este punto vamos a ver que existen varias opciones para transformar una relación 1:1 en el modelo relacional.</p>
+<p><strong>Primera opción</strong>:</p>
+<p><strong>Mantener las tablas</strong> generadas a partir de las entidades y que <strong>la clave principal de una</strong> de ellas <strong>se añada como clave foránea en la otra tabla</strong>, igual que en una relación 1:N, solo que ahora cualquiera podría ser la tabla que recibe la clave principal de la otra como clave foránea. Además esa clave foránea llevará una restricción de valor único, ya que no se repite, al ser la cardinalidad 1:1.</p>
+<p>Esta opción es <strong>recomendable si alguna o ambas las tablas tienen una participación (0,1)</strong>. Lo ideal es <strong>elegir la tabla con participación mínima 1 (si hay alguna) como tabla que recibe la clave de la otra</strong>, al no haber huecos, la clave foránea no tomará valores nulos (<strong>VNN</strong>).</p>
+<p>Si ambas tienen participación (0,1) los valores nulos son inevitables, pero la tabla que más participe en la relación será la que menos tenga, y por tanto esa debería ser la que reciba la clave de la otra.</p>
+<p>Si ambas tienen participación (1,1) la elección es libre, pero conviene considerar si no es mejor la segunda transformación en ese caso.</p>
+<div class="admonition danger">
+<p class="admonition-title">Importante</p>
+<p>Para garantizar la relación 1:1 esta clave foránea no puede repetirse, por tanto <strong>llevará además la restricción de valor único</strong>, en caso contrario estaríamos convirtiendo la relación en 1:N.</p>
+</div>
+<p><strong>Segunda opción</strong>:</p>
+<p><strong>Unir las tablas en una sola</strong>. Es <strong>recomendable si tenemos la garantía de que ambas tablas tienen el mismo número de filas,</strong> es decir, que <strong>ambas participaciones son (1,1)</strong>. Una de las claves lo será de la tabla fusionada y la otra será un campo VNN. Si además comparten la misma clave principal entonces ya es una necesidad, y sería absurdo elegir la primera opción.</p>
+<p>En caso de que una de las entidades tenga una participación (0,1), solo conviene aplicarla si la inmensa mayoría de las ocurrencias participan en la relación, porque si no, la tabla resultante tendrá muchos campos nulos.</p>
+<p>Además, como la <strong>participación mínima 0 hace aparecer huecos</strong>, significa que <strong>los campos de la otra tabla son todos nulos y por tanto no pueden ser clave primaria</strong>. Si hay una <strong>entidad con participación (0,1) debemos elegirla para la clave primaria</strong>, pues la otra tendrá huecos. En cambio, <strong>si ambas tablas tienen participación (0,1), nunca debemos aplicar esta solución</strong>.</p>
+<p><strong>Tercera opción</strong>:</p>
+<p>La tercera opción es <strong>mantener ambas tablas y colocar cada una de las claves principales como claves foráneas con restricción de valor único en la otra tabla</strong>. Esto conlleva introducir una <strong>redundancia</strong> en nuestro modelo, pero algunas veces esta redundancia <strong>puede ser de mucha utilidad para simplificar determinadas consultas</strong>.</p>
+<p>Cabe tener en cuenta que <strong>si las tablas tienen distinta CP solo la segunda opción superaría la fase de normalización</strong>, las otras 2 si aplicamos las reglas de normalización acabarán transformadas en la segunda igualmente.</p>
+<h4 id="ejemplo-con-las-tres-soluciones">Ejemplo con las tres soluciones</h4>
+<p>Veamos un ejemplo:</p>
+<p>Supongamos que tenemos un modelo E-R que representa parte de la administración pública de nuestra comunidad en la que se representan los altos cargos de la administración y están relacionados con los coches que tienen asignados para sus desplazamientos. (Suponemos que los altos cargos que tienen coche oficial solo tienen uno y que no hay ningún coche oficial que no se haya asignado a un alto cargo).</p>
+<p><img alt="Asignado_1_1" src="../img/asignado-1-1.png" /></p>
+<p>Supongamos que a partir de las entidades obtenemos las siguientes tablas (los campos son inventados pues no aparecen en el modelo E-R del que partimos).</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>ALTO_CARGO</strong> (<u>dni</u>, nombre, puesto, fecha_posesion)</p>
+<p><strong>COCHE_OFICIAL</strong> (<u>matricula</u>, marca, modelo, color, fecha_matricula)</p>
+</li>
+</ul>
+</div>
+<p><strong>Primera opción</strong>:</p>
+<p>Si las participaciones fuesen (1,1) en ambos casos, sería indiferente a qué tabla llevar una clave foránea, nos guiaríamos por el contexto. Pero al tener una participación con (0,1) eso nos quiere decir que hay algún ALTO_CARGO que no tienen COCHE_OFICIAL. En esas tuplas los campos correspondientes al COCHE_OFICIAL tendrán valor NULO.</p>
+<p>Por tanto, si colocásemos el campo matricula en la tabla ALTO_CARGO como clave foránea tendríamos nulos. Lógicamente, hacemos lo contrario y colocamos el atributo dni como clave foránea en la tabla COCHE_OFICIAL, que representará quien tiene asignado ese coche. Conviene no olvidar la restricción de valor único para la CF o estamos convirtiendo la relación en 1:N.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>ALTO_CARGO</strong> (<u>dni</u>, nombre, puesto, fecha_posesion)</p>
+<p><strong>COCHE_OFICIAL</strong> (<u>matricula</u>, marca, modelo, color, fecha_matricula, <u class="discontinuo">dni</u>)<br>
+CF: dni → ALTO_CARGO {dni}<br>
+ÚNICO: dni<br>
+VNN: dni  -- por la participación (1,1) de COCHE_OFICIAL<br></p>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>E<strong>sta opción es recomendable cuando no muchos ALTO_CARGO tienen COCHE_OFICIAL asignado o se van a hacer muchas consultas sobre cargos donde no importe su coche o coches sin que importe a quién está asignados.</strong></p>
+</div>
+<p><strong>Segunda opción</strong>:</p>
+<p>La segunda opción une en una sola tabla las dos anteriores:</p>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>CARGO_COCHE</strong> (<u>dni</u>, nombre, puesto, f_pos, matricula, marca, modelo, color, f_mat)</li>
+</ul>
+</div>
+<p>De nuevo, si ambas participaciones fuesen (1,1), sería indiferente, aunque la clave no elegida debería llevar VNN. Al tener una participación con (0,1) hay tuplas con los campos correspondientes al COCHE_OFICIAL a valor NULO y por tanto la matricula no puede ser clave primaria. Elegimos por tanto como clave primaria el dni.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>E<strong>sta solución es solo recomendable si la inmensa mayoría de ALTO_CARGO tiene COCHE_OFICIAL asignado.</strong></p>
+</div>
+<p><strong>Tercera opción</strong>:</p>
+<p>Se trata de añadir una CF a cada tabla, de forma redundante.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>ALTO_CARGO</strong> (<u>dni</u>, nombre, puesto, fecha_posesion, <u class="discontinuo">matricula</u>)<br>
+    CF: matricula → COCHE_OFICIAL {matricula}<br>
+    ÚNICO: matricula<br></p>
+<p><strong>COCHE_OFICIAL</strong> (<u>matricula</u>, marca, modelo, color, fecha_matricula, <u class="discontinuo">dni</u>)<br>
+CF: dni → ALTO_CARGO {dni}<br>
+ÚNICO: dni<br>
+VNN: dni  -- por la participación (1,1) de COCHE_OFICIAL<br></p>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p><strong>Esta opción es solo aceptable si se van a hacer muchas consultas cruzadas</strong> donde importen los datos tanto del COCHE_OFICIAL como del ALTO_CARGO pero por organización o <strong>por tener pocos altos cargos con coche asignado la primera no es conveniente</strong>.</p>
+</div>
+<h2 id="44-transformacion-de-relaciones-reflexivas">4.4. Transformación de Relaciones REFLEXIVAS</h2>
+<p>Las relaciones reflexivas se resuelven igual que las anteriores para cada cardinalidad, solo que en este caso las "dos" entidades a las que se refiere la relación son la misma, y por tanto deberemos "duplicar" algún campo y cambiar algún nombre cuando "movamos" las claves.</p>
+<h3 id="441-cardinalidad-1n">4.4.1. Cardinalidad 1:N</h3>
+<p>Supongamos que estamos modelando la pertenencia a un club exclusivo en el que los clientes solo pueden ser admitidos si vienen recomendados por otros clientes. Tendríamos algo así:</p>
+<p><img alt="Recomienda_Reflexiva_1_N" src="../img/reflexiva-1-n.png" /></p>
+<p>Pues bien, la tabla donde añadir la CP de CLIENTE como Clave Foránea es la propia tabla CLIENTE. Por ello <strong>añadimos otro campo</strong> num_socio <strong>al que cambiaremos el nombre</strong> del atributo para que sepamos a qué corresponde (y <strong>por obligación</strong> al no poder haber 2 campos con el mismo nombre). Este nuevo atributo es el que actúa como clave foránea, en este caso <strong>no es válido dejar un único atributo CP+CF puesto que un campo no puede referenciarse a él mismo</strong>.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>CLIENTE</strong> (<u>num_socio</u>, nombre, <u class="discontinuo">recomendado_por_cliente</u>)
+    CF: recomendado_por_cliente → CLIENTE {num_socio}<br>
+    VNN: recomendado_por_cliente<br></li>
+</ul>
+</div>
+<p>Podemos ver que el nuevo campo al que hemos llamado <em>recomendado_por_cliente</em> representará al CLIENTE que realizó la recomendación, ya que un único num_socio no puede a la vez identificar al propio CLIENTE y representar al que lo recomendó.</p>
+<p>La restricción VNN viene dada por la participación (1,1), todos los clientes vienen recomendados. De no existir esta obligación no se necesitaría la restricción y simplemente el nuevo campo podría admitir valores nulos en aquellos clientes que no fueron recomendados por nadie. Piensa en ello y ponte varios ejemplos para que veas lo que puede influir la participación a la hora de decidir que campos pueden ser nulos o no.</p>
+<h3 id="442-cardinalidad-11">4.4.2. Cardinalidad 1:1</h3>
+<p>Esta vez no existen 3 opciones, ya que al ser ambas tablas la misma no se pueden fusionar (opción 1) ni cruzar claves foráneas (opción 3). De modo que simplemente se procede como en el caso anterior 1:N, <strong>añadiendo a la tabla un campo que actúe como clave foránea referenciando a la CP de la propia tabla</strong>, con la particularidad que además <strong>esta CF tiene la restricción de valor único</strong>.</p>
+<h3 id="443-cardinalidad-nm">4.4.3. Cardinalidad N:M</h3>
+<p>Supongamos ahora una relación que represente qué miembros del club se conocen entre ellos:</p>
+<p><img alt="Conoce_Reflexiva_N_M" src="../img/reflexiva-n-m.png" /></p>
+<p>En este caso tenemos que <strong>añadir una nueva tabla</strong> que relacione a cada CLIENTE con cada uno de sus conocidos de entre los miembros. Por tanto la tabla llevará <strong>2 copias de la CP</strong>, cada una representando a un CLIENTE y por tanto <strong>siendo también 2 claves foráneas</strong>. <strong>La CP de esta tabla será la combinación de estas 2 CF</strong>.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>CLIENTE</strong> (<u>num_socio</u>, nombre, <u class="discontinuo">recomendado_por*</u> → CLIENTE)<br>
+    "recomendado_por" viene de la relación anterior, en nomenclatura abreviada. El siguiente está con cláusulas para que quede más claro.</p>
+<p><strong>Conoce</strong> (<u class="doble">cliente_1</u>, <u class="doble">cliente_2</u>)<br>
+CP: {cliente_1, cliente_2}<br>
+CF: cliente_1 → CLIENTE {num_socio}<br>
+CF: cliente_2 → CLIENTE {num_socio}<br>
+RESTRICCIÓN DE INTEGRIDAD (por pérdida semántica): La CP no puede repetirse cambiando el orden de los CLIENTEs.</p>
+</li>
+</ul>
+</div>
+<p>Esta vez hemos creado 2 campos para la nueva tabla, cliente_1 y cliente_2, cada uno es independientemente una CF de CLIENTE, ya que cada campo representa a uno de los CLIENTEs y a otro que lo conoce. La combinación de ambos CLIENTEs es la CP, garantizando poder incluir todas las parejas de conocidos sin duplicar la información.</p>
+<p>Si existiese algún atributo de la relación se añadiría a la tabla también, como por ejemplo la fecha en que se conocieron.</p>
+<p>Por otro lado, hay que tener en cuenta que en este caso, que el cliente_1 con num_socio "X" conozca al que tiene el num_socio "Y" (cliente_2) ya implica que "Y" conoce al "X", por tanto se debe limitar que se cambie el orden en el que aparecen los 2 CLIENTEs en la clave con una restricción adicional. No siempre es así, piensa en una relación como la anterior de recomendaciones pero esta vez N:M donde todos los CLIENTEs pudiesen recomendar a otros, por si los demás quieren conocerlos, que X recomiende a Y ya no significa lo mismo que Y recomendando a X, así que la restricción anterior no sería válida.</p>
+<h2 id="45-transformacion-de-relaciones-ternarias">4.5. Transformación de Relaciones TERNARIAS</h2>
+<p>Para las relaciones ternarias <strong>siempre se crea una nueva tabla con las claves principales de cada una de las respectivas entidades y los atributos de la relación E-R</strong> (si hay). Además <strong>cada una de ellas será respectivamente CF referenciando a la tabla original</strong>. Recuerda que las claves foráneas compuestas se deben poner juntas ya que no funciona cada campo por separado para referenciar a los campos de la tabla original sino como conjunto.</p>
+<p>Dependiendo de la cardinalidad se aplicará una CP u otra a la nueva tabla, además de ciertas restricciones, pero antes un inciso sobre las participaciones.</p>
+<h3 id="451-perdida-semantica-en-ternarias">4.5.1. Pérdida semántica en TERNARIAS</h3>
+<p>En una <strong>RELACIÓN BINARIA (1:1, 1:N, N:M)</strong> podemos detallar cómo se relacionan dos entidades indicando sus participaciones.</p>
+<ul>
+<li>Por ejemplo, en una relación ESTUDIANTE ← MATRICULA → ASIGNATURA podemos determinar cuantos ESTUDIANTES concretos pueden matricularse en una ASIGNATURA concreta.</li>
+<li>Si decidimos que ESTUDIANTE (1,n) ← MATRICULA → (0,n) ASIGNATURA estaremos expresando que un ESTUDIANTE concreto puede estar matriculado o no en una o varias ASIGNATURAS y, una ASIGNATURA concreta debe tener al menos un ESTUDIANTE matriculado.</li>
+<li>De esta manera, en una RELACIÓN BINARIA, controlamos cómo se comportan todas las ocurrencias de todas las entidades (o casi). Existe únicamente pérdida semántica en el caso de las participaciones mínimas 1 en las N:M, como hemos visto antes.</li>
+</ul>
+<p><strong>En las ternarias no ocurre lo mismo</strong>.</p>
+<p>En una <strong><em>RELACIÓN TERNARIA (1:1:1, 1:1:N, ...)</em></strong> podemos detallar <strong>cómo se relacionan las entidades dos a dos</strong>, indicando sus participaciones en pares. Lo vemos más fácil con un ejemplo, la reserva de pistas de un club, con unos horarios predefinidos.</p>
+<p>Supongamos que tenemos una relación ternaria que relaciona 3 entidades, PERSONA, PISTA y HORARIO, para definir como se hacen las reservas de pistas de un club. Sin entrar en cuáles son sus participaciones, veamos qué se puede determinar con una relación ternaria y qué no.</p>
+<p><img alt="Reserva_G3" src="../img/reserva-ternaria.png" /></p>
+<ul>
+<li>Podemos determinar las RESERVAS de una PERSONA i PISTA concretas y con qué HORARIO, que PERSONA hace RESERVAS de una PISTA y HORARIO concretos, o en un HORARIO concreto qué PERSONA ha reservado una PISTA.</li>
+<li>En resumen, podemos ver como actúa una pareja de entidades con respecto a la tercera. Por ejemplo cuantas PERSONAs pueden reservar una pareja de PISTA y HORARIO).</li>
+<li>Lo que <strong>no podremos determinar en una TERNARIA</strong> es:<ul>
+<li>Si todas las ocurrencias de PERSONA/PISTA/HORARIO participan en la relación necesariamente. Por tanto, no sabemos si hay personas que no reservan nada, pistas que puedan estar vacías, o horarios sin elegir.</li>
+<li>Cómo se relacionan 2 entidades sin tener en cuenta la tercera. Por ejemplo, si una PERSONA puede reservar más de una PISTA o no; a secas, sin tener en cuenta el HORARIO.</li>
+</ul>
+</li>
+<li>De esta manera, en una RELACIÓN TERNARIA, <strong>solo controlamos cómo se comportan todas las ocurrencias de las entidades de dos a dos</strong>, no pudiendo modelar, diseñar, controlar... cómo se comporta una entidad de manera individual. Es lo que técnicamente se denomina una pérdida semántica, que ocurre además para cualquier relación de grado superior a 2.</li>
+</ul>
+<h3 id="452-cardinalidad-nmp">4.5.2. Cardinalidad N:M:P</h3>
+<p>Para las relaciones ternarias con cardinalidad N:M:P se actúa de manera similar a las binarias, <strong>siendo la CP la combinación de las 3 la claves primarias</strong> de las entidades que participan en la relación.</p>
+<p>Veamos un ejemplo:</p>
+<p>Supongamos una relación donde los actores pueden actuar libremente en películas haciendo cualquier personaje, por tanto, sin entrar en más detalles, la cardinalidad es N:M:P.</p>
+<p><img alt="Actuar_G3_N_M_P" src="../img/actuar-n-m-p.png" /></p>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>ACTUAR</strong> (<u class="doble">id_pelicula</u>, <u class="doble">id_estudio</u>, <u class="doble">id_personaje</u>, <u class="doble">dni</u>)<br>
+    CP: {id_pelicula, id_estudio, id_personaje, dni}<br>
+    CF: {id_pelicula, id_estudio} → PELICULA {id_pelicula, id_estudio}<br>
+    CF: id_personaje → PERSONAJE {id_personaje}<br>
+    CF: dni → ACTOR {dni}</li>
+</ul>
+</div>
+<p>Por tanto añadimos una tabla actuar donde la CP será {id_pelicula, id_estudio, id_personaje, dni}, combinando todas las claves de las entidades y cambiando el nombre de id en PERSONAJE a id_personaje para que quede más claro que representa.</p>
+<p>Por otro lado, además estos campos deben ser claves foráneas de sus tablas respectivas. Ten en cuenta que las claves compuestas se ponen juntas, en este caso {id_pelicula, id_estudio}.</p>
+<h3 id="453-cardinalidad-nm1">4.5.3. Cardinalidad N:M:1</h3>
+<p>Para este caso <strong>la CP está formada por la combinación de las claves primarias de las 2 entidades que actúan con cardinalidad N</strong> en la relación. En cambio, a la parte correspondiente a la clave principal de la tabla que actúa con cardinalidad 1 solo se le añade una restricción de valor no nulo, puesto que siempre participan las 3 entidades.</p>
+<p>Para ejemplificar esta relación usaremos la relación de reserva de pistas mencionada anteriormente, a la cual se le puede dar distintas interpretaciones, una de ellas concuerda con esta cardinalidad.</p>
+<p>Consideramos que una pareja HORARIO-PISTA la pueden reservar varias PERSONAs, así permitimos reservas grupales, ya que es lo más probable, y registramos a toda la gente que usa las PISTAs mediante la RESERVA, sin necesidad de otra relación. Por otro lado, parece evidente que una pareja PERSONA-HORARIO solo puede reservar una PISTA, ya que no puedes usar varias a la vez. En cambio, una pareja PERSONA-PISTA puede corresponderse con varios HORARIOS ya que puedes reservar a distintas horas o al menos en distintos días la misma PISTA.</p>
+<p>Con estas consideraciones, la cardinalidad es N:1:M.</p>
+<p><img alt="Reserva_G3_N_1_M" src="../img/reserva-n-1-m.png" /></p>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>RESERVA</strong> (<u class="doble">dni</u>, <u class="doble">id_hora</u>, <u class="discontinuo">id_pista</u>)<br>
+    CP:  {dni, id_hora}<br>
+    CF: dni → PERSONA {dni}<br>
+    CF: id_hora → HORARIO {id_hora}<br>
+    CF: id_pista → PISTA {id_pista}<br>
+    VNN: id_pista</li>
+</ul>
+</div>
+<p>Al definir la tabla de este modo, para cada ocurrencia de la CP (una PERSONA y un HORARIO que haya reservado) solo se puede corresponder a una PISTA y además este campo no puede ser nulo o la relación no sería ternaria.</p>
+<h3 id="454-cardinalidad-n11">4.5.4. Cardinalidad N:1:1</h3>
+<p>La idea en este caso es que <strong>cualquier combinación de la clave de la entidad que actúa con cardinalidad N y una de las que actúan con cardinalidad 1</strong> es una clave candidata, con lo que para la CP podemos elegir la que mejor nos convenga <strong>y a la otra combinación ponerle una restricción de unicidad</strong>. Finalmente para asegurar que la relación sea ternaria también se añade una restricción de valor no nulo al campo/s que no forma parte de la CP elegida.</p>
+<p>Como ejemplo tomaremos una pequeña variación del anterior caso en el que consideramos que la PISTA-HORARIO solo se puede reservar por una PERSONA cada vez, que de hecho es más lógico. Con esto la relación pasa a ser N:1:1.</p>
+<p>Veamos ventajas e inconvenientes del cambio; esta relación no permite saber quienes usan las PISTAs si hay varias PERSONAs, lo que debe ir en otra relación ternaria de cardinalidad N:1:M similar a la anterior. Pero al separar las RESERVAS del uso, se evita que PERSONAs no relacionadas puedan RESERVAR la misma PISTA en el mismo HORARIO (a la misma hora), cosa que sí podría ocurrir en la anterior, aunque podría evitarse con restricciones adicionales o usando una agregación PISTA-HORARIO en vez de una ternaria.</p>
+<p><img alt="Reserva_G3_1_N_1" src="../img/reserva-1-n-1.png" /></p>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>RESERVA</strong> (<u class="doble">id_hora</u>, <u class="doble">dni</u>, <u class="discontinuo">id_pista</u>)<br>
+    CP:  {id_hora, dni}<br>
+    CF: id_hora → HORARIO {id_hora}<br>
+    CF: dni → PERSONA {dni}<br>
+    CF: id_pista → PISTA {id_pista}<br>
+    VNN: id_pista<br>
+    ÚNICO: {id_hora, id_pista}<br></li>
+</ul>
+</div>
+<p>Se elige como clave id_hora+dni pero id_hora+id_pista sería igualmente válido. Es una clave candidata, y por eso a esa pareja se le añade la restricción de unicidad, indicando que para cualquiera de esas parejas solo puede haber un valor de la tercera entidad en la relación. Es decir, por cada HORARIO-PERSONA solo una PISTA y por cada HORARIO-PISTA solo una PERSONA; esto representa los unos de las cardinalidades. En cambio, las parejas PERSONA-PISTA pueden corresponderse a tantos HORARIOS como sea necesario (N).</p>
+<p>La clave foránea correspondiente a la entidad que queda fuera de la clave escogida, id_pista, y lleva una restricción VNN para asegurar que la relación es ternaria. Si se elige la otra clave candidata, id_hora+id_pista, la restricción de unicidad iría a id_hora+dni y la restricción VNN a id_hora.</p>
+<h3 id="455-cardinalidad-111">4.5.5. Cardinalidad 1:1:1</h3>
+<p>Para este último caso todas las parejas en la relación solo pueden tener como máximo una correspondencia de la tercera entidad en la relación, así que <strong>cualquier combinación de las claves de 2 de las 3 entidades</strong> es una clave candidata, podemos elegir la que queramos como CP. Puesto que entre 3 elementos hay 3 combinaciones posibles, <strong>las otras 2 combinaciones de claves no elegidas llevarán cada una la restricción de unicidad</strong>. De nuevo, para asegurar que la relación sea ternaria, <strong>también se añade una restricción de valor no nulo al campo/s que no forma parte de la CP</strong> elegida.</p>
+<p>Para este ejemplo vamos a suponer que diseñamos una serie de ACTIVIDADES individuales a realizar sobre un conjunto de bases de datos (BD) por el ALUMNADO para unas sesiones de prácticas. Para cada ACTIVIDAD el ALUMNADO intercambia la BD sobre la que trabaja para mostrar la importancia de una buena documentación y organización de las mismas. Se establece que cada ACTIVIDAD-BD es trabajada por una sola ocurrencia de ALUMNADO, cada ACTIVIDAD-ALUMNADO se realiza sobre una sola BD (con eso ya se ha practicado ese punto de la materia), y el ALUMNADO trabaja en cada BD una sola ACTIVIDAD. La relación es por tanto 1:1:1.</p>
+<p>Que no te confundan las relaciones binarias. Como puedes ver, 1:1:1 no implica que cada entidad de manera individual no pueda participar más de una vez en la relación. Por ejemplo el ALUMNADO puede realizar varias ACTIVIDADES, siempre que cambie de BD y esa actividad no se haya realizado antes sobre la misma.</p>
+<p><img alt="Trabaja_G3_1_1_1" src="../img/trabaja-1-1-1.png" /></p>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>TRABAJA</strong> (<u class="doble">nia</u>, <u class="doble">id_act</u>, <u class="discontinuo">nombre_bd</u>)<br>
+    CP:  {nia, id_act}<br>
+    CF: nia → ALUMNADO {nia}<br>
+    CF: id_act → ACTIVIDAD {id_act}<br>
+    CF: nombre_bd → BD {nombre}<br>
+    VNN: nombre_bd<br>
+    ÚNICO: {nia, nombre_bd}<br>
+    ÚNICO: {id_act, nombre_bd}<br></li>
+</ul>
+</div>
+<p>Elegimos las claves de 2 de las 3 entidades como CP, en este caso nia+id_act, pero cualquiera de las otras 2 combinaciones sería perfectamente válida. A partir de ahí simplemente añadimos VNN a la clave que ha quedado fuera de la combinación elegida y marcamos como únicas las 2 combinaciones no elegidas, nia+nombre_bd e id_act+nombre_bd.</p>
+<h2 id="46-atributos-de-relacion">4.6. Atributos de relación</h2>
+<p>Hasta ahora hemos ignorado los atributos de relación, pero estos también deben ser tenidos en cuenta a la hora de transformar una relación en una tabla. En realidad los atributos de relación son fáciles de resolver ya que simplemente se añaden:</p>
+<ul>
+<li>A la <strong>tabla resultante de la relación</strong> si se crea una nueva tabla.</li>
+<li>A la <strong>tabla donde aparece una clave foránea</strong> si ese es el caso.</li>
+</ul>
+<p>Por otro lado, si el o los atributos de la relación tienen <strong>restricciones de identificación, se añaden a la clave principal</strong> de la tabla donde estén junto al resto de atributos identificadores.</p>
+<h2 id="47-transformacion-de-especializaciones">4.7. Transformación de especializaciones</h2>
+<p>Cuando tenemos especializaciones podemos optar por cuatro posibilidades de transformación. Cada tipo de transformación se adaptará a unas circunstancias concretas, no se corresponden exactamente con los tipos de especialización.</p>
+<ul>
+<li>Podemos optar por crear <strong>una tabla para el supertipo y otra tabla para cada uno de los subtipos</strong> encontrados. <strong>La clave primaria del supertipo lo será también en</strong> cada una de las tablas obtenidas a partir de los <strong>subtipos</strong>; <strong>es igualmente una clave foránea referenciando al supertipo.</strong><ul>
+<li>Ideal para relaciones <em>parciales y solapadas</em>.</li>
+<li>Recomendable también cuando existan relaciones diferenciadas en los subtipos y en el supertipo, independientemente del tipo de especialización.</li>
+<li>Es la más general y la opción a escoger en caso de duda.</li>
+<li>Si la especialización es <em>total y/o disyunta</em> se deben <strong>añadir restricciones adicionales</strong> que lo indiquen. Por ejemplo: "Todas las ocurrencias del supertipo deben estar en alguno de los subtipos"/"Una ocurrencia no puede estar en varios subtipos". Donde se cambie supertipo/subtipos por los nombres de las tablas en cada caso.</li>
+</ul>
+</li>
+<li>Otra opción sería <strong>crear una tabla para cada subtipo incorporando en cada una todos los atributos del supertipo</strong>. NO se crearía la tabla del supertipo pues sus campos se han incorporado en cada una de las tablas de los subtipos.<ul>
+<li>Esta opción solo sería válida para especializaciones <em>totales</em> y no es recomendable en <em>solapadas</em>, pues añadiría redundancia de datos.</li>
+<li>Ideal para <em>totales disyuntas</em> que no tengan relaciones afectando al supertipo. Si hay relaciones afectando al supertipo obliga a "separarlas" en una distinta para cada subtipo y luego son más difíciles de consultar.</li>
+</ul>
+</li>
+<li>La tercera posibilidad es <strong>crear una sola tabla para el supertipo y añadir en ella todos los atributos de los subtipos añadiendo además un campo (por ejemplo tipo)</strong> para identificar a qué tipo de especialización corresponde esa tupla.<ul>
+<li>Esta opción solo sería válida para especializaciones <em>disyuntas</em>.</li>
+<li>Solo recomendable para pocos subtipos con pocos atributos. Además, los subtipos deberían no tener relaciones propias o éstas consultarse poco.</li>
+</ul>
+</li>
+<li>La cuarta opción sería <strong>crear una sola tabla para el supertipo añadiendo los atributos de los subtipos y añadir un campo booleano para indicar si pertenece a cada uno de los subtipos</strong>.<ul>
+<li>Adaptación de la anterior para representar <em>solapadas</em>, con las mismas limitaciones que ésta.</li>
+<li>Además solo es recomendable en relaciones muy solapadas, donde la mayoría de ocurrencias estén en muchos subtipos.</li>
+</ul>
+</li>
+</ul>
+<p>En resumen, <strong>la primera opción es la más genérica y comúnmente usada</strong>; exige añadir restricciones adicionales si no es <em>parcial solapada</em> pero se adapta a cualquier especialización. La segunda se usa para <em>totales disyuntas</em> sin relaciones (o poco relevantes) en el supertipo y las otras 2 solo son recomendables en casos muy concretos con pocas o sin relaciones en los subtipos.</p>
+<p>Veamos un ejemplo:</p>
+<p>Se supone un supertipo EMPLEADOS que se especializa en los subtipos COMERCIAL, TÉCNICO y DIRECTIVO, cada uno con un atributo propio. Esta especialidad será parcial, hay otros tipos de empleados no especificados, y solapada, un EMPLEADO puede pertenecer a varios de los subtipos.</p>
+<p><img alt="Especializacion_Empleados" src="../img/especializacion-empleados.png" /></p>
+<p><strong>Primera opción</strong>:</p>
+<p>Una tabla para el supertipo y una para cada subtipo y todas con la misma clave primaria, pero siendo clave foránea. Es la más recomendable, ya que indica más claramente que es una especialización. Puesto que en este caso es parcial solapada no requiere restricciones adicionales</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>EMPLEADOS</strong> (<u>dni</u>, nombre)</p>
+<p><strong>COMERCIAL</strong> (<u class="doble">dni</u>, comision)<br>
+CF: dni → EMPLEADOS {dni}</p>
+<p><strong>TÉCNICO</strong> (<u class="doble">dni</u>, especialidad)<br>
+CF: dni → EMPLEADOS {dni}</p>
+<p><strong>DIRECTIVO</strong> (<u class="doble">dni</u>, seccion)<br>
+CF: dni → EMPLEADOS {dni}</p>
+</li>
+</ul>
+</div>
+<p>Suponiendo que fuese total, se debería añadir la <strong>restricción de integridad</strong>:</p>
+<ul>
+<li>Todos los EMPLEADOS deben estar, al menos en una de estas 3 tablas: COMERCIAL,TÉCNICO o DIRECTIVO.</li>
+</ul>
+<p>Si fuese disyunta:</p>
+<ul>
+<li>Cada dni solo aparece en una de las 3 tablas: COMERCIAL, TÉCNICO o DIRECTIVO</li>
+</ul>
+<p>Si fuese total disyunta:</p>
+<ul>
+<li>Cada dni en EMPLEADOS tiene que aparecer en una de las 3 tablas (COMERCIAL, TÉCNICO o DIRECTIVO) y solo en una.</li>
+</ul>
+<p><strong>Segunda opción</strong>:</p>
+<p>Sin tabla para el supertipo e incorporando sus atributos a las tablas de los subtipos. <em>En este caso esta opción NO ES CORRECTA, ya que puede haber EMPLEADOS que NO estén en ninguno de estos subtipos</em>; debería ser total para funcionar. Además solo es recomendable si no hay relaciones importantes en EMPLEADOS.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>COMERCIAL</strong> (<u>dni</u>, nombre, comision)</p>
+<p><strong>TÉCNICO</strong> (<u>dni</u>, nombre, especialidad)</p>
+<p><strong>DIRECTIVO</strong> (<u>dni</u>, nombre, sección)</p>
+</li>
+</ul>
+</div>
+<p><strong>Tercera Opción</strong>:</p>
+<p>Todo en una tabla con un campo añadido para distinguir el tipo de especialización. Esta opción <strong>no sería correcta, ya que puede que haya EMPLEADOS que estén en más de un subtipo: debería ser disyunta para funcionar</strong>. En cada ocurrencia solo los campos correspondientes a su subtipo tendrán algún valor, los otros se quedarán con valor nulo.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>EMPLEADOS</strong> (<u>dni</u>, nombre, tipo, comision, especialidad, seccion)</li>
+</ul>
+</div>
+<p><strong>Cuarta Opción</strong>:</p>
+<p>Todo en una tabla con un campo booleano añadido por cada especialización. Por cada subtipo al que no se pertenece, en esa ocurrencia el booleano respectivo se pone a <code>FALSE</code> y los atributos relacionados se quedan con valor nulo. Ya se puede ver que no parece la forma óptima de representar la especialización a menos que muchos EMPLEADOS sean una combinación de TÉCNICO, COMERCIAL y DIRECTIVO.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li><strong>EMPLEADOS</strong> (<u>dni</u>, nombre, es_com, comision, es_tec, especialidad, es_dir, seccion)</li>
+</ul>
+</div>
+<h2 id="48-transformacion-de-agregaciones">4.8. Transformación de agregaciones</h2>
+<p>Las agregaciones se suelen resolver creando una tabla para la entidad agregada, que puede contener los atributos de la agregación en caso de que existan. Pero cuando hablamos de agregaciones que contienen una sola relación, y en este curso nos vamos a limitar a ellas, esta tabla se corresponde con la resolución de la relación que contienen. Es decir, que:</p>
+<ul>
+<li><strong>Para una relación reflexiva/binaria N:M o para cualquier ternaria la agregación es directamente la propia tabla creada al resolver la relación</strong>, ya que las ocurrencias de esta tabla son las que participan en la agregación.</li>
+<li><strong>Para una relación reflexiva/binaria 1:N la relación se resuelve en una de las tablas ya existentes</strong>, y por tanto <strong>la agregación son las ocurrencias de la tabla con la clave foránea donde esta no es nula</strong>. Esto nos permite aprovechar la propia tabla, aunque con algunos matices.<ul>
+<li>Si la participación es <strong>(1,1)</strong> todas las ocurrencias de la tabla participan en la agregación (la clave foránea es no nula), por lo que <strong>la tabla con la clave foránea es la tabla de la agregación directamente</strong>.</li>
+<li>Si la participación es <strong>(0,1)</strong> hay ocurrencias que no participan en la relación y no forman parte de la agregación, por lo que tenemos 2 opciones:<ul>
+<li><strong>Usar igualmente la tabla con la clave foránea como la agregación</strong>, pero en las relaciones en que participe la agregación se añade una <strong>restricción adicional: "Solo pueden participar ocurrencias de la tabla de agregación que tengan valor no nulo en la clave foránea"</strong>.</li>
+<li>En vez de resolver la relación 1:N de dentro de la agregación, <strong>crear una subentidad de la tabla donde se debía mover la clave foránea y mover allí la relación, ahora con participación (1:1)</strong>. Con esto, tenemos la tabla original con todas las ocurrencias y datos, y una tabla subentidad que solo contiene las ocurrencias que participan en la relación, es decir, la tabla de agregación.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Esto puede parecer enrevesado pero en realidad es sencillo, y en la mayoría de los casos se resuelve de manera automática. Veamos un ejemplo:</p>
+<p><img alt="Agregacion_1_N" src="../img/agregacion-1-n.png" /></p>
+<p><strong>Si la cardinalidad es N:M</strong>:</p>
+<p>La tabla OFERTAR que crea la relación es directamente la tabla de la agregación, no hace falta hacer nada. En todo caso si la agregación tuviese algún atributo se añadiría a la tabla.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>BALNEARIO</strong> (<u>id_bal</u>)</p>
+<p><strong>TRATAMIENTO</strong> (<u>id_trat</u>)</p>
+<p>(<i>-- Ofertar es la agregación</i>)</p>
+<p><strong>OFERTAR</strong> (<u class="doble">id_bal</u>, <u class="doble">id_trat</u>, ...)<br>
+CF: id_bal → BALNEARIO {id_bal}<br>
+CF: id_trat → TRATAMIENTO {id_trat}</p>
+</li>
+</ul>
+</div>
+<p>Los puntos suspensivos son para representar posibles campos de la agregación, aunque no se ha especificado ninguno.</p>
+<p><strong>Si la cardinalidad es 1:N</strong> (los tratamientos son exclusivos de un balneario):</p>
+<p><strong>Primera opción</strong>, resolvemos la relación 1:N y tomamos la tabla TRATAMIENTO como la tabla de la agregación; ideal si la participación de TRATAMIENTO es (1,1).</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>BALNEARIO</strong> (<u>id_bal</u>)</p>
+<p><strong>TRATAMIENTO</strong> (<u>id_trat</u>, <u class="discontinuo">id_bal</u>, ...)<br>
+CF: id_bal → BALNEARIO {id_bal}</p>
+</li>
+</ul>
+</div>
+<p>Si TRATAMIENTO tiene participación (0,1) en la relación, entonces no todas las ocurrencias de TRATAMIENTO participan en la agregación, por lo que añadimos una restricción adicional. "Para participar en relaciones con la agregación, <code>id_bal</code> no puede ser nulo".</p>
+<p>Obviamente otras relaciones directas con TRATAMIENTO no tienen esta limitación, solo las que involucren a la agregación.</p>
+<p><strong>Segunda opción</strong>, creamos una tabla de agregación y movemos la relación 1:N a ella, ahora con participación (1,1). La tabla TRATAMIENTO se queda como estaba y pierde la relación OFERTAR, aunque conservaría otras relaciones que tuviese. Con el nuevo esquema E-R de la situación puede que se entienda mejor, recuerda que se supone que OFERTAR apunta a TRATAMIENTO y tiene participación (1,1).</p>
+<p><img alt="Agregacion_1_N_2" src="../img/agregacion-1-n-2.png" /></p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><i>-- BALNEARIO y TRATAMIENTO conservan sus campos y relaciones salvo OFERTAR</i></p>
+<p><strong>TRAT_OFERTADO</strong> (<u class = "doble">id_trat</u>, <u class="discontinuo">id_bal</u>*, ... )<br>
+CF: id_trat → TRATAMIENTO {id_trat}<br>
+CF: id_bal → BALNEARIO {id_bal}<br>
+VNN: id_bal</p>
+</li>
+</ul>
+</div>
+<p>Con esto, la tabla TRATAMIENTO conserva todas sus ocurrencias y datos, y la tabla TRAT_OFERTADO contiene las claves principales de las ocurrencias de la relación OFERTAR, con lo que tiene participación (1,1) y se resuelve como el primer caso, convirtiéndose en la tabla de la agregación.</p>
+<h4 id="transformacion-de-relaciones-con-agregaciones">Transformación de relaciones con agregaciones</h4>
+<p>Si una o varias agregaciones participan en relaciones se aplican las mismas reglas que para las relaciones normales, las tablas de agregación, sean las que sean, se tratan como si fueran tablas normales. Por tanto, una vez resuelta la agregación no tienen ninguna complicación, solo conviene recordar la <strong>restricción adicional</strong> a las ocurrencias en caso que no se haya creado una tabla nueva para la agregación si contenía una relación 1:N con participación (0,1).</p>
+<p>Veamos unos ejemplos:</p>
+<p><img alt="Agregacion_1_N_Relacion" src="../img/agregacion-1-n-relacion.png" /></p>
+<p>Tenemos una agregación OFERTAR formada por una relación N:M y sus entidades. Sobre esa agregación el CLIENTE debe RESERVAR alguna de las parejas de TRATAMIENTO-BALNEARIO existentes en la agregación. Por tanto simplemente se crea la tabla N:M ofertar y esta tabla se usa para resolver la relación 1:N con CLIENTE.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>BALNEARIO</strong> (<u>id_bal</u>)</p>
+<p><strong>TRATAMIENTO</strong> (<u>id_trat</u>)</p>
+<p><strong>OFERTAR</strong> (<u class="doble">id_bal</u>, <u class="doble">id_trat</u>)<br>
+CF: id_bal → BALNEARIO {id_bal}<br>
+CF: id_trat → TRATAMIENTO {id_trat}</p>
+<p><strong>CLIENTE</strong> (<u>id_cli</u>, <u class="discontinuo">id_bal</u><em>, <u class="discontinuo">id_trat</u></em>)<br>
+CF: {id_bal,id_trat} → OFERTAR {id_bal,id_trat}<br>
+VNN: id_bal<br>
+VNN: id_trat</p>
+</li>
+</ul>
+</div>
+<p>La clave foránea en CLIENTE es compuesta, apunta a OFERTAR (tabla de agregación) y no puede tomar valores nulos porque la participación mínima en la relación RESERVAR de CLIENTE es 1.</p>
+<p>Si RESERVAR fuese de cardinalidad N:M simplemente se crearia como tabla con las claves de CLIENTE y OFERTAR.</p>
+<p><img alt="Agregacion_N_M_Relacion" src="../img/agregacion-n-m-relacion.png" /></p>
+<p>Ahora le hemos dado la vuelta a la situación y la agregación está formada por una relación OFERTAR 1:N, pero la relación con la agregación, RESERVAR, es N:M. Los TRATAMIENTOs son exclusivos de un BALNEARIO y pueden ser reservados por varios CLIENTEs, pero obviamente solo los que están en OFERTAR.</p>
+<p>Si la participación mínima de TRATAMIENTO en OFERTAR fuese 1, todas sus tuplas pueden participar en RESERVAR y por tanto se puede resolver la agregación con TRATAMIENTO y relacionar allí RESERVAR, sería completamente equivalente a ignorar la agregación. Pero como la mínima es 0 (en OFERTAR), entonces puede haber tuplas en TRATAMIENTO sin BALNEARIO asignado, y esas no forman parte de la agregación. Esto obliga a usar una restricción adicional o a crear una tabla de agregación.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p><strong>BALNEARIO</strong> (<u>id_bal</u>)</p>
+<p><strong>TRATAMIENTO</strong> (<u>id_trat</u>, <u class="discontinuo">id_bal</u>)<br>
+CAj: id_bal → BALNEARIO {id_bal}</p>
+<p><strong>CLIENTE</strong> (<u>id_cli</u>)<br></p>
+<p><strong>RESERVAR</strong> (<u class="doble">id_cli</u>, <u class="doble">id_trat</u>)<br>
+CF: id_cli → CLIENTE {id_cli}<br>
+CF: id_trat → TRATAMIENTO {id_trat}<br>
+RESTRICCIONES DE INTEGRIDAD (por pérdida semántica):
+<ul>
+<li>id_trat debe ser de una tupla de TRATAMIENTO que tenga id_bal NO NULO</li>
+<li>Todas las tuplas de CLIENTE deben estar en RESERVAR (por (1,n))</li>
+</ul></p>
+</li>
+</ul>
+</div>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p>(<i>-- Alternativa, creamos una tabla de agregación además de TRATAMIENTO</i>)<br>
+    <strong>BALNEARIO</strong> (<u>id_bal</u>)</p>
+<p><strong>TRATAMIENTO</strong> (<u>id_trat</u>)<br></p>
+<p><strong>TRAT_OFERTADO</strong> (<u class="doble">id_trat</u>, <u class="discontinuo">id_bal</u>*, ... )<br>
+CF: id_trat → TRATAMIENTO {id_trat}<br>
+CF: id_bal → BALNEARIO {id_bal}<br>
+VNN: id_bal</p>
+<p><strong>RESERVAR</strong> (<u class="doble">id_cli</u>, <u class="doble">id_trat</u>)<br>
+CF: id_cli → CLIENTE {id_cli}<br>
+CF: id_trat → TRAT_OFERTADO {id_trat}<br>
+RESTRICCIÓN DE INTEGRIDAD (por pérdida semántica):
+<ul>
+<li>Todas las tuplas de CLIENTE deben estar en RESERVAR (por (1,n))</li>
+</ul></p>
+</li>
+</ul>
+</div>
+<p>La restricción de CLIENTE se debe a la participación mínima 1 en RESERVAR, se da siempre que hay participaciones (1,n).</p>
+<p>Respecto a la otra restricción, es necesaria en el primer caso para evitar que se reserven TRATAMIENTOS que no corresponden a ningún BALNEARIO, ya que estos no forman parte de la agregación.</p>
+<p>En el segundo caso, la tabla de agregación TRAT_OFERTADO es simplemente un extracto (especialización) para indicar qué tuplas de TRATAMIENTO participan en la relación (lo que en realidad es tan sencillo como ver cuales tienen id_bal NO_NULO), pero con esta tabla se evita la restricción adicional y el diseño puede reflejar toda la información. Si la participación mínima de TRATAMIENTO en OFERTAR fuese 1, esta tabla sería completamente redundante e innecesaria.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "content.code.annotate", "navigation.tracking", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/toc-toggle.js"></script>
+      
+    
+  </body>
+</html>
