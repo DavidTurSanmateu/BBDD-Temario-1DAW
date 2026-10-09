@@ -2035,6 +2035,61 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#ejercicio-8-reservas-de-garajes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 8. Reservas de garajes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-9-trabajadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 9. Trabajadores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-10-hospital" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 10. Hospital
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-11-biblioteca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 11. Biblioteca
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-12-competicion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 12. Competición
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2335,6 +2390,274 @@
 <ul>
 <li>(RA1) Tabla TRANSPORTE: fecha_salida debe ser anterior a fecha_llegada.</li>
 <li>(RA2) Tabla REALIZAR: debe comprobarse que los pilotos y las naves no se repitan en un mismo transporte.</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+<hr />
+<h2 id="ejercicio-8-reservas-de-garajes">Ejercicio 8. Reservas de garajes</h2>
+<p><img alt="Ejercicio 8" src="../img/ejB-8-1.png" /></p>
+<details class="question">
+<summary>Solución</summary>
+<div class="grid cards solo-filas" markdown>
+<ul>
+<li>
+<p><strong>CLIENTE</strong> (<u>codigo</u>, dni, nombre, telefono, direccion, <u class="discontinuo">avalador</u>)</p>
+<p>CP: codigo</p>
+<p>CAj: avalador → CLIENTE (codigo)</p>
+<p><strong>RESERVA</strong> (<u>codigo</u>, litros, fecha_inicio, fecha_fin, indicador, <u class="discontinuo">codigo_cliente</u>*, <u class="discontinuo">codigo_agencia</u>*)</p>
+<p>CP: codigo</p>
+<p>CAj: codigo_cliente → CLIENTE (codigo)</p>
+<p>CAj: codigo_agencia → AGENCIA (codigo)</p>
+<p>VNN: codigo_cliente</p>
+<p>VNN: codigo_agencia</p>
+<p><strong>COCHE</strong> (<u>matricula</u>, marca, modelo, color, precio_alquiler, <u class="discontinuo">codigo_reserva</u>*, <u class="discontinuo">codigo_garaje</u>*)</p>
+<p>CP: matricula</p>
+<p>CAj: codigo_reserva → RESERVA (codigo)</p>
+<p>CAj: codigo_garaje → GARAJE (codigo)</p>
+<p>VNN: codigo_reserva</p>
+<p>VNN: codigo_garaje</p>
+<p><strong>AGENCIA</strong> (<u>codigo</u>, nombre)</p>
+<p>CP: codigo</p>
+<p><strong>GARAJE</strong> (<u>codigo</u>, nombre)</p>
+<p>CP: codigo</p>
+<p><em>Restricciones de integridad</em>:</p>
+<p>Es necesaria una restricción de integridad que asegure, tal y como se muestra en el diagrama E-R, que en cada garaje hay asociado, al menos, un coche.</p>
+<ul>
+<li>Todo GARAJE debera tener ASIGNADO, al menos, un COCHE (1,n).</li>
+</ul>
+<p>Lo mismo para asegurar que en cada reserva hay, al menos, un coche.</p>
+<ul>
+<li>Toda RESERVA deberá INVOLUCRAR, al menos, un coche (1,n).</li>
+</ul>
+<p>Por último, se debería asegurar que las fechas de inicio son anteriores a las fechas de fin.</p>
+<ul>
+<li>Las fechas de inicio de una RESERVA deberán ser anteriores a las fechas de fin.</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+<h2 id="ejercicio-9-trabajadores">Ejercicio 9. Trabajadores</h2>
+<p><img alt="Ejercicio 9" src="../img/ejB-9.png" /></p>
+<details class="question">
+<summary>Solucion</summary>
+<div class="grid cards solo-filas" markdown>
+<ul>
+<li>
+<p><strong>PARTICIPANTE</strong> (<u>dni</u>, nombre)</p>
+<p>CP: dni</p>
+<p><strong>TRABAJADOR</strong> (<u class="doble">dni</u>, fecha_ingreso, <u class="discontinuo">cif_asociacion</u>*)</p>
+<p>CP: dni</p>
+<p>CAj: dni → PARTICIPANTE (dni)</p>
+<p>CAj: cif_asociacion → ASOCIACION (cif)</p>
+<p>VNN: cif_asociacion</p>
+<p><strong>ASALARIADO</strong> (<u class="doble">dni</u>, irpf, ss)</p>
+<p>CP: dni</p>
+<p>CAj: dni → TRABAJADOR (dni)</p>
+<p><strong>VOLUNTARIO</strong> (<u class="doble">dni</u>, edad, horas, profesion)</p>
+<p>CP: dni</p>
+<p>CAj: dni → TRABAJADOR (dni)</p>
+<p><strong>SOCIO</strong> (<u class="doble">dni</u>, provincia, direccion)</p>
+<p>CP: dni</p>
+<p>CAj: dni → PARTICIPANTE (dni)</p>
+<p><strong>ASOCIACION</strong> (<u>cif</u>, denominacion, tipo, entidad_publica, direccion, provincia)</p>
+<p>CP: cif</p>
+<p>ÚNICO: denominacion</p>
+<p><strong>ASOCIACION_SOCIO</strong> (<u class="doble">cif_asociacion</u>, <u class="doble">dni_socio</u>, fecha_ingreso, cuota_mensual)</p>
+<p>CP: {cif_asociacion, dni_socio}</p>
+<p>CAj: cif_asociacion → ASOCIACION (cif)</p>
+<p>CAj: dni_socio → SOCIO (dni)</p>
+<p><strong>PROYECTO</strong> (<u class="doble">cif_asociacion</u>, <u>codigo</u>, objetivo, beneficiarios, zona, pais, <u class="discontinuo">proyecto_base</u>*)</p>
+<p>CP: {cif_asociacion, codigo}</p>
+<p>CAj: cif_asociacion → ASOCIACION (cif)</p>
+<p>CAj: proyecto_base → PROYECTO (codigo)</p>
+<p><em>Restricciones de integridad</em>:</p>
+<ul>
+<li>Cada ASOCIACIÓN estará asociado mediante la relación LLEVA a, al menos, un PROYECTO (1,n).</li>
+<li>Una ASOCIACIÓN estará FORMADA por, al menos, un SOCIO, y viceversa (1,n).</li>
+<li>En una ASOCIACIÓN TRABAJA, al menos, un TRABAJADOR (1,n).</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+<h2 id="ejercicio-10-hospital">Ejercicio 10. Hospital</h2>
+<p><img alt="Ejercicio 10" src="../img/ejB-10.png" /></p>
+<details class="question">
+<summary>Solución</summary>
+<div class="grid cards solo-filas" markdown>
+<ul>
+<li>
+<p><strong>EMPLEADO</strong> (<u>codigo</u>, dni, nombre, apellidos, email, telefono, direccion)</p>
+<p>CP: codigo</p>
+<p>Único: dni</p>
+<p><strong>CONDUCTOR_AMBULANCIA</strong> (<u class="doble">codigo</u>, tipo_carnet, precio_hora, <u class="discontinuo">ambulancia</u>)</p>
+<p>CP: codigo</p>
+<p>CAj: codigo → EMPLEADO (codigo)</p>
+<p>VNN: ambulancia</p>
+<p><strong>PERSONAL_SANITARIO</strong> (<u class="doble">codigo</u>, nivel, salario, puesto, <u class="discontinuo">codigo_grupo</u>)</p>
+<p>CP: codigo</p>
+<p>CAj: codigo → EMPLEADO (codigo)</p>
+<p>CAj: codigo_grupo → GRUPO (codigo)</p>
+<p>VNN: codigo_grupo</p>
+<p><strong>AMBULANCIA</strong> (<u class="doble">matricula</u>, tipo, instrumental_medico)</p>
+<p>CP: matricula</p>
+<p>CAj: matricula → EMPLEADO (codigo)</p>
+<p><strong>TRASLADO_HOSPITAL</strong> (<u>codigo_traslado</u>, <u class="discontinuo">conductor_ambulancia</u>, <u class="discontinuo">codigo_hospital</u>, fecha, poblacion, km, n_horas)</p>
+<p>CP: codigo_traslado</p>
+<p>CAj: conductor_ambulancia → CONDUCTOR_AMBULANCIA (codigo)</p>
+<p>CAj: codigo_hospital → HOSPITAL (codigo)</p>
+<p><strong>HOSPITAL</strong> (<u>codigo</u>, nombre, categoria, telefono, especialidades, provincia, localidad, cod_postal)</p>
+<p>CP: codigo</p>
+<p>Único: nombre</p>
+<p><strong>PERSONAL_HOSPITAL</strong> (<u>codigo</u>, <u class="discontinuo">codigo_sanitario</u>, <u class="discontinuo">codigo_hospital</u>, fecha_alta, fecha_baja)</p>
+<p>CP: codigo</p>
+<p>CAj: codigo_sanitario → PERSONAL_SANITARIO (codigo)</p>
+<p>CAj: codigo_hospital → HOSPITAL (codigo)</p>
+<p><strong>GUARDIA_HOSPITAL</strong> (<u>codigo_guardia</u>, <u class="discontinuo">codigo_sanitario</u>, <u class="discontinuo">codigo_hospital</u>, fecha, turno, n_horas)</p>
+<p>CP: codigo_guardia</p>
+<p>CAj: codigo_sanitario → PERSONAL_SANITARIO (codigo)</p>
+<p>CAj: codigo_hospital → HOSPITAL (codigo)</p>
+<p><strong>GRUPO</strong> (<u>codigo</u>, nombre)</p>
+<p>CP: codigo</p>
+<p><em>Restricciones de integridad</em>:</p>
+<ul>
+<li>Un HOSPITAL estará asociado, como mínimo, a un CONDUCTOR_AMBULANCIA (1,n).</li>
+<li>Un GRUPO estará FORMADO por, al menos, un PERSONAL_SANITARIO (1,n).</li>
+<li>En un HOSPITAL TRABAJARÁ, al menos, un PERSONAL_SANITARIO, y viceversa (1,n).</li>
+<li>En un HOSPITAL HARÁ GUARDIA, al menos, un PERSONAL_SANITARIO (1,n).</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+<h2 id="ejercicio-11-biblioteca">Ejercicio 11. Biblioteca</h2>
+<p><img alt="Ejercicio 11" src="../img/ejB-11.png" /></p>
+<details class="question">
+<summary>Solución</summary>
+<div class="grid cards solo-filas" markdown>
+<ul>
+<li>
+<p><strong>ENCICLOPEDIA</strong> (<u>isbn</u>, titulo, editorial, pais_editorial, autor)</p>
+<p>CP: isbn</p>
+<p>Único: titulo</p>
+<p><strong>TOMO</strong> (<u class="doble">isbn</u>, <u>numero</u>, primera_palabra, ultima_palabra, <u class="discontinuo">letra_armario</u>, <u class="discontinuo">pasillo_armario</u>)</p>
+<p>CP: {isbn, numero}</p>
+<p>CAj: isbn → ENCICLOPEDIA (isbn)</p>
+<p>CAj: letra_armario → ARMARIO (letra)</p>
+<p>CAj: pasillo_armario → ARMARIO (pasillo)</p>
+<p>VNN: letra_armario, pasillo_armario</p>
+<p><strong>TARJETA</strong> (<u>tipo_acceso</u>, <u class="doble">dni_alumno</u>, precio, max_consultas, <u class="discontinuo">dni_administrativo</u>)</p>
+<p>CP: {tipo_acceso, dni_alumno}</p>
+<p>CAj: dni_alumno → ALUMNO (dni)</p>
+<p>CAj: dni_administrativo → GESTION (dni)</p>
+<p>VNN: dni_administrativo</p>
+<p><strong>CONSULTAS</strong> (<u class="doble">isbn</u>, <u class="doble">numero</u>, <u class="doble">tipo_acceso</u>, <u class="doble">dni_alumno</u>, <u>fecha</u>, tiempo_prestamo)</p>
+<p>CP: {isbn, numero, tipo_acceso, dni_alumno, fecha}</p>
+<p>CAj: isbn → TOMO (isbn)</p>
+<p>CAj: numero → TOMO (numero)</p>
+<p>CAj: tipo_acceso → TARJETA (tipo_acceso)</p>
+<p>CAj: dni_alumno → TARJETA (tipo_acceso)</p>
+<p><strong>PERSONA</strong> (<u>dni</u>, nombre)</p>
+<p>CP: dni</p>
+<p><strong>ALUMNO</strong> (<u class="doble">dni</u>, nivel_estudios, ciclo)</p>
+<p>CP: dni</p>
+<p>CAj: dni → PERSONA (dni)</p>
+<p><strong>EMPLEADO</strong> (<u class="doble">dni</u>, fecha_nac)</p>
+<p>CP: dni</p>
+<p>CAj: dni → PERSONA (dni)</p>
+<p><strong>GESTION</strong> (<u class="doble">dni</u>, titulacion)</p>
+<p>CP: dni</p>
+<p>CAj: dni → EMPLEADO (dni)</p>
+<p><strong>MANTENIMIENTO</strong> (<u class="doble">dni</u>, funcion)</p>
+<p>CP: dni</p>
+<p>CAj: dni → EMPLEADO (dni)</p>
+<p><strong>MANTENIMIENTO_ARMARIO</strong> (<u>codigo_mantenimiento</u>, <u class="discontinuo">letra_armario</u>, <u class="discontinuo">pasillo_armario</u>, <u class="discontinuo">DNI_conserje</u>, fecha, descripcion)</p>
+<p>CP: codigo_mantenimiento</p>
+<p>CAj: letra_armario → ARMARIO (letra)</p>
+<p>CAj: pasillo_armario → ARMARIO (pasillo)</p>
+<p>CAj: DNI_conserje → MANTENIMIENTO (dni)</p>
+<p><strong>ARMARIO</strong> (<u>letra</u>, <u>pasillo</u>, capacidad)</p>
+<p>CP: {letra, pasillo}</p>
+<p><em>Restricciones de integridad</em>:</p>
+<ul>
+<li>Una ENCICLOPEDIA estará asociada a, al menos, un TOMO (1,n).</li>
+<li>Un TOMO estará asociado a, al menos, una TARJETA (1,n).</li>
+<li>Un ALUMNO tiene, como mínimo, una TARJETA (1,n).</li>
+<li>Un empleado de GESTION estará asociada, como mínimo, a una TARJETA.</li>
+<li>Un ARMARIO estará asociado a, al menos, un empleado de MANTENIMIENTO.</li>
+</ul>
+<p>También es necesario indicar, en las especializaciones (por la solución empleada), las restricciones de integridad por pérdida semántica debidas al hecho de ser una especialización Total y Disyunta.</p>
+<ul>
+<li>Toda ocurrencia de PERSONA deberá aparecer también en alguna de las subclases (ALUMNO, empleado de GESTIÖN o empleado de MANTENIMIENTO). (Total).</li>
+<li>Si una ocurrencia aparece en alguna de las subclases (ALUMNO, empleado de GESTIÖN o empleado de MANTENIMIENTO), no puede aparecer en las demás. (Disyunta).</li>
+</ul>
+</li>
+</ul>
+</div>
+</details>
+<h2 id="ejercicio-12-competicion">Ejercicio 12. Competición</h2>
+<p><img alt="Ejercicio 12" src="../img/ejB-12.png" /></p>
+<details class="question">
+<summary>Solución</summary>
+<div class="grid cards solo-filas" markdown>
+<ul>
+<li>
+<p><strong>CAMPEONATO</strong> (<u>nombre</u>)</p>
+<p>CP: nombre</p>
+<p><strong>CAMPEONATO_PARTICIPANTE</strong> (<u class="doble">n_socio</u>, <u class="doble">nombre_campeonato</u>, Tipo)</p>
+<p>CP: {n_socio, nombre_campeonato}</p>
+<p>CAj: n_socio → PARTICIPANTE (n_socio)</p>
+<p>CAj: nombre_campeonato → CAMPEONATO (nombre)</p>
+<p><strong>PARTICIPANTE</strong> (<u>n_socio</u>, nombre, telefono, direccion, <u class="discontinuo">codigo_pais</u>)</p>
+<p>CP: n_socio</p>
+<p>CAj: codigo_pais → PAIS (codigo)</p>
+<p><strong>JUGADOR</strong> (<u class="doble">n_socio</u>, nivel)</p>
+<p>CP: n_socio</p>
+<p>CAj: n_socio → PARTICIPANTE (n_socio)</p>
+<p><strong>ARBITRO</strong> (<u class="doble">n_socio</u>)</p>
+<p>CP: n_socio</p>
+<p>CAj: n_socio → PARTICIPANTE (n_socio)</p>
+<p><strong>PAIS</strong> (<u>codigo</u>, nombre, n_clubes, <u class="discontinuo">representante</u>*)</p>
+<p>CP: codigo</p>
+<p>Único: nombre</p>
+<p>CAj: representante → PAIS (codigo)</p>
+<p><strong>ALOJAMIENTO</strong> (<u>codigo_alojamiento</u>, <u class="discontinuo">n_socio</u>, <u class="discontinuo">nombre_hotel</u>, fecha_inicio, fecha_fin)</p>
+<p>CP: codigo_alojamiento</p>
+<p>CAj: n_socio → PARTICIPANTE (n_socio)</p>
+<p>CAj: nombre_hotel → HOTEL (nombre_hotel)</p>
+<p><strong>HOTEL</strong> (<u>nombre</u>, telefono, direccion)</p>
+<p>CP: nombre</p>
+<p><strong>SALA</strong> (<u>codigo</u>, <u class="discontinuo">nombre_hotel</u>, capacidad, medios)</p>
+<p>CP: codigo</p>
+<p>CAj: nombre_hotel → HOTEL (nombre)</p>
+<p><strong>PARTIDA_JUGADOR</strong> (<u class="doble">jugador</u>, <u class="doble">codigo_partida</u>, color)</p>
+<p>CP: {jugador, codigo_partida}</p>
+<p>CAj: jugador → JUGADOR (n_socio)</p>
+<p>CAj: codigo_partida → PARTIDA (codigo)</p>
+<p><strong>PARTIDA</strong> (<u>codigo</u>, anio, mes, dia, <u class="discontinuo">arbitro</u>, <u class="discontinuo">codigo_sala</u>, entradas)</p>
+<p>CP: codigo</p>
+<p>CAj: arbitro → ARBITRO (n_socio)</p>
+<p>CAj: codigo_sala → SALA (codigo)</p>
+<p><strong>MOVIMIENTOS</strong> (<u class="doble">codigo_partida</u>, <u>codigo</u>, comentario, movimientos)</p>
+<p>CP: {codigo_partida, codigo}</p>
+<p>CAj: codigo_partida → PARTIDA (codigo)</p>
+<p><em>Restricciones de integridad</em>:</p>
+<ul>
+<li>Cada PARTICIPANTE está ALOJADO en, al menos, un HOTEL (1,n).</li>
+<li>Cada PARTICIPANTE estará asociado a, al menos, un CAMPEONATO, y viceversa (1,n).</li>
+<li>En cada SALA se CELEBRA, al menos, una PARTIDA (1,n).</li>
+<li>Un JUGADOR JUEGA, al menos, una PARTIDA (1,n).</li>
+<li>Un ARBITRO ARBITRA, al menos, una PARTIDA (1,n).</li>
+<li>
+<p>Una PARTIDA tiene, al menos, un MOVIMIENTO (1,n).</p>
+</li>
+<li>
+<p>Una ocurrencia de PARTICIPANTE deberá de aparecer en alguna de sus subclases (JUGADOR o ARBITRO). (Total).</p>
+</li>
+<li>Una ocurrencia de JUGADOR no puede aparecer en ARBITRO, y viceversa. (Disyunta).</li>
 </ul>
 </li>
 </ul>

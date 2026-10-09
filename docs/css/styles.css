@@ -4,6 +4,144 @@
  * @description Theme for the IES Conselleria presentation template
 */
 
+/* ==================================================
+   CONFIGURACIÓN DE BOTONES MKDOCS MATERIAL
+   ================================================== */
+
+   
+:root {
+    /* Dimensiones */
+    --btn-padding-y: 0.65rem;
+    --btn-padding-x: 1.3rem;
+    --btn-min-width: 0;
+    --btn-font-size: 0.85rem;
+    --btn-font-weight: 600;
+    --btn-line-height: 1.4;
+
+    /* Colores */
+    --btn-bg: #008591;
+    --btn-color: #ffffff;
+    --btn-border-color: #008591;
+
+    /* Bordes */
+    --btn-border-width: 1px;
+    --btn-border-radius: 0.5rem;
+
+    /* Sombras */
+    --btn-shadow: 0 2px 5px rgb(0 0 0 / 15%);
+    --btn-shadow-hover: 0 4px 10px rgb(0 0 0 / 20%);
+
+    /* Hover */
+    --btn-bg-hover: #00a4b3;
+    --btn-color-hover: #ffffff;
+    --btn-border-color-hover: #008591;
+
+    /* Clic */
+    --btn-bg-active: #008591;
+
+    /* Transiciones */
+    --btn-transition: 0.2s ease;
+
+    /* Espaciado exterior */
+    --btn-margin-y: 0.25rem;
+    --btn-margin-x: 0.15rem;
+}
+
+/* Botón */
+.md-typeset a.md-button {
+    display: inline-block;
+    min-width: var(--btn-min-width);
+    padding: var(--btn-padding-y) var(--btn-padding-x);
+    margin: var(--btn-margin-y) var(--btn-margin-x);
+
+    font-size: var(--btn-font-size);
+    font-weight: var(--btn-font-weight);
+    line-height: var(--btn-line-height);
+    text-align: center;
+    text-decoration: none;
+
+    color: var(--btn-color);
+    background-color: var(--btn-bg);
+    border: var(--btn-border-width) solid var(--btn-border-color);
+    border-radius: var(--btn-border-radius);
+
+    box-shadow: var(--btn-shadow);
+    transition: all var(--btn-transition);
+}
+
+/* Hover */
+.md-typeset a.md-button:hover {
+    color: var(--btn-color-hover);
+    background-color: var(--btn-bg-hover);
+    border-color: var(--btn-border-color-hover);
+    box-shadow: var(--btn-shadow-hover);
+    transform: translateY(-2px);
+}
+
+/* Clic */
+.md-typeset a.md-button:active {
+    color: var(--btn-color);
+    background-color: var(--btn-bg);
+    border: var(--btn-border-width) solid var(--btn-border-color);
+    border-radius: var(--btn-border-radius);
+    transform: translateY(0);
+}
+
+/* Foco */
+.md-typeset a.md-button:focus-visible {
+    outline: 3px solid var(--btn-bg-hover);
+    outline-offset: 3px;
+    color: var(--btn-color);
+    background-color: var(--btn-bg);
+    border: var(--btn-border-width) solid var(--btn-border-color);
+    border-radius: var(--btn-border-radius);
+}
+
+/* Evitar colores predeterminados después de hacer clic */
+.md-typeset a.md-button:focus,
+.md-typeset a.md-button:focus-visible,
+.md-typeset a.md-button:visited {
+    color: var(--btn-color);
+    background-color: var(--btn-bg);
+    border-color: var(--btn-border-color);
+}
+
+/* Mantener el diseño al soltar el clic */
+.md-typeset a.md-button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Conservar el efecto hover si el ratón sigue encima */
+.md-typeset a.md-button:hover:focus {
+    color: var(--btn-color-hover);
+    background-color: var(--btn-bg-hover);
+    border-color: var(--btn-border-color-hover);
+}
+
+/*
+--------------------------------
+*/
+
+/* Bloques CMD */
+div.highlight.cmd,
+div.highlight.cmd pre,
+div.highlight.cmd code,
+div.highlight.cmd span,
+div.highlight.cmd * {
+    font-family: monospace !important;
+}
+
+div.highlight.cmd,
+div.highlight.cmd pre,
+div.highlight.cmd code {
+    background-color: #0000008f !important;
+    color: #ffffff !important;
+}
+
+div.highlight.cmd span {
+    color: #ffffff !important;
+}
+
 .solo-filas {
   grid-template-columns: 1fr !important;
 }
