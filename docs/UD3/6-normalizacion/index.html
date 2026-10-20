@@ -2318,7 +2318,7 @@
     CP: cod_centro</p>
 </li>
 <li>
-<p><strong>TELÉFONOS</strong> (<u class="doble">cod_centro</u>, teléfono)<br>
+<p><strong>TELÉFONOS</strong> (<u>teléfono</u>, <u class="discontinuo">cod_centro</u>)<br>
     CP: teléfono<br>
     CAj: cod_centro → CENTRO (cod_centro)<br></p>
 </li>
@@ -2346,7 +2346,7 @@
     CP: dni</p>
 </li>
 <li>
-<p><strong>TELÉFONOS</strong> (<u class="doble">dni</u>, teléfono)<br>
+<p><strong>TELÉFONOS</strong> (<u class="doble">dni</u>, <u>teléfono</u>)<br>
     CP: {dni, teléfono}<br>
     CAj: dni → PERSONA (dni)<br></p>
 </li>
@@ -2396,7 +2396,7 @@
 <p><img alt="2FN" src="../img/2fn-tabla-asignaturas.png" /></p>
 <div class="grid cards solo-filas">
 <ul>
-<li><strong>NOTAS</strong> (<u class="doble">cod_alumno</u>, asignatura, nota)<br>
+<li><strong>NOTAS</strong> (<u class="doble">cod_alumno</u>, <u class="doble">asignatura</u>, nota)<br>
     CAj: cod_alumno → ALUMNOS (cod_alumno)<br>
     CAj: asignatura → ASIGNATURAS (asignatura)<br></li>
 </ul>
