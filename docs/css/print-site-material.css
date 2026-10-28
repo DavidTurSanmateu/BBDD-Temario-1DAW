@@ -15,24 +15,30 @@ https://github.com/squidfunk/mkdocs-material */
 }
 
 @media print {
-    #print-site-page td {
-        word-wrap: break-word;
+    @page {
+        size: A4;
+        margin: 25mm 20mm 20mm 20mm;
+
+        @top-center {
+            content: "";
+            width: 100%;
+            /*height: 12mm;*/
+            background-image: url("../img/logo.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 170mm auto;
+        }
     }
 
-}
-
-@page {
-
-    size: A4 portrait;
-    margin: 4em 1.5em 4em 1.5em;
-    padding: 0em 0em 0em 0em;
-    counter-increment: page;
-
-    @bottom-center {
-        content: string(chapter);
-    }
-    @bottom-right {
-        content: 'Page ' counter(page);
+    html,
+    body {
+        text-align: justify;
+        font-size: 10pt;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
+    #pdf-header {
+        display: none !important;
+    }
 }
