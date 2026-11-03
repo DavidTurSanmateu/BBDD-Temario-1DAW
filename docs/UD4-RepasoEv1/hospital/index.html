@@ -8,10 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://davidtursanmateu.github.io/BBDD-Temario-1DAW/RepasoEv1/laboratorio/">
+        <link rel="canonical" href="https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD4-RepasoEv1/hospital/">
       
       
-        <link rel="prev" href="../../UD4/ejB/">
+        <link rel="prev" href="../laboratorio/">
       
       
       
@@ -23,7 +23,7 @@
     
     
       
-        <title>1. Laboratorio - Bases de datos</title>
+        <title>2. Hospital - Bases de datos</title>
       
     
     
@@ -147,7 +147,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#actividad-de-repaso-laboratorio" class="md-skip">
+        <a href="#actividad-de-repaso-hospital" class="md-skip">
           Skip to content
         </a>
       
@@ -182,7 +182,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. Laboratorio
+              2. Hospital
             
           </span>
         </div>
@@ -2431,6 +2431,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../laboratorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Laboratorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -2450,7 +2478,7 @@
   <span class="md-ellipsis">
     
   
-    1. Laboratorio
+    2. Hospital
   
 
     
@@ -2468,7 +2496,7 @@
   <span class="md-ellipsis">
     
   
-    1. Laboratorio
+    2. Hospital
   
 
     
@@ -2496,10 +2524,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-diagrama-entidad-relacion" class="md-nav__link">
+  <a href="#1-paso-a-modelo-relacional-normalizado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Diagrama Entidad-Relación
+        1. Paso a modelo relacional normalizado
       
     </span>
   </a>
@@ -2507,32 +2535,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-paso-a-modelo-relacional-normalizado" class="md-nav__link">
+  <a href="#2-paso-a-tablas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Paso a modelo relacional normalizado
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-paso-a-tablas-ddl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Paso a tablas (DDL)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-modificacion-de-los-metadatos-ddl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Modificación de los metadatos (DDL)
+        2. Paso a tablas
       
     </span>
   </a>
@@ -2584,10 +2590,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-diagrama-entidad-relacion" class="md-nav__link">
+  <a href="#1-paso-a-modelo-relacional-normalizado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Diagrama Entidad-Relación
+        1. Paso a modelo relacional normalizado
       
     </span>
   </a>
@@ -2595,32 +2601,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-paso-a-modelo-relacional-normalizado" class="md-nav__link">
+  <a href="#2-paso-a-tablas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Paso a modelo relacional normalizado
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-paso-a-tablas-ddl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Paso a tablas (DDL)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-modificacion-de-los-metadatos-ddl" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Modificación de los metadatos (DDL)
+        2. Paso a tablas
       
     </span>
   </a>
@@ -2644,460 +2628,380 @@
 
 
 
-<h1 id="actividad-de-repaso-laboratorio">Actividad de repaso. Laboratorio</h1>
-<h2 id="1-diagrama-entidad-relacion">1. Diagrama Entidad-Relación</h2>
-<p><strong>Dado el siguiente enunciado, diseña el diagrama E-R, con las posibles debilidades y aclaraciones necesarias anexadas en lenguaje natural al pie del diagrama.</strong></p>
-<p>Se desea modelar una BD para un laboratorio donde se realizan análisis de sangre. Cada análisis tiene asociado un único “volante”, compuesto por los datos del paciente (DNI, nombre completo y teléfonos asociados), el médico (los del paciente más el número de colegiado) y la clínica que lo solicita (IDClínica, nombre, dirección completa) de manera que no se aceptan análisis en el sistema si no se dispone de los tres datos. Es decir, un paciente no puede presentarse en el laboratorio y pedir un análisis si no viene de parte de un médico y de una clínica.</p>
-<p>Médicos y pacientes se almacenan de manera conjunta como “usuarios” en la BD del laboratorio, existiendo otros tipos de usuario además de esos dos que no necesitamos modelar ahora.</p>
-<p>De cada análisis, además del volante, se necesita saber el código del análisis, la fecha y las observaciones que se puedan añadir.</p>
-<p>De los diferentes indicadores (CALCIO, CREATINA, etc.) queremos saber su código, nombre, valor mínimo y máximo de referencia, así como la categoría en la que se clasifica (HEMATOLOGÍA, BIOQUÍMICA, etc.). De cada categoría interesa su código y nombre. A su vez, cada indicador se ordena de manera secuencial en cada análisis en forma de líneas del análisis (1, 2, etc.) de las que solo queremos saber el valor obtenido y el número de orden para poder colocarlo en el listado.</p>
-<details class="question">
-<summary>Diagrama E-R</summary>
-<p><img alt="Solución Laboratorio" src="../img/laboratorio.png" /></p>
-<p>Esta es una propuesta de solución donde:</p>
-<ul>
-<li>Se han omitido los atributos para una mayor claridad del diagrama (están en el paso a tablas).</li>
-<li>Asume que las participaciones mínimas son todas cero.</li>
-</ul>
-<p>Observaciones:</p>
-<ul>
-<li>La agregación puede cubrir también a la superentidad USUARIOS y el significado de la misma no variaría, ya que lo importante es que una agregación solo englobe a una única relación (en este caso ternaria). También sería válido eliminar la relación ASIGNAR y la entidad ANÁLISIS y relacionar directamente la agregación con la entidad débil LÍNEAS DE ANÁLISIS, poniendo el código de análisis, las observaciones y la fecha como atributos de la relación ternaria o, más extraño pero válido, como atributos de la propia agregación.</li>
-<li>El atributo en la relación ternaria nos permite que un mismo médico prescriba un análisis a un mismo paciente desde una misma clínica pero en diferentes fechas. Es complicado de ver pero es la manera más sencilla de permitir esta situación. Al poder repetirse las tres claves primarias (PK) de las tres entidades que forman la relación, el atributo FECHA tendría que ser el cuarto elemento de la clave primaria de esa ternaria.</li>
-<li>Otra alternativa sería que FECHA fuera un atributo de ANÁLISIS y la participación de ANÁLISIS fuera de N. De esta manera, un mismo volante (paciente-médico-clínica) podría generar diferentes análisis con sus fechas y sus observaciones.</li>
-<li>Por último, la opción más lógica sería que cada volante tuviera un número de identificación único, lo que permitiría que un mismo médico recete un análisis a un mismo paciente desde una misma clínica pero con diferente número de volante. De este modo, la clave primaria sería simple y estaría formada únicamente por el número de volante.</li>
-</ul>
-</details>
-<h2 id="2-paso-a-modelo-relacional-normalizado">2. Paso a modelo relacional normalizado</h2>
+<h1 id="actividad-de-repaso-hospital">Actividad de repaso. Hospital</h1>
+<p>Partiendo del siguiente diagrama E-R de un hospital:</p>
+<p><img alt="Diagrama E-R Hospital" src="../img/hospital.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Los atributos 'nombre' y 'dirección' son compuestos tanto en la entidad Trabajadores como en la entidad Enfermos.</p>
+</div>
+<h2 id="1-paso-a-modelo-relacional-normalizado">1. Paso a modelo relacional normalizado</h2>
 <p><strong>Pasa a tablas siguiendo el modelo lógico relacional, indicando las pérdidas semánticas y detallando los cambios necesarios para obtener unas tablas normalizadas en 3FN.</strong></p>
 <p>No olvides incluir las restricciones o anotaciones recopiladas en el modelo anterior.</p>
+<p>Redacción</p>
 <details class="question">
 <summary>Modelo Relacional</summary>
-<ul>
-<li>Las participaciones mínimas se asumen a CERO (para simplificar la solución).</li>
-<li>No hay pérdidas semánticas y sería conveniente explicar la debilidad.</li>
-</ul>
 <div class="grid cards solo-filas" markdown>
 <ul>
 <li>
-<p><strong>Usuarios</strong> (DNI, nombre, apellidos, (teléfono)n)</p>
-<p>CP: DNI</p>
-<p><strong>Pacientes</strong> (DNI)</p>
-<p>CP: DNI</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
-<p><i>No necesita más campos, ya que comparte los atributos de la superentidad. El enunciado no lo dice, pero podríamos considerar almacenar su dirección. De este modo tendríamos:</i></p>
-<div class="grid cards solo-filas" markdown>
-<ul>
-<li>
-<p><strong>Pacientes</strong> (DNI, direccióncompleta.dirección_postal, direccióncompleta.ciudad, direccióncompleta.provincia)</p>
-<p>CP: DNI</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
-</li>
-</ul>
-<p><strong>Médicos</strong> (DNI, ncolegiado)</p>
-<p>CP: DNI</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
-<p>UK: ncolegiado (<i>aunque no se dice en el enunciado, el n.º de colegiado es único</i>)</p>
-<p><strong>Clínicas</strong> (IDclínica, nombre, direccióncompleta.dirección_postal, direccióncompleta.ciudad, direccióncompleta.provincia)</p>
-<p>CP: IDclínica</p>
-<p><strong>Volante</strong> (DNI_P, DNI_M, IDclínica, fecha_v)</p>
-<p>CP: {DNI_P, DNI_M, IDclínica, fecha_v}</p>
-<p>CAj: DNI_P → Pacientes (DNI)</p>
-<p>CAj: DNI_M → Médicos (DNI)</p>
-<p>CAj: IDclínica → Clínicas (IDclínica)</p>
-<p><i>El atributo de la relación "fecha_v" entra en la PK, pero no siempre es así.</i></p>
-<p><strong>Análisis</strong> (cod_análisis, observaciones, fecha_a)</p>
-<p>CP: cod_análisis</p>
-<p><strong>Asignar</strong> (DNI_P, DNI_M, IDclínica, fecha_v, cod_análisis)</p>
-<p>CP: {DNI_P, DNI_M, IDclínica, fecha_v}</p>
-<p>CAj: {DNI_P, DNI_M, IDclínica, fecha_v} → Volante (DNI_P, DNI_M, IDclínica, fecha_v)</p>
-<p>CAj: cod_análisis → Análisis (cod_análisis)</p>
-<p>UK: cod_análisis</p>
-<p>VNN: cod_análisis → no tiene sentido asignar un volante sin un análisis</p>
-<p><i>Otra opción válida sería poner como PK el "cod_análisis" y como UK+VNN los cuatro campos que ahora son PK.</i></p>
-<p><strong>Categorías</strong> (cod_cat, nombre)</p>
-<p>CP: cod_cat</p>
-<p><strong>Indicadores</strong> (cod_indicador, nombre, minref, maxref, cod_cat)</p>
-<p>CP: cod_indicador</p>
-<p>CAj: cod_cat → Categorías (cod_cat)</p>
-<p>VNN: cod_cat (<i>aunque no se dice en el enunciado, tiene sentido que un indicador pertenezca a una categoría</i>)</p>
-<p><strong>Líneas_análisis</strong> (cod_análisis, orden, cantidad, cod_indicador)</p>
-<p>CP: {cod_análisis, orden}</p>
-<p>CAj: cod_análisis → Análisis (cod_análisis)</p>
-<p>CAj: cod_indicador → Indicadores (cod_indicador)</p>
-<p>UK: {cod_análisis, cod_indicador} (<i>esta restricción se deduce al entender cómo funciona un análisis y no surge del paso a tablas, por lo que incluirla es totalmente opcional, ya que no lo indica el enunciado.</i>)</p>
+<p><strong>Trabajadores</strong> (dni_trab, nombre.nombre, nombre.apellidos, dirección.postal, dirección.ciudad, dirección.provincia, dirección.país, {teléfono}<sup>n</sup>, sueldo)</p>
+<p>CP: dni_trab</p>
+<p><strong>Médicos</strong> (dni_trab, especialidad)</p>
+<p>CP: dni_trab</p>
+<p>CAj: dni_trab → Trabajadores (dni_trab)</p>
+<p><strong>Plantas</strong> (especialidad_planta, num_habitaciones)</p>
+<p>CP: especialidad_planta</p>
+<p><strong>Habitaciones</strong> (especialidad_planta, número, num_camas, observaciones)</p>
+<p>CP: {especialidad_planta, número}</p>
+<p>CAj: especialidad_planta → Plantas (especialidad_planta)</p>
+<p><strong>Enfermeras</strong> (dni_trab, especialidad_planta)</p>
+<p>CP: dni_trab</p>
+<p>CAj: dni_trab → Trabajadores (dni_trab)</p>
+<p>CAj: especialidad_planta → Plantas (especialidad_planta)</p>
+<p>VNN: especialidad_planta</p>
+<p><strong>Enfermos</strong> (dni_enf, cod_enf, nombre.nombre, nombre.apellidos, fecha_nac, dirección.postal, dirección.ciudad, dirección.provincia, dirección.país, {teléfono}<sup>n</sup>, dni_trab, especialidad_planta, número, fecha_entrada, fecha_salida)</p>
+<p>CP: dni_enf</p>
+<p>ÚNICO: cod_enf</p>
+<p>CAj: dni_trab → Médicos (dni_trab)</p>
+<p>CAj: {especialidad_planta, número} → Habitaciones (especialidad_planta, número)</p>
+<p>VNN: dni_trab</p>
+<p>VNN: {especialidad_planta, número}</p>
+<p><i>El atributo "edad_enf" es derivado, por lo que no es necesario almacenarlo. Se obtiene a partir de la fecha de nacimiento y la fecha actual: edad_enf = fecha_actual.Año − fecha_nac.Año.</i></p>
+<p><strong>Diagnósticos</strong> (cod_diag, informe, fecha, dni_trab, dni_enf)</p>
+<p>CP: cod_diag</p>
+<p>CAj: dni_trab → Médicos (dni_trab)</p>
+<p>CAj: dni_enf → Enfermos (dni_enf)</p>
+<p>VNN: dni_trab</p>
+<p>VNN: dni_enf</p>
+<p><em>Pérdidas semánticas:</em></p>
+<p>1) Todo trabajador del hospital es médico o enfermera, pero no ambos a la vez.</p>
+<p>2) Toda planta debe tener asignada al menos una enfermera.</p>
+<p>3) Toda planta debe tener al menos una habitación.</p>
+<p>4) Todo médico debe tratar al menos a un enfermo.</p>
+<p>5) Todo médico que trata a un enfermo debe emitir un diagnóstico.</p>
 </li>
 </ul>
 </div>
 </details>
 <details class="question">
 <summary>Primera Forma Normal (1FN)</summary>
-<p><strong>Relación Usuarios</strong>:</p>
+<p><strong>1) Relación Trabajadores</strong></p>
+<ul>
+<li>Los atributos compuestos «nombre» y «dirección» se dividen en tantos campos como tenga su composición.</li>
+</ul>
 <div class="grid cards solo-filas" markdown>
 <ul>
 <li>
-<p><strong>Usuarios</strong> (DNI, nombre, apellidos, (teléfono)n)</p>
-<p>CP: DNI</p>
-<p><i>El atributo teléfono es multivaluado. La relación no está en 1FN, por lo que procedemos a transformarla:</i></p>
-<p><strong>Usuarios</strong> (DNI, nombre, apellidos)</p>
-<p>CP: DNI</p>
-<p><strong>Teléfonos</strong> (DNI, teléfono)</p>
-<p>CP: {DNI, teléfono}</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
+<p><strong>Trabajadores</strong> (dni_trab, nombre, apellidos, dirección_postal, ciudad, provincia, país, {teléfono}<sup>n</sup>, sueldo)</p>
+<p>CP: dni_trab</p>
 </li>
 </ul>
 </div>
-<p><strong>Relación Pacientes</strong>:</p>
+<ul>
+<li>El atributo multivaluado «teléfono» se sustituye por una relación en el modelo E/R y se convierte en una tabla independiente.</li>
+</ul>
 <div class="grid cards solo-filas" markdown>
 <ul>
 <li>
-<p><strong>Pacientes</strong> (DNI)</p>
-<p>CP: DNI</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
-<p><i>No necesita más campos, ya que comparte los atributos de la superentidad. El enunciado no lo dice, pero podríamos considerar almacenar su dirección. De este modo tendríamos:</i></p>
-<p><strong>Pacientes</strong> (DNI, direccióncompleta.dirección_postal, direccióncompleta.ciudad, direccióncompleta.provincia)</p>
-<p>CP: DNI</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
-<p><i>La direccióncompleta es un atributo compuesto. En este caso, la relación no está en 1FN y tenemos que separar los atributos en varios campos.</i></p>
-<p><strong>Pacientes</strong> (DNI, dirección_postal, ciudad, provincia)</p>
-<p>CP: DNI</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
+<p><strong>Trabajadores</strong> (dni_trab, nombre, apellidos, dirección_postal, ciudad, provincia, país, sueldo)</p>
+<p>CP: dni_trab</p>
+<p><strong>TrabTelf</strong> (teléfono, dni_trab)</p>
+<p>CP: {teléfono, dni_trab}</p>
+<p>CAj: dni_trab → Trabajadores (dni_trab)</p>
 </li>
 </ul>
 </div>
-<p><strong>Relación Clínicas</strong>:</p>
+<p><strong>2) Relación Enfermos</strong></p>
+<ul>
+<li>Los atributos compuestos «nombre» y «dirección» se dividen en tantos campos como tenga su composición.</li>
+</ul>
 <div class="grid cards solo-filas" markdown>
 <ul>
 <li>
-<p><strong>Clínicas</strong> (IDclínica, nombre, direccióncompleta.dirección_postal, direccióncompleta.ciudad, direccióncompleta.provincia)</p>
-<p>CP: IDclínica</p>
-<p><i>La direccióncompleta es un atributo compuesto. En este caso, la relación no está en 1FN y tenemos que separar los atributos en varios campos.</i></p>
-<p><strong>Clínicas</strong> (IDclínica, nombre, dirección_postal, ciudad, provincia)</p>
-<p>CP: IDclínica</p>
+<p><strong>Enfermos</strong> (dni_enf, cod_enf, nombre, apellidos, fecha_nac, dirección_postal, ciudad, provincia, país, {teléfono}<sup>n</sup>, dni_trab, especialidad_planta, número, fecha_entrada, fecha_salida)</p>
+<p>CP: dni_enf</p>
+<p>ÚNICO: cod_enf</p>
+<p>CAj: dni_trab → Médicos (dni_trab)</p>
+<p>CAj: {especialidad_planta, número} → Habitaciones (especialidad_planta, número)</p>
+<p>VNN: dni_trab</p>
+<p>VNN: {especialidad_planta, número}</p>
 </li>
 </ul>
 </div>
+<ul>
+<li>El atributo multivaluado «teléfono» se sustituye por una relación en el modelo E/R y se convierte en una tabla independiente.</li>
+</ul>
+<div class="grid cards solo-filas" markdown>
+<ul>
+<li>
+<p><strong>Enfermos</strong> (dni_enf, cod_enf, nombre, apellidos, fecha_nac, dirección_postal, ciudad, provincia, país, dni_trab, especialidad_planta, número, fecha_entrada, fecha_salida)</p>
+<p>CP: dni_enf</p>
+<p>ÚNICO: cod_enf</p>
+<p>CAj: dni_trab → Médicos (dni_trab)</p>
+<p>CAj: {especialidad_planta, número} → Habitaciones (especialidad_planta, número)</p>
+<p>VNN: dni_trab</p>
+<p>VNN: {especialidad_planta, número}</p>
+<p><strong>EnfTelf</strong> (teléfono, dni_enf)</p>
+<p>CP: {teléfono, dni_enf}</p>
+<p>CAj: dni_enf → Enfermos (dni_enf)</p>
+</li>
+</ul>
+</div>
+<ul>
+<li>El atributo derivado «edad» se elimina, ya que puede calcularse a partir de la fecha de nacimiento y la fecha actual. Su expresión se recoge en observaciones.</li>
+</ul>
+<p><em>Observaciones:</em></p>
+<p>1) edad_enf = fecha_actual.Año − fecha_nac.Año</p>
 </details>
 <details class="question">
 <summary>Segunda Forma Normal (2FN)</summary>
-<p>Las tablas que tienen una clave primaria simple ya están en 2FN. El resto también se encuentra en 2FN, puesto que no hay dependencias parciales.</p>
+<p>Hay que eliminar las DF parciales.</p>
+<ul>
+<li>Las relaciones Trabajadores, Médicos, Plantas, Enfermeras, Enfermos y Diagnósticos no tienen claves principales compuestas, por lo que ya están en 2FN.</li>
+<li>Las relaciones TrabTelf y EnfermosTelf no tienen atributos que no sean clave primaria, por lo que ya están en 2FN.</li>
+<li>Para la relación Habitaciones obtenemos el diagrama de DF para ver si hay dependencias parciales: no hay dependencias parciales, ya que los campos “num_camas” y “observaciones” dependen completamente de la clave primaria, por lo que está en 2FN.</li>
+</ul>
 </details>
 <details class="question">
 <summary>Tercera Forma Normal (3FN)</summary>
-<p><strong>Relación Pacientes</strong>:</p>
-<p><i>No está en 3FN, puesto que existe una dependencia transitiva provincia → ciudad. Debemos crear una nueva tabla para eliminar esta dependencia transitiva.</i></p>
+<p>Para eliminar las dependencias funcionales transitivas (DF transitivas), es necesario calcular el diagrama funcional de cada relación y descomponer aquellas que no estén en 3FN.</p>
+<p><strong>1) Relación Trabajadores</strong></p>
+<p><strong>Diagrama funcional:</strong></p>
+<ul>
+<li>nombre, apellidos, dirección_postal, ciudad, sueldo → dni_trab</li>
+<li>ciudad → provincia</li>
+<li>provincia → país</li>
+</ul>
+<p>Se identifican dos dependencias transitivas, por lo que se crean las siguientes relaciones:</p>
 <div class="grid cards solo-filas" markdown>
 <ul>
 <li>
-<p><strong>Provincia</strong> (provincia)</p>
+<p><strong>Provincias</strong> (provincia, país)</p>
 <p>CP: provincia</p>
-<p><strong>Ciudad</strong> (ciudad, provincia)</p>
-<p>CP: {ciudad, provincia}</p>
-<p>CAj: provincia → Provincia (provincia)</p>
-<p><strong>Pacientes</strong> (DNI, dirección_postal, ciudad, provincia)</p>
-<p>CP: DNI</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
-<p>CAj: {ciudad, provincia} → Ciudad (ciudad, provincia)</p>
+<p>VNN: país</p>
+<p><strong>Ciudades</strong> (ciudad, provincia)</p>
+<p>CP: ciudad</p>
+<p>CAj: provincia → Provincias (provincia)</p>
+<p>VNN: provincia</p>
+<p><strong>Trabajadores</strong> (dni_trab, nombre, apellidos, dirección_postal, ciudad, sueldo)</p>
+<p>CP: dni_trab</p>
+<p>CAj: ciudad → Ciudades (ciudad)</p>
 </li>
 </ul>
 </div>
-<p><strong>Relación Clínicas</strong>:</p>
-<p><i>No está en 3FN, puesto que existe una dependencia transitiva provincia → ciudad. Debemos crear una nueva tabla para eliminar esta dependencia transitiva.</i></p>
-<p><i>Las tablas Provincia y Ciudad son las mismas que hemos creado anteriormente.</i></p>
+<p><strong>2) Relación Enfermos</strong></p>
+<p><strong>Diagrama funcional:</strong></p>
+<ul>
+<li>cod_enf, nombre, apellidos, dirección_postal, ciudad, dni_trab, especialidad_planta, número, fecha_entrada, fecha_salida → dni_enf</li>
+<li>provincia → ciudad</li>
+<li>país → provincia</li>
+</ul>
+<p>Se procede de la misma forma que en la relación Trabajadores, por lo que ya tenemos creadas las relaciones Provincias y Ciudades.</p>
 <div class="grid cards solo-filas" markdown>
 <ul>
 <li>
-<p><strong>Clínicas</strong> (IDclínica, nombre, dirección_postal, ciudad, provincia)</p>
-<p>CP: IDclínica</p>
-<p>CAj: {ciudad, provincia} → Ciudad (ciudad, provincia)</p>
+<p><strong>Enfermos</strong> (dni_enf, cod_enf, nombre, apellidos, fecha_nac, dirección_postal, ciudad, dni_trab, especialidad_planta, número, fecha_entrada, fecha_salida)</p>
+<p>CP: dni_enf</p>
+<p>ÚNICO: cod_enf</p>
+<p>CAj: ciudad → Ciudades (ciudad)</p>
+<p>CAj: dni_trab → Médicos (dni_trab)</p>
+<p>CAj: {especialidad_planta, número} → Habitaciones (especialidad_planta, número)</p>
+<p>VNN: dni_trab</p>
+<p>VNN: {especialidad_planta, número}</p>
 </li>
 </ul>
 </div>
+<p><strong>3) Relación TrabTelf</strong></p>
+<p>Como no hay atributos no-clave, no puede haber dependencias funcionales transitivas. Por tanto, la relación ya está en 3FN.</p>
+<p><strong>4) Relación EnfermosTelf</strong></p>
+<p>Como no hay atributos no-clave, no puede haber dependencias funcionales transitivas. Por tanto, la relación ya está en 3FN.</p>
+<p><strong>5) Relación Médicos</strong></p>
+<p>Como solo hay un atributo no-clave, no puede haber dependencias funcionales transitivas. Por tanto, la relación ya está en 3FN.</p>
+<p><strong>6) Relación Plantas</strong></p>
+<p>Como solo hay un atributo no-clave, no puede haber dependencias funcionales transitivas. Por tanto, la relación ya está en 3FN.</p>
+<p><strong>7) Relación Habitaciones</strong></p>
+<p>Todos los atributos dependen directamente de la clave primaria. Por tanto, la relación ya está en 3FN.</p>
+<p><strong>8) Relación Enfermeras</strong></p>
+<p>Como solo hay un atributo no-clave, no puede haber dependencias funcionales transitivas. Por tanto, la relación ya está en 3FN.</p>
+<p><strong>9) Relación Diagnósticos</strong></p>
+<p>Todos los atributos dependen directamente de la clave primaria. Por tanto, la relación ya está en 3FN.</p>
 </details>
 <details class="question">
 <summary>Resultado final</summary>
+<p>Y el resultado final:</p>
 <div class="grid cards solo-filas" markdown>
 <ul>
 <li>
-<p><strong>Usuarios</strong> (DNI, nombre, apellidos)</p>
-<p>CP: DNI</p>
-<p><strong>Teléfonos</strong> (DNI, teléfono)</p>
-<p>CP: {DNI, teléfono}</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
-<p><strong>Provincia</strong> (provincia)</p>
+<p><strong>Provincias</strong> (provincia, país)</p>
 <p>CP: provincia</p>
-<p><strong>Ciudad</strong> (ciudad, provincia)</p>
-<p>CP: {ciudad, provincia}</p>
-<p>CAj: provincia → Provincia (provincia)</p>
-<p><strong>Pacientes</strong> (DNI, dirección_postal, ciudad, provincia)</p>
-<p>CP: DNI</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
-<p>CAj: {ciudad, provincia} → Ciudad (ciudad, provincia)</p>
-<p><strong>Médicos</strong> (DNI, ncolegiado)</p>
-<p>CP: DNI</p>
-<p>CAj: DNI → Usuarios (DNI)</p>
-<p>UK: ncolegiado: (<i>aunque no se dice en el enunciado, el n.º de colegiado es único</i>)</p>
-<p><strong>Clínicas</strong> (IDclínica, nombre, dirección_postal, ciudad, provincia)</p>
-<p>CP: IDclínica</p>
-<p>CAj: {ciudad, provincia} → Ciudad (ciudad, provincia)</p>
-<p><strong>Volante</strong> (DNI_P, DNI_M, IDclínica, fecha_v)</p>
-<p>CP: {DNI_P, DNI_M, IDclínica, fecha_v}</p>
-<p>CAj: DNI_P → Pacientes (DNI)</p>
-<p>CAj: DNI_M → Médicos (DNI)</p>
-<p>CAj: IDclínica → Clínicas (IDclínica)</p>
-<p><i>El atributo de la relación fecha_v entra en la PK, pero no siempre es así.</i></p>
-<p><strong>Análisis</strong> (cod_análisis, observaciones, fecha_a)</p>
-<p>CP: cod_análisis</p>
-<p><strong>Asignar</strong> (DNI_P, DNI_M, IDclínica, fecha_v, cod_análisis)</p>
-<p>CP: {DNI_P, DNI_M, IDclínica, fecha_v}</p>
-<p>CAj: {DNI_P, DNI_M, IDclínica, fecha_v} → Volante (DNI_P, DNI_M, IDclínica, fecha_v)</p>
-<p>CAj: cod_análisis → Análisis (cod_análisis)</p>
-<p>UK: cod_análisis</p>
-<p>VNN: cod_análisis: (<i>no tiene sentido asignar un volante sin un análisis</i>)</p>
-<p><i>Otra opción válida sería poner como PK el cod_análisis y como UK+VNN los cuatro campos que ahora son PK.</i></p>
-<p><strong>Categorías</strong> (cod_cat, nombre)</p>
-<p>CP: cod_cat</p>
-<p><strong>Indicadores</strong> (cod_indicador, nombre, minref, maxref, cod_cat)</p>
-<p>CP: cod_indicador</p>
-<p>CAj: cod_cat → Categorías (cod_cat)</p>
-<p>VNN: cod_cat: <i>aunque no se dice en el enunciado, tiene sentido que un indicador pertenezca a una categoría</i></p>
-<p><strong>Líneas_análisis</strong> (cod_análisis, orden, cantidad, cod_indicador)</p>
-<p>CP: {cod_análisis, orden}</p>
-<p>CAj: cod_análisis → Análisis (cod_análisis)</p>
-<p>CAj: cod_indicador → Indicadores (cod_indicador)</p>
-<p>UK: {cod_análisis, cod_indicador}: <i>esta restricción se deduce al entender cómo funciona un análisis y no surge del paso a tablas, por lo que incluirla es totalmente opcional, ya que no lo indica el enunciado.</i></p>
+<p>VNN: país</p>
+<p><strong>Ciudades</strong> (ciudad, provincia)</p>
+<p>CP: ciudad</p>
+<p>CAj: provincia → Provincias (provincia)</p>
+<p>VNN: provincia</p>
+<p><strong>Trabajadores</strong> (dni_trab, nombre, apellidos, dirección_postal, ciudad, sueldo)</p>
+<p>CP: dni_trab</p>
+<p>CAj: ciudad → Ciudades (ciudad)</p>
+<p><strong>TrabTelf</strong> (teléfono, dni_trab)</p>
+<p>CP: {teléfono, dni_trab}</p>
+<p>CAj: dni_trab → Trabajadores (dni_trab)</p>
+<p><strong>Médicos</strong> (dni_trab, especialidad)</p>
+<p>CP: dni_trab</p>
+<p>CAj: dni_trab → Trabajadores (dni_trab)</p>
+<p><strong>Plantas</strong> (especialidad_planta, num_habitaciones)</p>
+<p>CP: especialidad_planta</p>
+<p><strong>Habitaciones</strong> (especialidad_planta, número, num_camas, observaciones)</p>
+<p>CP: {especialidad_planta, número}</p>
+<p>CAj: especialidad_planta → Plantas (especialidad_planta)</p>
+<p><strong>Enfermeras</strong> (dni_trab, especialidad_planta)</p>
+<p>CP: dni_trab</p>
+<p>CAj: dni_trab → Trabajadores (dni_trab)</p>
+<p>CAj: especialidad_planta → Plantas (especialidad_planta)</p>
+<p>VNN: especialidad_planta</p>
+<p><strong>Enfermos</strong> (dni_enf, cod_enf, nombre, apellidos, fecha_nac, dirección_postal, ciudad, dni_trab, especialidad_planta, número, fecha_entrada, fecha_salida)</p>
+<p>CP: dni_enf</p>
+<p>ÚNICO: cod_enf</p>
+<p>CAj: ciudad → Ciudades (ciudad)</p>
+<p>CAj: dni_trab → Médicos (dni_trab)</p>
+<p>CAj: {especialidad_planta, número} → Habitaciones (especialidad_planta, número)</p>
+<p>VNN: dni_trab</p>
+<p>VNN: {especialidad_planta, número}</p>
+<p><strong>EnfermosTelf</strong> (teléfono, dni_enf)</p>
+<p>CP: {teléfono, dni_enf}</p>
+<p>CAj: dni_enf → Enfermos (dni_enf)</p>
+<p><strong>Diagnósticos</strong> (cod_diag, informe, fecha, dni_trab, dni_enf)</p>
+<p>CP: cod_diag</p>
+<p>CAj: dni_trab → Médicos (dni_trab)</p>
+<p>CAj: dni_enf → Enfermos (dni_enf)</p>
+<p>VNN: dni_trab</p>
+<p>VNN: dni_enf</p>
+<p><em>Pérdidas semánticas:</em></p>
+<p>1) Todo trabajador del hospital es médico o enfermera, pero no ambos a la vez.</p>
+<p>2) Toda planta debe tener asignada al menos una enfermera.</p>
+<p>3) Toda planta debe tener al menos una habitación.</p>
+<p>4) Todo médico debe tratar al menos a un enfermo.</p>
+<p>5) Todo médico que trata a un enfermo debe emitir un diagnóstico.</p>
+<p><em>Observaciones:</em></p>
+<p>1) edad_enf = fecha_actual.Año – fecha_nac.Año</p>
 </li>
 </ul>
 </div>
 </details>
-<h2 id="3-paso-a-tablas-ddl">3. Paso a tablas (DDL)</h2>
-<p><strong>Indica las sentencias DDL necesarias, en el orden adecuado, para crear una BD en MySQL que pueda gestionar el modelo propuesto en los pasos anteriores.</strong></p>
-<p>No olvides incluir las restricciones o anotaciones recopiladas en los modelos anteriores.</p>
+<h2 id="2-paso-a-tablas">2. Paso a tablas</h2>
+<p><strong>Traduce a tablas el modelo relacional anterior utilizando el SGBDR MySQL.</strong></p>
 <details class="question">
-<summary>Paso a tablas SQL</summary>
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">ClinicaAnalisis</span>
-<span class="w">    </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span>
-<span class="w">    </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_spanish_ci</span><span class="p">;</span>
+<summary>Paso a tablas MySQL</summary>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">Hospital</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8_spanish_ci</span><span class="p">;</span>
 
-<span class="n">USE</span><span class="w"> </span><span class="n">ClinicaAnalisis</span><span class="p">;</span>
+<span class="n">USE</span><span class="w"> </span><span class="n">Hospital</span><span class="p">;</span>
 
-
-<span class="c1">-- 1. Tabla Usuarios</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Usuarios</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">DNI</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
-<span class="w">    </span><span class="n">nombre</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-<span class="w">    </span><span class="n">apellidos</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">150</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Provincias</span><span class="w"> </span><span class="p">(</span>
+<span class="n">provincia</span><span class="w">   </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span>
+<span class="n">pais</span><span class="w">        </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">pro_prov_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">provincia</span><span class="p">)</span>
 <span class="p">);</span>
 
-
-<span class="c1">-- 2. Tabla Telefonos</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Telefonos</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">DNI</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
-<span class="w">    </span><span class="n">telefono</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI</span><span class="p">,</span><span class="w"> </span><span class="n">telefono</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">tel_dni_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Usuarios</span><span class="p">(</span><span class="n">DNI</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Ciudades</span><span class="w"> </span><span class="p">(</span>
+<span class="n">ciudad</span><span class="w">      </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="n">provincia</span><span class="w">   </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">ciu_ciu_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ciudad</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">ciu_prov_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">provincia</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Provincias</span><span class="w"> </span><span class="p">(</span><span class="n">provincia</span><span class="p">)</span>
 <span class="p">);</span>
 
-
-<span class="c1">-- 3. Tabla Provincia</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Provincia</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">provincia</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">provincia</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Trabajadores</span><span class="w"> </span><span class="p">(</span>
+<span class="n">dni_trab</span><span class="w">            </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span>
+<span class="n">nombre</span><span class="w">              </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="n">apellidos</span><span class="w">           </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span>
+<span class="n">direccion_postal</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="n">ciudad</span><span class="w">              </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="n">sueldo</span><span class="w">              </span><span class="nb">FLOAT</span><span class="p">,</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">trab_dni_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">trab_ciu_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ciudad</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Ciudades</span><span class="w"> </span><span class="p">(</span><span class="n">ciudad</span><span class="p">)</span>
 <span class="p">);</span>
 
-
-<span class="c1">-- 4. Tabla Ciudad</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Ciudad</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">ciudad</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-<span class="w">    </span><span class="n">provincia</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ciudad</span><span class="p">,</span><span class="w"> </span><span class="n">provincia</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">ciu_pro_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">provincia</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Provincia</span><span class="p">(</span><span class="n">provincia</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">TrabTelf</span><span class="w"> </span><span class="p">(</span>
+<span class="n">telefono</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
+<span class="n">dni_trab</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">trt_teldni_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">telefono</span><span class="p">,</span><span class="w"> </span><span class="n">dni_trab</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">trt_dni_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Trabajadores</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">CASCADE</span>
 <span class="p">);</span>
-
-
-<span class="c1">-- 5. Tabla Pacientes</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Pacientes</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">DNI</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
-<span class="w">    </span><span class="n">direccion_postal</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
-<span class="w">    </span><span class="n">ciudad</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-<span class="w">    </span><span class="n">provincia</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">pac_dni_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Usuarios</span><span class="p">(</span><span class="n">DNI</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">pac_ciu_pro_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ciudad</span><span class="p">,</span><span class="w"> </span><span class="n">provincia</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Ciudad</span><span class="p">(</span><span class="n">ciudad</span><span class="p">,</span><span class="w"> </span><span class="n">provincia</span><span class="p">)</span>
-<span class="p">);</span>
-
-
-<span class="c1">-- 6. Tabla Medicos</span>
 
 <span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Medicos</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">DNI</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
-<span class="w">    </span><span class="n">ncolegiado</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">med_dni_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Usuarios</span><span class="p">(</span><span class="n">DNI</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">med_nco_uk</span>
-<span class="w">        </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">ncolegiado</span><span class="p">)</span>
+<span class="n">dni_trab</span><span class="w">        </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span>
+<span class="n">especialidad</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">med_dni_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">med_dni_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Trabajadores</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">)</span>
 <span class="p">);</span>
 
-
-<span class="c1">-- 7. Tabla Clinicas</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Clinicas</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">IDclinica</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">nombre</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">150</span><span class="p">),</span>
-<span class="w">    </span><span class="n">direccion_postal</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
-<span class="w">    </span><span class="n">ciudad</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-<span class="w">    </span><span class="n">provincia</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">IDclinica</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">cli_ciu_pro_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ciudad</span><span class="p">,</span><span class="w"> </span><span class="n">provincia</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Ciudad</span><span class="p">(</span><span class="n">ciudad</span><span class="p">,</span><span class="w"> </span><span class="n">provincia</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Plantas</span><span class="w"> </span><span class="p">(</span>
+<span class="n">especialidad_planta</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="n">num_habitaciones</span><span class="w">    </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">pla_esp_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">especialidad_planta</span><span class="p">)</span>
 <span class="p">);</span>
 
-
-<span class="c1">-- 8. Tabla Volante</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Volante</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">DNI_P</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
-<span class="w">    </span><span class="n">DNI_M</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
-<span class="w">    </span><span class="n">IDclinica</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">fecha_v</span><span class="w"> </span><span class="nb">DATE</span><span class="p">,</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI_P</span><span class="p">,</span><span class="w"> </span><span class="n">DNI_M</span><span class="p">,</span><span class="w"> </span><span class="n">IDclinica</span><span class="p">,</span><span class="w"> </span><span class="n">fecha_v</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">vol_dnp_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI_P</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Pacientes</span><span class="p">(</span><span class="n">DNI</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">vol_dnm_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI_M</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Medicos</span><span class="p">(</span><span class="n">DNI</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">vol_idc_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">IDclinica</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Clinicas</span><span class="p">(</span><span class="n">IDclinica</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Habitaciones</span><span class="w"> </span><span class="p">(</span>
+<span class="n">especialidad_planta</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="n">numero</span><span class="w">              </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="n">num_camas</span><span class="w">           </span><span class="nb">INTEGER</span><span class="p">,</span>
+<span class="n">observaciones</span><span class="w">       </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">hab_espnum_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">especialidad_planta</span><span class="p">,</span><span class="w"> </span><span class="n">numero</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">hab_esp_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">especialidad_planta</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Plantas</span><span class="w"> </span><span class="p">(</span><span class="n">especialidad_planta</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">RESTRICT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">CASCADE</span>
 <span class="p">);</span>
 
-
-<span class="c1">-- 9. Tabla Analisis</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Analisis</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">cod_analisis</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">observaciones</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">fecha_a</span><span class="w"> </span><span class="nb">DATE</span><span class="p">,</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cod_analisis</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Enfermeras</span><span class="w"> </span><span class="p">(</span>
+<span class="n">dni_trab</span><span class="w">            </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span>
+<span class="n">especialidad_planta</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">enf_dnitrab_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">enf_dnitrab_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Trabajadores</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">enf_esp_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">especialidad_planta</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Plantas</span><span class="w"> </span><span class="p">(</span><span class="n">especialidad_planta</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">RESTRICT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">CASCADE</span>
 <span class="p">);</span>
 
-
-<span class="c1">-- 10. Tabla Asignar</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Asignar</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">DNI_P</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
-<span class="w">    </span><span class="n">DNI_M</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
-<span class="w">    </span><span class="n">IDclinica</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">fecha_v</span><span class="w"> </span><span class="nb">DATE</span><span class="p">,</span>
-<span class="w">    </span><span class="n">cod_analisis</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI_P</span><span class="p">,</span><span class="w"> </span><span class="n">DNI_M</span><span class="p">,</span><span class="w"> </span><span class="n">IDclinica</span><span class="p">,</span><span class="w"> </span><span class="n">fecha_v</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">asi_dna_uk</span>
-<span class="w">        </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">cod_analisis</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">asi_vol_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">DNI_P</span><span class="p">,</span><span class="w"> </span><span class="n">DNI_M</span><span class="p">,</span><span class="w"> </span><span class="n">IDclinica</span><span class="p">,</span><span class="w"> </span><span class="n">fecha_v</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Volante</span><span class="p">(</span><span class="n">DNI_P</span><span class="p">,</span><span class="w"> </span><span class="n">DNI_M</span><span class="p">,</span><span class="w"> </span><span class="n">IDclinica</span><span class="p">,</span><span class="w"> </span><span class="n">fecha_v</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">asi_cod_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cod_analisis</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Analisis</span><span class="p">(</span><span class="n">cod_analisis</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Enfermos</span><span class="w"> </span><span class="p">(</span>
+<span class="n">dni_enf</span><span class="w">             </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span>
+<span class="n">cod_enf</span><span class="w">             </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="n">nombre</span><span class="w">              </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+<span class="n">apellidos</span><span class="w">           </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span>
+<span class="n">fecha_nac</span><span class="w">           </span><span class="nb">DATE</span><span class="p">,</span>
+<span class="n">direccion_postal</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+<span class="n">ciudad</span><span class="w">              </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span>
+<span class="n">dni_trab</span><span class="w">            </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="n">especialidad_planta</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="n">numero</span><span class="w">              </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="n">fecha_entrada</span><span class="w">       </span><span class="nb">DATE</span><span class="p">,</span>
+<span class="n">fecha_salida</span><span class="w">        </span><span class="nb">DATE</span><span class="p">,</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">enf_dnienf_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_enf</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">enf_cod_uk</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">cod_enf</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">enf_ciu_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ciudad</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Ciudades</span><span class="w"> </span><span class="p">(</span><span class="n">ciudad</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">enf_dnimed_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Trabajadores</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">enf_hab_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">especialidad_planta</span><span class="p">,</span><span class="w"> </span><span class="n">numero</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Habitaciones</span><span class="w"> </span><span class="p">(</span><span class="n">especialidad_planta</span><span class="p">,</span><span class="w"> </span><span class="n">numero</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">RESTRICT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">CASCADE</span>
 <span class="p">);</span>
 
-
-<span class="c1">-- 11. Tabla Categorias</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Categorias</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">cod_cat</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">nombre</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cod_cat</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">EnfTelf</span><span class="w"> </span><span class="p">(</span>
+<span class="n">telefono</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span>
+<span class="n">dni_enf</span><span class="w">     </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">ent_teldni_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">telefono</span><span class="p">,</span><span class="w"> </span><span class="n">dni_enf</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">ent_dni_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_enf</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Enfermos</span><span class="w"> </span><span class="p">(</span><span class="n">dni_enf</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">UPDATE</span><span class="w"> </span><span class="k">CASCADE</span>
 <span class="p">);</span>
 
-
-<span class="c1">-- 12. Tabla Indicadores</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Indicadores</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">cod_indicador</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">nombre</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">150</span><span class="p">),</span>
-<span class="w">    </span><span class="n">minref</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
-<span class="w">    </span><span class="n">maxref</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
-<span class="w">    </span><span class="n">cod_cat</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cod_indicador</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">ind_cat_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cod_cat</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Categorias</span><span class="p">(</span><span class="n">cod_cat</span><span class="p">)</span>
-<span class="p">);</span>
-
-
-<span class="c1">-- 13. Tabla Lineas_analisis</span>
-
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Lineas_analisis</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="n">cod_analisis</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">orden</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-<span class="w">    </span><span class="n">cantidad</span><span class="w"> </span><span class="nb">DECIMAL</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
-<span class="w">    </span><span class="n">cod_indicador</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span>
-
-<span class="w">    </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cod_analisis</span><span class="p">,</span><span class="w"> </span><span class="n">orden</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">lin_cai_uk</span>
-<span class="w">        </span><span class="k">UNIQUE</span><span class="w"> </span><span class="p">(</span><span class="n">cod_analisis</span><span class="p">,</span><span class="w"> </span><span class="n">cod_indicador</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">lin_ana_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cod_analisis</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Analisis</span><span class="p">(</span><span class="n">cod_analisis</span><span class="p">),</span>
-
-<span class="w">    </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">lin_ind_fk</span>
-<span class="w">        </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cod_indicador</span><span class="p">)</span>
-<span class="w">        </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Indicadores</span><span class="p">(</span><span class="n">cod_indicador</span><span class="p">)</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Diagnósticos</span><span class="w"> </span><span class="p">(</span>
+<span class="n">cod_diag</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+<span class="n">informe</span><span class="w">     </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span>
+<span class="n">dni_trab</span><span class="w">    </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="n">dni_enf</span><span class="w">     </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">dia_cod_pk</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">cod_diag</span><span class="p">),</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">dia_dnitrab_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Trabajadores</span><span class="w"> </span><span class="p">(</span><span class="n">dni_trab</span><span class="p">)</span>
+<span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">dia_dnienf_fk</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">dni_enf</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">Enfermos</span><span class="w"> </span><span class="p">(</span><span class="n">dni_enf</span><span class="p">)</span>
 <span class="p">);</span>
 </code></pre></div>
+<p><em>Pérdidas semánticas:</em></p>
+<p>1) Todo trabajador del hospital es médico o enfermera, pero no ambos a la vez.</p>
+<p>2) Toda planta debe tener asignada al menos una enfermera.</p>
+<p>3) Toda planta debe tener al menos una habitación.</p>
+<p>4) Todo médico debe tratar al menos a un enfermo.</p>
+<p>5) Todo médico que trata a un enfermo debe emitir un diagnóstico.</p>
+<p><em>Observaciones:</em></p>
+<p>1) edad_enf = fecha_actual.Año – fecha_nac.Año</p>
 </details>
-<h2 id="4-modificacion-de-los-metadatos-ddl">4. Modificación de los metadatos (DDL)</h2>
-<p><strong>Indica las sentencias DDL necesarias, en el orden adecuado</strong>, para:</p>
-<ul>
-<li>Añadir que el número de colegiado sea único para todos los médicos almacenados</li>
-<li>Añadir la posibilidad de que un análisis sea asociado, opcionalmente, con una de las aseguradoras de salud (ASISA, SANITAS, ADESLAS, etc.).</li>
-</ul>
 
 
 
