@@ -21,7 +21,7 @@
     
     
       
-        <title>5 transacciones - Bases de datos</title>
+        <title>5. Transacciones - Bases de datos</title>
       
     
     
@@ -144,6 +144,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#5-transacciones" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -175,7 +180,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              5 transacciones
+              5. Transacciones
             
           </span>
         </div>
@@ -2784,7 +2789,35 @@
   <span class="md-ellipsis">
     
   
-    Boletín A
+    Actividades - Boletín A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín B
   
 
     
@@ -2832,6 +2865,143 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-inicio-y-fin-de-una-transaccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Inicio y fin de una transacción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. COMMIT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. ROLLBACK
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-auto-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Auto-commit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-savepoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5. SAVEPOINT
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-estado-de-los-datos-durante-la-transaccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6. Estado de los datos durante la transacción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-ejemplos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.7. Ejemplos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7. Ejemplos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-1-transaccion-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 1: Transacción Simple
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-2-autocommit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 2: Autocommit
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-3-puntos-de-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 3: Puntos de control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-4-conflictos-entre-usuarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 4: Conflictos entre usuarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2848,9 +3018,256 @@
 
 
 
-  <h1>5 transacciones</h1>
+<h1 id="5-transacciones">5. Transacciones</h1>
+<p>Las transacciones son un aspecto crucial de los SGBD que garantizan la integridad, coherencia y fiabilidad de los datos. <strong>Una transacción en SQL representa una secuencia de sentencias SQL</strong> que se ejecutan como una única unidad de trabajo, es decir todas a la vez sin interferencias (por ejemplo de otros usuarios modificando las mismas tablas/datos).</p>
+<p>Las propiedades fundamentales de una transacción, a menudo denominadas propiedades <strong>ACID</strong>, son Atomicidad, Consistencia, Aislamiento y Durabilidad.</p>
+<ul>
+<li><strong>Atomicidad</strong>: Garantiza que una transacción se trate como una unidad de trabajo única e indivisible. O bien todos los cambios realizados por la transacción se consignan en la base de datos, o bien no se consigna ninguno. Si alguna parte de la transacción falla, toda la transacción vuelve a su estado anterior.</li>
+<li><strong>Consistencia</strong>: Garantiza que una transacción lleve la base de datos de un estado válido a otro. Evita que se puedan romper las restricciones de integridad, deshaciendo los cambios en caso necesario.</li>
+<li><strong>Aislamiento</strong>: Garantiza que la ejecución de una transacción esté aislada de la ejecución de otras transacciones. El aislamiento evita las interferencias entre transacciones garantizando la consistencia e integridad de los datos.</li>
+<li><strong>Durabilidad</strong>: Garantiza que, una vez realizada una transacción, sus efectos sean permanentes y sobrevivan a cualquier fallo posterior, como una caída del sistema.</li>
+</ul>
+<p>Las transacciones se usan principalmente para asegurar la integridad de los datos, durante y después de las instrucciones. Los escenarios más comunes son:</p>
+<ul>
+<li><strong>Manipulación de datos.</strong></li>
+<li><strong>Secuencia de consultas.</strong></li>
+</ul>
+<h2 id="11-inicio-y-fin-de-una-transaccion">1.1. Inicio y fin de una transacción</h2>
+<p><strong>Una transacción comienza con la primera instrucción DML que se ejecute o con la sentencia <code>START TRANSACTION</code></strong>; y <strong>finaliza</strong> con alguna de estas circunstancias:</p>
+<ul>
+<li>Una operación <code>COMMIT;</code> o <code>ROLLBACK;</code>.</li>
+<li>Una instrucción <strong>DDL</strong> (como <code>ALTER TABLE</code>, por ejemplo).</li>
+<li>Una instrucción <strong>DCL</strong> (como <code>GRANT</code>).</li>
+<li>El usuario <strong>abandona la sesión</strong>.</li>
+<li><strong>Caída del sistema</strong>.</li>
+</ul>
+<p>Hay que tener en cuenta que <strong>cualquier instrucción DDL, DCL, así como iniciar otra transacción con START TRANSACTION;, da lugar a un COMMIT implícito</strong> (automático).Es decir, todas las instrucciones DML ejecutadas hasta ese instante pasan a ser definitivas.</p>
+<h2 id="12-commit">1.2. COMMIT</h2>
+<p>La instrucción <code>COMMIT;</code> confirma los cambios realizados por la transacción para que sean definitivos, irrevocables. Sólo se debe utilizar si estamos de acuerdo con los cambios, conviene asegurarse mucho antes de realizar el COMMIT ya que las instrucciones ejecutadas pueden afectar a miles de registros. Esto no es un repositorio, no se guardan varios estados, sólo el último.</p>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>Mucho cuidado con los <code>COMMIT</code> implícitos por usar sentencias DDL, DCL o <code>START TRANSACTION</code>.</p>
+</div>
+<p>El cierre correcto de la sesión puede dar lugar a un <code>COMMIT</code>/<code>ROLLBACK</code> dependiendo del SGBD. Conviene ejecutar explícitamente la instrucción deseada para asegurarse. <strong>En MySQL no se ejecuta un <code>COMMIT</code> automático en el cierre de sesión</strong>, por ejemplo.</p>
+<h2 id="13-rollback">1.3. ROLLBACK</h2>
+<p><strong><code>ROLLBACK;</code> regresa la BD al punto anterior al inicio de la transacción</strong>, normalmente el último <code>COMMIT</code>, la última instrucción DDL/DCL o el inicio de la sesión.</p>
+<p>Anula definitivamente los cambios, por lo que conviene también asegurarse de esta operación. Un abandono de sesión incorrecto o un problema de comunicación o una caída del sistema dan lugar a un <code>ROLLBACK</code> implícito.</p>
+<h2 id="14-auto-commit">1.4. Auto-commit</h2>
+<p>Algunos SGBD, como <strong>MySQL</strong>, tienen un modo llamado <code>autocommit</code> que hace un <strong><code>COMMIT</code> automático con cada sentencia DML</strong>. Por tanto las transacciones solo funcionan si se definen específicamente con <code>START TRANSACTION;</code>, mientras que en otros SGBD son inherentes a las instrucciones DML.</p>
+<p>El modo <code>autocommit</code> en MySQL empieza habilitado por defecto en cada sesión aunque se puede desactivar mediante <code>SET autocommit=0;</code>, de este modo las sentencias DML no se confirmarán automáticamente aunque no se inicie específicamente una transacción con <code>START TRANSACTION;</code> y funcionará como la mayoría de SGBD. Se puede volver a activar el funcionamiento con <code>autocommit</code> ejecutando <code>SET autocommit=1;</code>.</p>
+<p>Los cambios en el funcionamiento del <code>autocommit</code> no afectan a la configuración del servidor, ni siquiera permanentemente a la del cliente; afectan sólo a la sesión actual, la siguiente vez que el cliente se conecte <code>autocommit</code> vuelve a estar activo. Para cambiar la configuración por defecto del servidor se debería modificar este valor en el archivo de configuración.</p>
+<p>Este modo de operación puede ser desconcertante si se tiene experiencia con otros sistemas de bases de datos, donde es una práctica estándar emitir una secuencia de instrucciones DML y confirmarlas (<code>COMMIT</code>) o deshacerlas (<code>ROLLBACK</code>) todas juntas.</p>
+<h2 id="15-savepoint">1.5. SAVEPOINT</h2>
+<p>Algunos SGBD, como <strong>Oracle</strong>, <strong>MySQL</strong> o <strong>PostgreSQL</strong>, permiten definir puntos de control intermedio en una transacción con la instrucción <code>SAVEPOINT nombre;</code>. Esto permite deshacer los cambios realizados desde ese punto en adelante sin tener que deshacer toda la transacción. Se pueden definir varios puntos de control en una transacción, siempre que tengan nombres distintos, si se repite el nombre, el nuevo punto de control sobrescribe al anterior.</p>
+<p>Para volver al estado deseado se usa <code>ROLLBACK TO nombre;</code>. Se debe tener en cuenta que si volvemos a un punto de control, todos los puntos de control posteriores se eliminan, como se ha comentado anteriormente, las transacciones no tienen un comportamiento de historial completo como un repositorio de versiones. Otros puntos de control previos sí que se mantienen.</p>
+<p>Al terminar la transacción, cualquiera que sea el método de finalización, todos sus puntos de control se eliminan automáticamente. Si se desea eliminar algún punto de control para liberar memoria durante el transcurso de la transacción puede hacerse con <code>RELEASE SAVEPOINT nombre;</code></p>
+<p>La sintaxis en <strong>SQL Server</strong> es distinta, <code>SAVE/ROLLBACK TRANSACTION nombre;</code>.</p>
+<h2 id="16-estado-de-los-datos-durante-la-transaccion">1.6. Estado de los datos durante la transacción</h2>
+<p>Recordemos que una transacción se inicia con un comando DML o <code>START TRANSACTION</code>. Cuando esto sucede, hay que tener en cuenta que:</p>
+<ul>
+<li>Se puede volver a la instrucción anterior al inicio de la transacción cuando se desee (<code>ROLLBACK</code>).</li>
+<li>También se puede volver a los puntos de control intermedios creados (<code>ROLLBACK TO</code>).</li>
+<li>Las instrucciones de consulta (<code>SELECT</code>) realizadas por el usuario que inició la transacción muestran los datos ya modificados por las instrucciones DML (<code>INSERT</code>, <code>DELETE</code>, <code>UPDATE</code>).</li>
+<li>El resto de usuarios, en cambio, ven los datos tal cual estaban antes de la transacción, de hecho los registros afectados por la transacción aparecen bloqueados hasta que la transacción finalice. Esos usuarios no podrán modificar los valores de dichos registros.</li>
+<li>Del mismo modo, si otros usuarios modifican registros que no estén bloqueados tras el inicio de la transacción, el usuario que la inició no verá esos cambios hasta que la transacción finalice.</li>
+<li>Tras la transacción, todos los usuarios ven los datos en el estado que quedan tras las transacciones. Los bloqueos son liberados y los puntos de ruptura borrados.</li>
+</ul>
+<h2 id="17-ejemplos">1.7. Ejemplos</h2>
+<h3 id="ejemplo-1-transaccion-simple">Ejemplo 1: Transacción Simple</h3>
+<p>Usaremos la tabla de departamentos de las unidades anteriores, borraremos todos los departamentos anteriores y crearemos uno nuevo. Después deshacemos los cambios:</p>
+<div class="cmd highlight"><pre><span></span><code>mysql&gt; START TRANSACTION;
+Query OK, 0 rows affected (0,00 sec)
 
+mysql&gt; DELETE FROM departamentos;
+Query OK, 4 rows affected (0,00 sec)
 
+mysql&gt; INSERT INTO departamentos (cod_dpt, nombre_dpt, ubicacion) VALUES 
+    -&gt; ('MKT', 'Márquetin', 'Planta segunda U2');
+Query OK, 1 row affected (0,00 sec)
+
+mysql&gt; SELECT * FROM departamentos;
++---------+-------------+-------------------+
+| cod_dpt | nombre_dpt  | ubicacion         |
++---------+-------------+-------------------+
+| MKT     | Márquetin   | Planta segunda U2 |
++---------+-------------+-------------------+
+1 row in set (0,01 sec)
+
+mysql&gt; -- Anulamos los cambios
+mysql&gt; ROLLBACK;
+Query OK, 0 rows affected (0,00 sec)
+
+mysql&gt; SELECT * FROM departamentos;
++---------+-----------------+-------------------+
+| cod_dpt | nombre_dpt      | ubicacion         |
++---------+-----------------+-------------------+
+| ADM     | Administración  | Planta quinta U2  |
+| ALM     | Almacén         | Planta baja U1    |
+| COM     | Comercial       | Planta tercera U3 |
+| CONT    | Contabilidad    | Planta quinta U1  |
+| INF     | Informática     | Planta sótano U3  |
++---------+-----------------+-------------------+
+5 rows in set (0,00 sec)
+</code></pre></div>
+<p>Con un <code>COMMIT</code> en lugar del <code>ROLLBACK</code> se hubiesen confirmado los cambios.</p>
+<h3 id="ejemplo-2-autocommit">Ejemplo 2: Autocommit</h3>
+<p>Comprobamos ahora el funcionamiento del autocommit en MySQL. Primero comprobamos que el funcionamiento por defecto es con autocommit activado (las sentencias DML se auto-confirman y no se pueden deshacer)</p>
+<div class="cmd highlight"><pre><span></span><code>mysql&gt; INSERT INTO departamentos (cod_dpt, nombre_dpt, ubicacion) VALUES
+    -&gt; ('MKT', 'Márquetin', 'Planta segunda U2');
+Query OK, 1 row affected (0,01 sec)
+
+mysql&gt; ROLLBACK;
+Query OK, 0 rows affected (0,00 sec)
+
+mysql&gt; -- Autocommit hace que el ROLLBACK no sea aplicable.
+mysql&gt; SELECT * FROM departamentos;
++---------+-----------------+-------------------+
+| cod_dpt | nombre_dpt      | ubicacion         |
++---------+-----------------+-------------------+
+| ADM     | Administración  | Planta quinta U2  |
+                      [...]
+| MKT     | Márquetin       | Planta segunda U2 |
++---------+-----------------+-------------------+
+6 rows in set (0,00 sec)
+</code></pre></div>
+<p>Lo borramos, desactivamos el <code>autocommit</code> y repetimos el procedimiento anterior</p>
+<div class="cmd highlight"><pre><span></span><code>mysql&gt; -- Borramos 'MKT'
+mysql&gt; DELETE FROM departamentos WHERE cod_dpt='MKT';
+Query OK, 1 row affected (0,00 sec)
+
+mysql&gt; -- Desactivamos autocommit, ahora todo DML necesita confirmación
+mysql&gt; SET autocommit=0;
+Query OK, 0 rows affected (0,01 sec)
+
+mysql&gt; INSERT INTO departamentos (cod_dpt, nombre_dpt, ubicacion) VALUES
+    -&gt; ('MKT', 'Márquetin', 'Planta segunda U2');
+Query OK, 1 row affected (0,00 sec)
+
+mysql&gt; ROLLBACK;
+Query OK, 0 rows affected (0,00 sec)
+
+mysql&gt; -- Rollback deshace el Insert, estamos en una transacción.
+mysql&gt; SELECT * FROM departamentos;
++---------+-----------------+-------------------+
+| cod_dpt | nombre_dpt      | ubicacion         |
++---------+-----------------+-------------------+
+| ADM     | Administración  | Planta quinta U2  |
+| ALM     | Almacén         | Planta baja U1    |
+| COM     | Comercial       | Planta tercera U3 |
+| CONT    | Contabilidad    | Planta quinta U1  |
+| INF     | Informática     | Planta sótano U3  |
++---------+-----------------+-------------------+
+5 rows in set (0,00 sec)
+
+mysql&gt; -- Reactivamos autocommit
+mysql&gt; SET autocommit=1;
+Query OK, 0 rows affected (0,00 sec)
+</code></pre></div>
+<p>En muchos SGBD el funcionamiento por defecto es así, no hay <code>autocommit</code> y no se necesita una sentencia específica para iniciar la transacción. No es el caso de MySQL como hemos visto.</p>
+<h3 id="ejemplo-3-puntos-de-control">Ejemplo 3: Puntos de control</h3>
+<p>Ahora vamos a insertar varios departamentos, con puntos de control intermedios y deshacer los cambios hasta un punto concreto.</p>
+<div class="cmd highlight"><pre><span></span><code>mysql&gt; START TRANSACTION;
+Query OK, 0 rows affected (0,00 sec)
+
+mysql&gt; INSERT INTO departamentos (cod_dpt, nombre_dpt, ubicacion) VALUES
+    -&gt; ('MKT', 'Márquetin', 'Planta segunda U2');
+Query OK, 1 row affected (0,00 sec)
+
+mysql&gt; SAVEPOINT punto1;
+Query OK, 0 rows affected (0,00 sec)
+
+mysql&gt; INSERT INTO departamentos (cod_dpt, nombre_dpt, ubicacion) VALUES
+    -&gt; ('VEN', 'Ventas', 'Planta tercera U2');
+Query OK, 1 row affected (0,00 sec)
+
+mysql&gt; SAVEPOINT punto2;
+
+mysql&gt; INSERT INTO departamentos (cod_dpt, nombre_dpt, ubicacion) VALUES
+    -&gt; ('RRHH', 'Recursos Humanos', 'Planta cuarta U1');
+Query OK, 1 row affected (0,00 sec)
+
+mysql&gt; ROLLBACK TO punto1;
+Query OK, 0 rows affected (0,00 sec)
+
+mysql&gt; SELECT * FROM departamentos;
++---------+-----------------+-------------------+
+| cod_dpt | nombre_dpt      | ubicacion         |
++---------+-----------------+-------------------+
+| ADM     | Administración  | Planta quinta U2  |
+| ALM     | Almacén         | Planta baja U1    |
+| COM     | Comercial       | Planta tercera U3 |
+| CONT    | Contabilidad    | Planta quinta U1  |
+| INF     | Informática     | Planta sótano U3  |
+| MKT     | Márquetin       | Planta segunda U2 |
++---------+-----------------+-------------------+
+6 rows in set (0,00 sec)
+
+mysql&gt; ROLLBACK TO punto2;
+ERROR 1305 (42000): SAVEPOINT punto2 does not exist
+
+mysql&gt; ROLLBACK;
+Query OK, 0 rows affected (0,00 sec)
+
+mysql&gt; ROLLBACK TO punto1;
+ERROR 1305 (42000): SAVEPOINT punto1 does not exist
+</code></pre></div>
+<p>Como se puede observar, se puede volver a cualquier punto de control, pero una vez hecho, los puntos de control posteriores se pierden. Sí que se podría haber vuelto al <em>punto2</em> y posteriormente al <em>punto1</em> (o otra vez al <em>punto2</em>), e incluso crear otros puntos de control nuevos tras cualquier <code>ROLLBACK TO</code>.</p>
+<p>Una vez terminada la transacción todos sus puntos de control se eliminan.</p>
+<h3 id="ejemplo-4-conflictos-entre-usuarios">Ejemplo 4: Conflictos entre usuarios</h3>
+<p>Para este ejemplo se necesitan 2 clientes conectados a la misma base de datos. Puedes abrir dos terminales de MySQL aunque uses el mismo usuario, por ejemplo.</p>
+<p><strong>Cliente 1</strong></p>
+<p>Se cambia el código de <em>'INF'</em> a <em>'IT'</em>.</p>
+<div class="cmd highlight"><pre><span></span><code>mysql&gt; START TRANSACTION;
+Query OK, 0 rows affected (0,00 sec)
+
+mysql&gt; UPDATE departamentos SET cod_dpt='IT' WHERE cod_dpt='INF';
+Query OK, 1 row affected (0,00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+-- Se ejecutan ahora las sentencias en el cliente2 antes del COMMIT
+mysql&gt; COMMIT;
+Query OK, 0 rows affected (0,01 sec)
+</code></pre></div>
+<p><strong>Cliente 2</strong></p>
+<p>Antes de confirmar la transacción en el cliente 1 consultamos los datos en el cliente 2. El código sigue mostrándose como <em>'INF'</em>. Tras esto intentamos actualizar los datos. Se puede observar como los otros registros están libres, pero el registro con código <em>'INF'</em> está bloqueado.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>En MySQL los bloqueos se realizan a nivel de registro, no de tabla. Así que una transacción puede bloquear solo algunos registros y no toda la tabla.</p>
+</div>
+<div class="cmd highlight"><pre><span></span><code>mysql&gt; SELECT * FROM departamentos;
++---------+-----------------+-------------------+
+| cod_dpt | nombre_dpt      | ubicacion         |
++---------+-----------------+-------------------+
+                      [...]
+| INF     | Informática     | Planta sótano U3  |
++---------+-----------------+-------------------+
+5 rows in set (0,00 sec)
+
+mysql&gt; UPDATE departamentos SET cod_dpt='AD' WHERE cod_dpt='ADM';
+Query OK, 1 row affected (0,00 sec)
+
+mysql&gt; UPDATE departamentos SET cod_dpt='???' WHERE cod_dpt='INF';
+
+-- Se queda bloqueado aquí no avanzará hasta terminal la transacción del cliente 1
+-- Tras ejecutar el COMMIT en el cliente 1 podemos seguir
+
+mysql&gt; SELECT * FROM departamentos;
++---------+-----------------+-------------------+
+| cod_dpt | nombre_dpt      | ubicacion         |
++---------+-----------------+-------------------+
+| AD      | Administración  | Planta quinta U2  |
+                      [...]
+| IT      | Informática     | Planta sótano U3  |
++---------+-----------------+-------------------+
+5 rows in set (0,00 sec)
+</code></pre></div>
+<p>¿Que ha pasado aquí? Para empezar, el registro con código <em>'ADM'</em> estaba libre, y por tanto se puede modificar sin problemas, aunque esto tampoco sería visible para el cliente 1 hasta terminar su transacción. En cambio, registros con código <em>'INF'</em> o <em>'IT'</em> están bloqueados, por lo que no se pueden modificar. El cliente 2 se queda bloqueado hasta que el cliente 1 termine su transacción o se supere el tiempo de espera configurado en el SGBD, en cuyo caso se produciría un error.</p>
+<p>Tras finalizar la transacción del cliente 1, se liberan los bloqueos y, si no ha expirado, se ejecuta la operación bloqueada en el 2. En este caso, como el registro <em>'INF'</em> ha sido modificado, a <em>'IT'</em>, la operación del cliente 2 se ejecuta pero no encuentra registros con código <em>'INF'</em> y no se modifica nada. Si se hubiese hecho un ROLLBACK en el cliente 1, o el UPDATE del cliente 2 filtrase por 'IT' en lugar de <em>'INF'</em>, se habría modificado el registro y sería <em>'???'</em>.</p>
+<p>Esto se usa para evitar que se apliquen cambios simultáneos entre varios clientes que entren en conflicto entre ellos, pero permitiendo cambios en la misma tabla siempre que no entren en conflicto.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Independientemente de los bloqueos, ningún cambio realizado por una transacción es visible para otros usuarios hasta que termine. Del mismo modo, los cambios realizados por otros usuarios no son visibles durante la transacción. Esto se usa también en transacciones solo de lectura (sin DML) para evitar que los datos cambien mientras se realizan las consultas.</p>
+</div>
 
 
 

@@ -1,0 +1,87 @@
+1.=============================================
+===============================================
+
+CREATE TABLE mascotas (
+	id_mascota INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(50) NOT NULL,
+	especie VARCHAR(30) NOT NULL,
+	edad INT
+);
+
+CREATE TABLE veterinarios (
+	id_veterinario INT PRIMARY KEY,
+	nombre VARCHAR(50) NOT NULL,
+	especialidad VARCHAR(50),
+	salario DECIMAL(8,2)
+);
+
+CREATE TABLE consultas (
+	id_consulta INT,
+	fecha DATE,
+	coste DECIMAL(6,2),
+	id_mascota INT,
+	id_veterinario INT,
+	PRIMARY KEY (id_consulta, id_mascota, id_veterinario),
+	CONSTRAINT con_idm_fk FOREIGN KEY (id_mascota)
+		REFERENCES mascotas(id_mascota),
+	CONSTRAINT con_idv_fk FOREIGN KEY (id_veterinario)
+		REFERENCES veterinarios(id_veterinario)
+);
+
+2.=============================================
+===============================================
+
+INSERT INTO mascotas (nombre, especie, edad) VALUES
+	('Toby','Perro',5),
+	('Luna', 'Gato', 3),
+	('Rocky', 'Perro', 8),
+	('Nala', 'Conejo', 2);
+	
+INSERT INTO veterinarios VALUES
+	(101, 'Laura Martín', 'Cirugía', 2400),
+	(102, 'Javier Sánchez', 'Dermatología', 2100),
+	(103, 'Elena Torres', 'Medicina general', 1950);
+	
+INSERT INTO consultas (id_consulta, id_mascota, id_veterinario, fecha, coste) VALUES
+	(1, 1, 103, '2026-10-10', 35),
+	(2, 2, 102, '2026-10-12', 45),
+	(3, 3, 101, '2026-10-15', 120),
+	(4, 4, 103, '2026-10-18', 30);
+	
+3.=============================================
+===============================================
+
+UPDATE veterinarios
+SET especialidad='Medicina general'
+WHERE nombre='Javier Sánchez';
+
+4.=============================================
+===============================================
+
+UPDATE veterinarios
+SET salario=salario*1.05
+WHERE salario<2200;
+
+5.=============================================
+===============================================
+
+UPDATE consultas
+SET coste=coste+10
+WHERE coste<40;
+
+6.=============================================
+===============================================
+
+UPDATE mascotas
+SET edad=6
+WHERE nombre='Toby';
+
+7.=============================================
+===============================================
+
+UPDATE consultas
+SET fecha='2026-10-20'
+WHERE id_consulta=2;
+
+DELETE FROM consultas
+WHERE id_consulta=4;

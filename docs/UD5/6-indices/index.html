@@ -21,7 +21,7 @@
     
     
       
-        <title>6 indices - Bases de datos</title>
+        <title>2. Índices - Bases de datos</title>
       
     
     
@@ -144,6 +144,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#2-indices" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -175,7 +180,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              6 indices
+              2. Índices
             
           </span>
         </div>
@@ -2784,7 +2789,35 @@
   <span class="md-ellipsis">
     
   
-    Boletín A
+    Actividades - Boletín A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín B
   
 
     
@@ -2832,6 +2865,38 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#21-creacion-de-indices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Creación de índices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-lista-de-indices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Lista de índices
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2848,9 +2913,70 @@
 
 
 
-  <h1>6 indices</h1>
-
-
+<h1 id="2-indices">2. Índices</h1>
+<p>Los <strong>índices</strong> son un objeto más de las bases de datos, como pueden ser las tablas, que <strong>permiten acelerar las operaciones de consulta y ordenación de los datos (DQL o <code>SELECT</code>)</strong>.</p>
+<p>De cada tabla, se puede crear uno o varios índices, que funcionan como una copia de esa tabla ordenada en función de un campo o criterio concreto (pudiendo implicar varios campos). Por ejemplo, se puede tener una tabla de <code>ESTUDIANTES</code> con un índice sobre el campo <code>f_nacimiento</code> que permita consultar rápidamente todos los estudiantes ordenados por ese campo.</p>
+<div class="grid cards solo-filas">
+<ul>
+<li>
+<p>ESTUDIANTES (<u>DNI</u>, nombre, apellidos, f_nacimiento, <u class="discontinuo">id_ciudad</u>)</p>
+<p>CP:  DNI</p>
+<p>Caj: id_ciudad → CIUDADES {id_ciudad}</p>
+<p>UK:  {nombre, apellidos}</p>
+<p>IX:  f_nacimiento</p>
+</li>
+</ul>
+</div>
+<p>Los índices se almacenan aparte de la tabla a la que hace referencia, lo que permite crearlos y borrarlos en cualquier momento. No sólo agilizan las búsquedas ordenadas sino cualquier búsqueda que filtre usando el campo o los campos en el índice.</p>
+<p>La mayoría de los índices se crean de manera implícita (automática), como consecuencia de las restricciones <code>PRIMARY KEY</code>, <code>UNIQUE</code> y <code>FOREIGN KEY</code>. Estos son índices obligatorios, por lo que los crea el propio SGBD. Por ejemplo en la tabla anterior se crean todos estos elementos automáticamente:</p>
+<p>La tabla <code>ESTUDIANTES</code>.
+Una estructura indexada ordenada por la <strong>PK <code>DNI</code></strong>.
+Una estructura indexada ordenada por la <strong>FK <code>id_ciudad</code></strong>.
+Una estructura indexada ordenada por la <strong>UK <code>{nombre, apellidos}</code></strong>.
+De esta manera, cada vez que hagamos una operación <em>DML</em> (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) sobre esa tabla tendremos que reconstruir todos esos objetos por lo que <strong>los índices son recomendados solo cuando las operaciones DML son infinitamente menores que las de consulta</strong> (<em>DQL</em> o <code>SELECT</code>).</p>
+<p>Por tanto:</p>
+<ul>
+<li>Los índices realizan una lista ordenada por la que el SGBD puede acceder para facilitar la búsqueda y ordenación de los datos. <strong>Ayudan a acelerar ciertas consultas</strong>.</li>
+<li>Cada índice añade una nueva estructura, con lo que las <strong>instrucciones DML</strong> se tienen que aplicar sobre éstas y reordenarse, con lo que <strong>se ralentizan notablemente</strong>.</li>
+<li><strong>Se gana en velocidad de consulta a costa de almacenamiento y velocidad en la modificación e inserción de datos</strong>, estos deben ser los criterios para elegir cuando crear manualmente un índice o no.</li>
+</ul>
+<h2 id="21-creacion-de-indices">2.1. Creación de índices</h2>
+<p>Aparte de los índices implícitos (automáticos) comentados anteriormente, se pueden crear índices de forma explícita (manual). Éstos se crean para aquellos campos sobre los cuales se realizarán búsquedas e instrucciones de ordenación frecuentemente.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="p">[</span><span class="n">esquema</span><span class="p">.]</span><span class="n">nombre_tabla</span>
+<span class="p">(</span><span class="err">{</span><span class="n">nombre_columna</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">expr</span><span class="err">}</span><span class="w"> </span><span class="p">[</span><span class="k">ASC</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">DESC</span><span class="p">]</span><span class="w"> </span><span class="p">[,</span><span class="err">{</span><span class="n">nombre_columna</span><span class="err">…}</span><span class="p">])</span>
+</code></pre></div>
+<p>Simplificando:</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">nombre</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">tabla</span><span class="w"> </span><span class="p">(</span><span class="n">columna1</span><span class="w"> </span><span class="p">[,</span><span class="n">columna2</span><span class="err">…</span><span class="p">])</span>
+</code></pre></div>
+<p>Por ejemplo, creamos el índice que faltaba y otro para el nombre completo.</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">est_fna_ix</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="p">(</span><span class="n">f_nacimiento</span><span class="p">);</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">est_ncm_ix</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">estudiantes</span><span class="w"> </span><span class="p">(</span><span class="n">apellidos</span><span class="p">,</span><span class="w"> </span><span class="n">nombre</span><span class="p">);</span>
+</code></pre></div>
+<p>El segundo índice funciona para los campos <code>apellidos</code> y <code>nombre</code> en conjunto, es decir una estructura sobre la tabla ordenada alfabéticamente por los apellidos y en caso ser iguales por el nombre de los estudiantes. Por tanto este índice es efectivo solo cuando se buscan y ordenan estudiantes usando ese criterio. Si realizamos una consulta sobre esa tabla ordenada por esos campos y/o en ese orden, la respuesta será de milisegundos aunque la tabla tenga millones de registros.</p>
+<p>Se aconseja crear índices en campos que:</p>
+<ul>
+<li>Contengan una gran cantidad de valores repetidos o nulos. Los índices son especialmente efectivos en estos casos ya que todos los valores iguales se agrupan en un solo registro.</li>
+<li>Sean parte habitual de cláusulas <code>WHERE</code>, <code>GROUP BY</code> u <code>ORDER BY</code> (siguiente tema).</li>
+<li>Sean parte de filtros usados habitualmente.</li>
+</ul>
+<p>No se aconseja en campos que:</p>
+<ul>
+<li>Pertenezcan a tablas pequeñas, ya que no aportan una mejora significativa.</li>
+<li>No se usen a menudo en las consultas.</li>
+<li>Pertenezcan a tablas que se actualicen frecuentemente (operaciones DML), salvo que las consultas también sean frecuentes (por ejemplo en una tabla de pedidos).</li>
+</ul>
+<h2 id="22-lista-de-indices">2.2. Lista de índices</h2>
+<p>Lo organización de los índices es un asunto propio de cada SGBD, con lo que no existe una nomenclatura estándar para consultarlos. Se suele almacenar la información en algunas tablas/vistas que se pueden consultar, pero los nombres son distintos en cada uno</p>
+<p>Para ver la lista de índices en <strong>Oracle</strong> se utiliza la vista <code>USER_INDEXES</code>. Mientras que la vista <code>USER_IND_COLUMNS</code> muestra la lista de columnas que son utilizadas por índices.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>En MySQL, el comando <code>SHOW INDEX FROM nombre_tabla;</code> devuelve toda la información de los índices referente a esa tabla. Se puede filtrar con un <code>WHERE</code>.</p>
+</div>
+<p>2.3 Borrar índices</p>
+<p>Los SGBD no siguen completamente un estándar para el borrado de índices.</p>
+<p>En <strong>Oracle</strong> se usa <code>DROP INDEX [schema_name.]nombre_indice;</code>.</p>
+<p><strong>MySQL</strong> usa <code>DROP INDEX nombre_indice ON nombre_tabla;</code>.</p>
+<p>MySQL también admite <code>ALTER TABLE nombre_tabla DROP INDEX nombre_indice;</code>.</p>
 
 
 
