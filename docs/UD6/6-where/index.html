@@ -1,0 +1,4195 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://davidtursanmateu.github.io/BBDD-Temario-1DAW/UD6/6-where/">
+      
+      
+        <link rel="prev" href="../5-proyeccion/">
+      
+      
+        <link rel="next" href="../7-ordenacion/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>6. WHERE - Bases de datos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+  
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+    
+      
+      
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1%207.775V2.75C1%201.784%201.784%201%202.75%201h5.025c.464%200%20.91.184%201.238.513l6.25%206.25a1.75%201.75%200%200%201%200%202.474l-5.026%205.026a1.75%201.75%200%200%201-2.474%200l-6.25-6.25A1.75%201.75%200%200%201%201%207.775m1.5%200c0%20.066.026.13.073.177l6.25%206.25a.25.25%200%200%200%20.354%200l5.025-5.025a.25.25%200%200%200%200-.354l-6.25-6.25a.25.25%200%200%200-.177-.073H2.75a.25.25%200%200%200-.25.25ZM6%205a1%201%200%201%201%200%202%201%201%200%200%201%200-2%22/%3E%3C/svg%3E');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.5%201.75v11.5c0%20.138.112.25.25.25h3.17a.75.75%200%200%201%200%201.5H2.75A1.75%201.75%200%200%201%201%2013.25V1.75C1%20.784%201.784%200%202.75%200h8.5C12.216%200%2013%20.784%2013%201.75v7.736a.75.75%200%200%201-1.5%200V1.75a.25.25%200%200%200-.25-.25h-8.5a.25.25%200%200%200-.25.25m13.274%209.537zl-4.557%204.45a.75.75%200%200%201-1.055-.008l-1.943-1.95a.75.75%200%200%201%201.062-1.058l1.419%201.425%204.026-3.932a.75.75%200%201%201%201.048%201.074M4.75%204h4.5a.75.75%200%200%201%200%201.5h-4.5a.75.75%200%200%201%200-1.5M4%207.75A.75.75%200%200%201%204.75%207h2a.75.75%200%200%201%200%201.5h-2A.75.75%200%200%201%204%207.75%22/%3E%3C/svg%3E');--md-admonition-icon--info:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.5%207.75A.75.75%200%200%201%207.25%207h1a.75.75%200%200%201%20.75.75v2.75h.25a.75.75%200%200%201%200%201.5h-2a.75.75%200%200%201%200-1.5h.25v-2h-.25a.75.75%200%200%201-.75-.75M8%206a1%201%200%201%201%200-2%201%201%200%200%201%200%202%22/%3E%3C/svg%3E');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M3.499.75a.75.75%200%200%201%201.5%200v.996C5.9%202.903%206.793%203.65%207.662%204.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873%2010.794-.045%2012.622.26%2014.408.558%2016%201.94%2016%204.25c0%201.278-.954%202.575-2.44%202.734l.146.508.065.22c.203.701.412%201.455.476%202.226.142%201.707-.4%203.03-1.487%203.898C11.714%2014.671%2010.27%2015%208.75%2015h-6a.75.75%200%200%201%200-1.5h1.376a4.5%204.5%200%200%201-.563-1.191%203.84%203.84%200%200%201-.05-2.063%204.65%204.65%200%200%201-2.025-.293.75.75%200%200%201%20.525-1.406c1.357.507%202.376-.006%202.698-.318l.009-.01a.747.747%200%200%201%201.06%200%20.75.75%200%200%201-.012%201.074c-.912.92-.992%201.835-.768%202.586.221.74.745%201.337%201.196%201.621H8.75c1.343%200%202.398-.296%203.074-.836.635-.507%201.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.4%202.4%200%200%201-.507-.441%203.1%203.1%200%200%201-.633-1.248.75.75%200%200%201%201.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738%200%201.25-.615%201.25-1.25%200-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706%201.345-.46.92-.27%201.774.019%203.062l.042.19.01.05c.348.443.666.949.94%201.553a.75.75%200%201%201-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7%205.527c-.814-.68-1.75-1.462-2.692-2.619a3.7%203.7%200%200%200-1.023.88c-.406.495-.663%201.036-.722%201.508.116.122.306.21.591.239.388.038.797-.06%201.032-.19a.75.75%200%200%201%20.728%201.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75%205.677V5.5c0-.984.48-1.94%201.077-2.664.46-.559%201.05-1.055%201.673-1.353z%22/%3E%3C/svg%3E');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M13.78%204.22a.75.75%200%200%201%200%201.06l-7.25%207.25a.75.75%200%200%201-1.06%200L2.22%209.28a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018L6%2010.94l6.72-6.72a.75.75%200%200%201%201.06%200%22/%3E%3C/svg%3E');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M0%208a8%208%200%201%201%2016%200A8%208%200%200%201%200%208m8-6.5a6.5%206.5%200%201%200%200%2013%206.5%206.5%200%200%200%200-13M6.92%206.085h.001a.749.749%200%201%201-1.342-.67c.169-.339.436-.701.849-.977C6.845%204.16%207.369%204%208%204a2.76%202.76%200%200%201%201.637.525c.503.377.863.965.863%201.725%200%20.448-.115.83-.329%201.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6%206%200%200%200-.26.16%201%201%200%200%200-.276.245.75.75%200%200%201-1.248-.832c.184-.264.42-.489.692-.661q.154-.1.313-.195l.007-.004c.1-.061.182-.11.258-.161a1%201%200%200%200%20.277-.245C8.96%206.514%209%206.427%209%206.25a.61.61%200%200%200-.262-.525A1.27%201.27%200%200%200%208%205.5c-.369%200-.595.09-.74.187a1%201%200%200%200-.34.398M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M6.457%201.047c.659-1.234%202.427-1.234%203.086%200l6.082%2011.378A1.75%201.75%200%200%201%2014.082%2015H1.918a1.75%201.75%200%200%201-1.543-2.575Zm1.763.707a.25.25%200%200%200-.44%200L1.698%2013.132a.25.25%200%200%200%20.22.368h12.164a.25.25%200%200%200%20.22-.368Zm.53%203.996v2.5a.75.75%200%200%201-1.5%200v-2.5a.75.75%200%200%201%201.5%200M9%2011a1%201%200%201%201-2%200%201%201%200%200%201%202%200%22/%3E%3C/svg%3E');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M2.344%202.343za8%208%200%200%201%2011.314%2011.314A8.002%208.002%200%200%201%20.234%2010.089a8%208%200%200%201%202.11-7.746m1.06%2010.253a6.5%206.5%200%201%200%209.108-9.275%206.5%206.5%200%200%200-9.108%209.275M6.03%204.97%208%206.94l1.97-1.97a.749.749%200%200%201%201.275.326.75.75%200%200%201-.215.734L9.06%208l1.97%201.97a.749.749%200%200%201-.326%201.275.75.75%200%200%201-.734-.215L8%209.06l-1.97%201.97a.749.749%200%200%201-1.275-.326.75.75%200%200%201%20.215-.734L6.94%208%204.97%206.03a.75.75%200%200%201%20.018-1.042.75.75%200%200%201%201.042-.018%22/%3E%3C/svg%3E');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M9.504.43a1.516%201.516%200%200%201%202.437%201.713L10.415%205.5h2.123c1.57%200%202.346%201.909%201.22%203.004l-7.34%207.142a1.25%201.25%200%200%201-.871.354h-.302a1.25%201.25%200%200%201-1.157-1.723L5.633%2010.5H3.462c-1.57%200-2.346-1.909-1.22-3.004zm1.047%201.074L3.286%208.571A.25.25%200%200%200%203.462%209H6.75a.75.75%200%200%201%20.694%201.034l-1.713%204.188%206.982-6.793A.25.25%200%200%200%2012.538%207H9.25a.75.75%200%200%201-.683-1.06l2.008-4.418.003-.006-.004-.009-.006-.006-.008-.001q-.005%200-.009.004%22/%3E%3C/svg%3E');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4.72.22a.75.75%200%200%201%201.06%200l1%20.999a3.5%203.5%200%200%201%202.441%200l.999-1a.748.748%200%200%201%201.265.332.75.75%200%200%201-.205.729l-.775.776c.616.63.995%201.493.995%202.444v.327q0%20.15-.025.292c.408.14.764.392%201.029.722l1.968-.787a.75.75%200%200%201%20.556%201.392L13%207.258V9h2.25a.75.75%200%200%201%200%201.5H13v.5q-.002.615-.141%201.186l2.17.868a.75.75%200%200%201-.557%201.392l-2.184-.873A5%205%200%200%201%208%2016a5%205%200%200%201-4.288-2.427l-2.183.873a.75.75%200%200%201-.558-1.392l2.17-.868A5%205%200%200%201%203%2011v-.5H.75a.75.75%200%200%201%200-1.5H3V7.258L.971%206.446a.75.75%200%200%201%20.558-1.392l1.967.787c.265-.33.62-.583%201.03-.722a1.7%201.7%200%200%201-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72%201.28a.75.75%200%200%201%200-1.06m.53%206.28a.75.75%200%200%200-.75.75V11a3.5%203.5%200%201%200%207%200V7.25a.75.75%200%200%200-.75-.75ZM6.173%205h3.654A.17.17%200%200%200%2010%204.827V4.5a2%202%200%201%200-4%200v.327c0%20.096.077.173.173.173%22/%3E%3C/svg%3E');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5%205.782V2.5h-.25a.75.75%200%200%201%200-1.5h6.5a.75.75%200%200%201%200%201.5H11v3.282l3.666%205.76C15.619%2013.04%2014.543%2015%2012.767%2015H3.233c-1.776%200-2.852-1.96-1.899-3.458Zm-2.4%206.565a.75.75%200%200%200%20.633%201.153h9.534a.75.75%200%200%200%20.633-1.153L12.225%2010.5h-8.45ZM9.5%202.5h-3V6c0%20.143-.04.283-.117.403L4.73%209h6.54L9.617%206.403A.75.75%200%200%201%209.5%206Z%22/%3E%3C/svg%3E');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M1.75%202.5h10.5a.75.75%200%200%201%200%201.5H1.75a.75.75%200%200%201%200-1.5m4%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5m0%205h8.5a.75.75%200%200%201%200%201.5h-8.5a.75.75%200%200%201%200-1.5M2.5%207.75v6a.75.75%200%200%201-1.5%200v-6a.75.75%200%200%201%201.5%200%22/%3E%3C/svg%3E');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto,+sans-serif:300,300i,400,400i,700,700i%7CCourier+New,+monospace:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto, sans-serif";--md-code-font:"Courier New, monospace"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/styles.css">
+    
+      <link rel="stylesheet" href="../../css/toc-toggle.css">
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6-where" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Bases de datos" class="md-header__button md-logo" aria-label="Bases de datos" data-md-component="logo">
+      
+  <img src="../../img/logo-bbdd.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Bases de datos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              6. WHERE
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Cambiar a modo oscuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Cambiar a modo oscuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Bases de datos" class="md-nav__button md-logo" aria-label="Bases de datos" data-md-component="logo">
+      
+  <img src="../../img/logo-bbdd.png" alt="logo">
+
+    </a>
+    Bases de datos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1. Introducción a las bases de datos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1. Introducción a las bases de datos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_1" id="__nav_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/1-sistemas-almac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Sistemas de almacenamiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/2-ficheros/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Ficheros
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/3-bbdd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Bases de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/4-sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. SGBD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/5-arquitectura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Arquitectura de niveles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/6-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_2" id="__nav_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/ej1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1 - Práctica no evaluable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD1/ej2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2 - Práctica no evaluable
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2. Modelo conceptual (E-R)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2. Modelo conceptual (E-R)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/1-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. ¿Qué es una base de datos?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/2-sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Principales sistemas gestores de bases de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/3-creacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Creación de una base de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/4-modelo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Modelo conceptual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/5-restricciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Restricciones de integridad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/6-ent-debiles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Entidades débiles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/7-er-ext/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Modelo E-R ampliado. Generalización/Especialización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/8-agregacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Agregación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/9-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ej1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad inicial - Actividad de clase
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ejA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ejB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ej3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad inicial - Agregación y Especialización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/ejC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/anexo1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 1. Ejemplos de Participación y Cardinalidad
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/anexo2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 2. Procedimiento del diseño conceptual
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD2/anexo3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 3. Resumen Modelo E-R
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 3. Modelo lógico relacional
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 3. Modelo lógico relacional
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/1-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Modelo lógico relacional
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/2-elementos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Elementos del modelo relacional
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/3-restricciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Restricciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/4-paso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Paso del Modelo Conceptual al Lógico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/5-dependencia-funcional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Dependencias funcionales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/6-normalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Normalización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/7-ejemplo-normalizacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Ejemplo completo de normalización
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/ejA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/ejB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/ejC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Anexos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD3/anexo1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Anexo 1. Resumen de las transformaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 4. Modelo Físico. DDL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 4. Modelo Físico. DDL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/1-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introducción al Modelo Físico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/2-instalar-mysql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Instalación de MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/3-crear-bbdd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Creación de una base de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/4-creacion-tablas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Creación de tablas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/5-modificacion-tablas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Modificación de tablas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/6-borrado-tablas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Borrado de tablas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/7-diccionario/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Diccionario de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/8-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/ejA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4/ejB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repaso 1ª evaluación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Repaso 1ª evaluación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4-RepasoEv1/laboratorio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Laboratorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD4-RepasoEv1/hospital/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Hospital
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 5. Modelo Físico. DML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 5. Modelo Físico. DML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/1-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/2-insercion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Inserción de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/3-modificacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Modificación de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/4-borrado/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Borrado de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/5-transacciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Transacciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/6-indices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Índices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/7-bibliografia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bibliografía
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/ejA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/ejB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín B
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UD5/ejC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 6. Modelo Físico. DQL
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 6. Modelo Físico. DQL
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contenidos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contenidos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-dql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. DQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-select/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. SELECT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-from/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. FROM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-proyeccion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Proyección
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. WHERE
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. WHERE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="En esta página">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-operadores-relacionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Operadores relacionales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-is-not-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. IS [NOT] NULL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-operadores-logicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Operadores lógicos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-between" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. BETWEEN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65-not-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. [NOT] IN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-not-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. [NOT] LIKE
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7-ordenacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Ordenación de filas en la respuesta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8-indices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Índices, ordenación y eficiencia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9-funciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Funciones agregadas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-limitar-filas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Limitar las filas mostradas en la respuesta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Actividades
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ejA/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividades - Boletín A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="En esta página">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      En esta página
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#61-operadores-relacionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Operadores relacionales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62-is-not-null" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. IS [NOT] NULL
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#63-operadores-logicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Operadores lógicos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#64-between" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. BETWEEN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#65-not-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. [NOT] IN
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#66-not-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. [NOT] LIKE
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6-where">6. WHERE</h1>
+<p>La cláusula <strong><code>WHERE</code> filtra las filas o registros a mostrar en la respuesta</strong>, que deben cumplir con las condiciones especificadas.</p>
+<p>Existen muchas opciones para determinar los filtros a aplicar:</p>
+<h2 id="61-operadores-relacionales">6.1. Operadores relacionales</h2>
+<p>Los operadores que nos permitirán comparar datos para establecer los filtros son:</p>
+<div class="three-columns" style="align-items: start">
+<div>
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;</td>
+<td>Mayor</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>Menor</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;=</td>
+<td>Mayor o igual</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td>Menor o igual</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>Igual</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>Distinto</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>Recuerda que aunque <code>!=</code> es aceptado como sinónimo de distinto por muchos SGBD <strong>no es un estándar de SQL</strong>. Así mismo el comparador para la igualdad es un símbolo <code>=</code> simple y no doble como en otros lenguajes de programación, <strong>no uses nunca <code>==</code></strong>.</p>
+</div>
+<p>También se debe tener en cuenta que si la comparación de un campo se realiza con una <strong>cadena de caracteres</strong>, esta debe estar <strong>entre comillas simples o dobles</strong>. En cambio, si se realiza con <strong>un campo numérico</strong>, el valor <strong>no</strong> debe ponerse entre comillas.</p>
+<p>Obviamente en las condiciones del <code>WHERE</code> también pueden aparecer columnas, funciones y cálculos, como en la proyección. Veamos algunos ejemplos:</p>
+<ul>
+<li>
+<p>Mostrar el <code>nombre_emp</code> de los empleados del departamento de Informática (<em>INF</em>):</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-0-1">mysql&gt; SELECT nombre_emp FROM empleados WHERE dpt = 'INF';
+</span><span id="__span-0-2">+--------------+
+</span><span id="__span-0-3">| nombre_emp   |
+</span><span id="__span-0-4">+--------------+
+</span><span id="__span-0-5">| Mariano Sanz |
+</span><span id="__span-0-6">| Ana Silván   |
+</span><span id="__span-0-7">+--------------+
+</span><span id="__span-0-8">2 rows in set (0,01 sec)
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar el nombre_prod y el precio de los productos cuyo precio es igual o mayor de 20 euros.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-1-1">mysql&gt; SELECT nombre_prod, precio FROM producto WHERE precio &gt;= 20;
+</span><span id="__span-1-2">+-------------------+--------+
+</span><span id="__span-1-3">| nombre_prod       | precio |
+</span><span id="__span-1-4">+-------------------+--------+
+</span><span id="__span-1-5">| AVION FK20        |  31.75 |
+</span><span id="__span-1-6">| BOLA BOOM         |  22.20 |
+</span><span id="__span-1-7">| PATINETE 3 RUEDAS |  22.50 |
+</span><span id="__span-1-8">| PETER PAN         |  25.00 |
+</span><span id="__span-1-9">+-------------------+--------+
+</span><span id="__span-1-10">4 rows in set (0,01 sec)
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar la referencia y el nombre de los productos cuyo precio es menor de 15 euros.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-2-1">mysql&gt; SELECT ref_prod AS referencia, nombre_prod FROM producto 
+</span><span id="__span-2-2">mysql&gt; WHERE precio &lt; 15;
+</span><span id="__span-2-3">+------------+---------------------+
+</span><span id="__span-2-4">| referencia | nombre_prod         |
+</span><span id="__span-2-5">+------------+---------------------+
+</span><span id="__span-2-6">| HM12       | HOOP MUSICAL        |
+</span><span id="__span-2-7">| NPP10      | NAIPES PETER PARKER |
+</span><span id="__span-2-8">+------------+---------------------+
+</span><span id="__span-2-9">2 rows in set (0,01 sec)
+</span></code></pre></div>
+<p>Algunos detalles en esta consulta:</p>
+<ul>
+<li>Se ha usado un alias para que se muestre <code>ref_prod</code> como referencia.</li>
+<li><strong>No es necesario añadir a la proyección los campos del filtrado</strong>. Como puedes ver, no es imprescindible mostrar el <code>precio</code>, aunque sea el criterio usado en el filtro.</li>
+</ul>
+</li>
+<li>
+<p>Mostrar todos los campos de los pedidos realizados antes del <em>12/06/2013</em>.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-3-1">mysql&gt; SELECT * FROM pedido WHERE fecha &lt; '2013-06-12';
+</span><span id="__span-3-2">+---------+------------+----------+
+</span><span id="__span-3-3">| num_ped | fecha      | cod_prov |
+</span><span id="__span-3-4">+---------+------------+----------+
+</span><span id="__span-3-5">|       1 | 2013-06-10 | TO342    |
+</span><span id="__span-3-6">|       2 | 2013-06-10 | MA280    |
+</span><span id="__span-3-7">+---------+------------+----------+
+</span><span id="__span-3-8">2 rows in set (0,00 sec)
+</span></code></pre></div>
+<p>Aquí debemos tener cuidado, pues ya sabemos que las fechas son tratadas con formatos diferentes para su entrada como texto en los distintos SGBD. O usamos funciones de transformación del formato o ponemos el texto entre comillas en el formato correspondiente al SGBD usado; en MySQL <code>AAAA-MM-DD</code>.</p>
+</li>
+<li>
+<p>Mostrar todos los campos de las filas de <code>detalle_pedido</code> donde el <code>num_ped</code> es más grande que la <em><code>cantidad</code> + 1</em>. Se usa esta consulta sin sentido lógico alguno con el fin académico de mostrar el uso de comparaciones entre distintas columnas en cada fila y con operaciones aritméticas.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-4-1">SELECT * FROM detalle_pedido WHERE num_ped &gt; cantidad + 1;
+</span><span id="__span-4-2">+---------+----------+----------+
+</span><span id="__span-4-3">| num_ped | ref_prod | cantidad |
+</span><span id="__span-4-4">+---------+----------+----------+
+</span><span id="__span-4-5">|       5 | NPP10    |        3 |
+</span><span id="__span-4-6">+---------+----------+----------+
+</span><span id="__span-4-7">1 row in set (0,00 sec)
+</span></code></pre></div>
+</li>
+</ul>
+<h2 id="62-is-not-null">6.2. IS [NOT] NULL</h2>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p>Para comprobar valores nulos (no hay valor, no es lo mismo que 0) no se pueden usar los operadores relacionales. </p>
+<p>Para devolver las filas <strong>donde un parámetro es nulo se usa <code>IS NULL</code></strong> y para devolver las que el parámetro tenga cualquier valor, pero <strong>no esté vacío, es <code>IS NOT NULL</code></strong>.</p>
+</div>
+<p>Mucho cuidado porque en MySQL usar <code>=</code> o <code>&lt;&gt;</code> junto con <code>NULL</code> siempre devuelve una respuesta vacía, pero no un error ni un warning. Recuerda que <strong><code>NULL</code> se escribe siempre sin comillas</strong>, o se estaría comparando con la cadena de texto con esas letras.</p>
+<p>Por ejemplo, veamos los proyectos que no están asignados a ningún departamento y los que sí.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-5-1">mysql&gt; SELECT * FROM proyectos WHERE dpto IS NULL;
+</span><span id="__span-5-2">+----------+----------------+--------------+------+-------------+
+</span><span id="__span-5-3">| cod_proy | nombre         | fecha_inicio | dpto | responsable |
+</span><span id="__span-5-4">+----------+----------------+--------------+------+-------------+
+</span><span id="__span-5-5">| V324     | Oceanográfico  | 2012-09-29   | NULL | NULL        |
+</span><span id="__span-5-6">+----------+----------------+--------------+------+-------------+
+</span><span id="__span-5-7">1 row in set (0,00 sec)
+</span><span id="__span-5-8">
+</span><span id="__span-5-9">mysql&gt; SELECT * FROM proyectos WHERE dpto IS NOT NULL;
+</span><span id="__span-5-10">+----------+---------------------------+--------------+------+-------------+
+</span><span id="__span-5-11">| cod_proy | nombre                    | fecha_inicio | dpto | responsable |
+</span><span id="__span-5-12">+----------+---------------------------+--------------+------+-------------+
+</span><span id="__span-5-13">| MAD20    | Repsol, S.A.              | 2012-02-10   | CONT | 12345678A   |
+</span><span id="__span-5-14">| TO451    | Consejería de Educación   | 2012-05-24   | INF  | 23456789B   |
+</span><span id="__span-5-15">+----------+---------------------------+--------------+------+-------------+
+</span><span id="__span-5-16">2 rows in set (0,00 sec)
+</span><span id="__span-5-17">
+</span><span id="__span-5-18">mysql&gt; SELECT * FROM proyectos WHERE dpto = NULL;
+</span><span id="__span-5-19">Empty set (0,00 sec)
+</span><span id="__span-5-20">
+</span><span id="__span-5-21">mysql&gt; SELECT * FROM proyectos WHERE dpto &lt;&gt; NULL;
+</span><span id="__span-5-22">Empty set (0,00 sec)
+</span></code></pre></div>
+<h2 id="63-operadores-logicos">6.3. Operadores lógicos</h2>
+<p>Los operadores lógicos que permitirán crear filtros más elaborados que los vistos hasta este momento. Con ellos se pueden comprobar varias condiciones a la vez o cambiar el sentido de una condición. Los más comunes son:</p>
+<table>
+<thead>
+<tr>
+<th>Operador</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AND</td>
+<td>Verdadero si las expresiones a su izquierda y derecha son ambas verdaderas.</td>
+</tr>
+<tr>
+<td>OR</td>
+<td>Verdadero si cualquiera de las expresiones a izquierda o derecha es verdadera.</td>
+</tr>
+<tr>
+<td>NOT</td>
+<td>Invierte la lógica de la expresión a su derecha, si era verdadera pasa a ser falsa.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong><code>AND</code> es un "Y" lógico</strong>. El resultado será verdadero si los dos elementos que une son verdaderos. La tabla de verdad del operador <code>AND</code> es la siguiente:</li>
+</ul>
+<div style="display: flex; flex-direction: column; align-items: center">
+<p><strong><code>condición_1 AND condición_2</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>condición_1</th>
+<th>condición_2</th>
+<th>resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+</tr>
+<tr>
+<td>V</td>
+<td>F</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>V</td>
+<td>F</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong><code>OR</code> es un "O" lógico</strong>. El resultado será verdadero si cualquiera de los dos elementos es verdadero. La tabla de verdad del operador <code>OR</code> es la siguiente:</li>
+</ul>
+<div style="display: flex; flex-direction: column; align-items: center">
+<p><strong><code>condición_1 OR condición_2</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>condición_1</th>
+<th>condición_2</th>
+<th>resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V</td>
+<td>V</td>
+<td>V</td>
+</tr>
+<tr>
+<td>V</td>
+<td>F</td>
+<td>V</td>
+</tr>
+<tr>
+<td>F</td>
+<td>V</td>
+<td>V</td>
+</tr>
+<tr>
+<td>F</td>
+<td>F</td>
+<td>F</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><strong><code>NOT</code> es la negación de una condición</strong>. El resultado será lo contrario del resultado de la condición. Si es verdadera devuelve falso y si es falsa devuelve verdadero.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Atención</p>
+<p><strong>Las condiciones se evalúan de izquierda a derecha</strong> y podemos emplear paréntesis para agrupar condiciones. Lo más aconsejable es <strong>incluir paréntesis siempre que se use más de un operador distinto</strong> para evitar que las condiciones no funcionen como se pretende.</p>
+</div>
+<p>Veamos algunos ejemplos:</p>
+<ul>
+<li>
+<p>Mostrar todos los datos de los empleados del departamento '<em>INF</em>' o '<em>CONT</em>'.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-6-1">mysql&gt; SELECT * FROM empleados WHERE dpt= 'INF' OR dpt= 'CONT';
+</span><span id="__span-6-2">+-----------+--------------+--------------+------------+------+
+</span><span id="__span-6-3">| dni       | nombre_emp   | especialidad | fecha_alta | dpt  |
+</span><span id="__span-6-4">+-----------+--------------+--------------+------------+------+
+</span><span id="__span-6-5">| 12345678A | Alberto Gil  | Contable     | 2010-12-10 | CONT |
+</span><span id="__span-6-6">| 23456789B | Mariano Sanz | Informática  | 2011-10-04 | INF  |
+</span><span id="__span-6-7">| 45678901D | Ana Silván   | Informática  | 2012-11-25 | INF  |
+</span><span id="__span-6-8">+-----------+--------------+--------------+------------+------+
+</span><span id="__span-6-9">3 rows in set (0,00 sec)
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar todos los datos de los empleados del departamento de <em>informática</em> que se han incorporado a la empresa antes del <em>1 de enero de 2013</em>.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-7-1">mysql&gt; SELECT * FROM empleados WHERE dpt= 'INF' AND fecha_alta &lt; '2013-01-01';
+</span><span id="__span-7-2">+-----------+--------------+--------------+------------+------+
+</span><span id="__span-7-3">| dni       | nombre_emp   | especialidad | fecha_alta | dpt  |
+</span><span id="__span-7-4">+-----------+--------------+--------------+------------+------+
+</span><span id="__span-7-5">| 23456789B | Mariano Sanz | Informática  | 2011-10-04 | INF  |
+</span><span id="__span-7-6">| 45678901D | Ana Silván   | Informática  | 2012-11-25 | INF  |
+</span><span id="__span-7-7">+-----------+--------------+--------------+------------+------+
+</span><span id="__span-7-8">2 rows in set (0,00 sec)
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar todos los datos de los empleados que se han incorporado a la empresa antes del <em>1 de enero de 2013</em> al departamento de <em>informática</em> o al de <em>comercio</em>.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-8-1">mysql&gt; SELECT * FROM empleados WHERE dpt= 'INF' OR dpt= 'COM' 
+</span><span id="__span-8-2">mysql&gt; AND fecha_alta &lt; '2013-01-01';
+</span><span id="__span-8-3">+-----------+--------------+--------------+------------+------+
+</span><span id="__span-8-4">| dni       | nombre_emp   | especialidad | fecha_alta | dpt  |
+</span><span id="__span-8-5">+-----------+--------------+--------------+------------+------+
+</span><span id="__span-8-6">| 34567890C | Iván Gómez   | Ventas       | 2012-07-20 | COM  |
+</span><span id="__span-8-7">| 23456789B | Mariano Sanz | Informática  | 2011-10-04 | INF  |
+</span><span id="__span-8-8">| 45678901D | Ana Silván   | Informática  | 2012-11-25 | INF  |
+</span><span id="__span-8-9">+-----------+--------------+--------------+------------+------+
+</span><span id="__span-8-10">3 rows in set (0,00 sec)
+</span><span id="__span-8-11">
+</span><span id="__span-8-12">mysql&gt; -- SELECT * FROM empleados WHERE fecha_alta &lt; '2013-01-01' 
+</span><span id="__span-8-13">mysql&gt; -- AND (dpt= 'INF' OR dpt= 'COM');
+</span><span id="__span-8-14">
+</span><span id="__span-8-15"><span class="hll">mysql&gt; SELECT * FROM empleados WHERE fecha_alta &lt; '2013-01-01' 
+</span></span><span id="__span-8-16"><span class="hll">mysql&gt; AND dpt= 'INF' OR dpt= 'COM';
+</span></span><span id="__span-8-17"><span class="hll">                            [...]
+</span></span><span id="__span-8-18"><span class="hll">| 56789012E | María Cuadrado  | Ventas       | 2013-04-02 | COM  |
+</span></span></code></pre></div>
+<p>Aquí se puede ver la utilidad de los paréntesis. Las 2 primeras consultas son equivalentes, pero la última añade una cuarta fila con fecha de alta posterior a <em>enero del 2013</em> ya que primero se evalúa el <code>AND</code> y después el <code>OR</code>; los empleados del departamento <em>comercial</em> se saltan la condición de <code>fecha_entrada</code>. Por eso se debe vigilar el orden de las condiciones o simplemente usar paréntesis.</p>
+</li>
+<li>
+<p>Mostrar todos los datos de proyectos asignados al departamento de <em>informática</em> antes del <em>1 de enero de 2013</em> o que aún no estén asignados a ningún departamento:</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-9-1">mysql&gt; SELECT * FROM proyectos WHERE dpto IS NULL OR  
+</span><span id="__span-9-2">mysql&gt; (dpto = 'INF' AND fecha_inicio &lt; '2013-01-01');
+</span><span id="__span-9-3">+----------+---------------------------+--------------+------+-------------+
+</span><span id="__span-9-4">| cod_proy | nombre                    | fecha_inicio | dpto | responsable |
+</span><span id="__span-9-5">+----------+---------------------------+--------------+------+-------------+
+</span><span id="__span-9-6">| TO451    | Consejería de Educación   | 2012-05-24   | INF  | 23456789B   |
+</span><span id="__span-9-7">| V324     | Oceanográfico             | 2012-09-29   | NULL | NULL        |
+</span><span id="__span-9-8">+----------+---------------------------+--------------+------+-------------+
+</span><span id="__span-9-9">2 rows in set (0,00 sec)
+</span></code></pre></div>
+<p>Vamos a complicar (de forma innecesaria con fines meramente educativos) la solución de esta consulta para añadir un operador <code>NOT</code>. En este caso evaluaremos que <strong>no se cumple la condición de que el departamento no es nulo</strong>, lo que es lo mismo que en la primera opción sin la doble negación. El paréntesis está meramente para distinguir el operador lógico <code>NOT</code> de la condición, tampoco sería necesario.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-10-1">mysql&gt; SELECT * FROM proyectos WHERE NOT (dpto IS NOT NULL) OR   
+</span><span id="__span-10-2">mysql&gt; (dpto = 'INF' AND fecha_inicio &lt; '2013-01-01');
+</span><span id="__span-10-3">+----------+---------------------------+--------------+------+-------------+
+</span><span id="__span-10-4">| cod_proy | nombre                    | fecha_inicio | dpto | responsable |
+</span><span id="__span-10-5">+----------+---------------------------+--------------+------+-------------+
+</span><span id="__span-10-6">| TO451    | Consejería de Educación   | 2012-05-24   | INF  | 23456789B   |
+</span><span id="__span-10-7">| V324     | Oceanográfico             | 2012-09-29   | NULL | NULL        |
+</span><span id="__span-10-8">+----------+---------------------------+--------------+------+-------------+
+</span><span id="__span-10-9">2 rows in set (0,00 sec)
+</span></code></pre></div>
+</li>
+</ul>
+<h2 id="64-between">6.4. BETWEEN</h2>
+<p><strong><code>BETWEEN</code> selecciona los valores entre dos cotas</strong>. Su uso habitual es "<code>BETWEEN x AND y</code>", lo que sería equivalente a <code>&gt;=x AND &lt;=y</code>.</p>
+<p>Este operador se puede usar con cualquier tipo de dato, aunque lo más común es con fechas o tipos numéricos, ya que con cadenas de texto es una comparación sobre el orden alfabético. Por ejemplo:</p>
+<ul>
+<li>
+<p>Mostrar todos los datos de los pedidos con número entre el <em>2</em> y el <em>4</em>, ambos incluidos:</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-11-1">mysql&gt; SELECT * FROM pedido WHERE num_ped BETWEEN 2 AND 4;
+</span><span id="__span-11-2">+---------+------------+----------+
+</span><span id="__span-11-3">| num_ped | fecha      | cod_prov |
+</span><span id="__span-11-4">+---------+------------+----------+
+</span><span id="__span-11-5">|       2 | 2013-06-10 | MA280    |
+</span><span id="__span-11-6">|       3 | 2013-06-12 | BA843    |
+</span><span id="__span-11-7">|       4 | 2013-06-14 | TO342    |
+</span><span id="__span-11-8">+---------+------------+----------+
+</span><span id="__span-11-9">3 rows in set (0,00 sec)
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar todos los datos de los pedidos de los días <em>12 y 13 de junio de 2013</em>:</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-12-1">mysql&gt; SELECT * FROM pedido WHERE fecha BETWEEN '2013-06-12' AND '2013-06-13';
+</span><span id="__span-12-2">+---------+------------+----------+
+</span><span id="__span-12-3">| num_ped | fecha      | cod_prov |
+</span><span id="__span-12-4">+---------+------------+----------+
+</span><span id="__span-12-5">|       3 | 2013-06-12 | BA843    |
+</span><span id="__span-12-6">+---------+------------+----------+
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar todos los datos de los pedidos a los proveedores con un código que empiece por una letra desde la <em>B</em> hasta la <em>L</em>:</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-13-1">mysql&gt; SELECT * FROM pedido WHERE cod_prov BETWEEN 'B' AND 'M';
+</span><span id="__span-13-2">+---------+------------+----------+
+</span><span id="__span-13-3">| num_ped | fecha      | cod_prov |
+</span><span id="__span-13-4">+---------+------------+----------+
+</span><span id="__span-13-5">|       3 | 2013-06-12 | BA843    |
+</span><span id="__span-13-6">+---------+------------+----------+
+</span></code></pre></div>
+<p>Se usa <em>'M'</em> y no <em>'L'</em> puesto que cualquier código que empiece por <em>L</em> pero tenga más caracteres ya es "mayor". Si existiese un código <em>'M'</em> sin más caracteres después se mostraría, pero se considera un código no válido.</p>
+</li>
+</ul>
+<h2 id="65-not-in">6.5. [NOT] IN</h2>
+<p>Esta opción, que ya se ha visto en unidades anteriores como cláusula a usar en el <code>CHECK</code>, permite comparar con un listado de valores. Su uso es el siguiente: <code>expr_col [NOT] IN (Valor_1, Valor2, Valor_3, …)</code>.</p>
+<p>Permite comprobar si la expresión/columna especificada está o no está entre un listado de valores. Sería equivalente a encadenar comparaciones de <em>Valor_X</em> con operadores <code>OR</code>, abreviando mucho el texto de la consulta. Más adelante, en la parte correspondiente a subconsultas, se podrá ver que esta cláusula resulta muy útil también para seleccionar valores que pertenezcan al resultado de otra consulta.</p>
+<ul>
+<li>
+<p>Mostrar los datos de los empleados de los departamentos <em>'INF'</em>, <em>'COM'</em> y <em>'CONT'</em>.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-14-1">mysql&gt; SELECT * FROM empleados WHERE dpt IN ('INF', 'COM', 'CONT');
+</span><span id="__span-14-2">+-----------+-----------------+--------------+------------+------+
+</span><span id="__span-14-3">| dni       | nombre_emp      | especialidad | fecha_alta | dpt  |
+</span><span id="__span-14-4">+-----------+-----------------+--------------+------------+------+
+</span><span id="__span-14-5">| 34567890C | Iván Gómez      | Ventas       | 2012-07-20 | COM  |
+</span><span id="__span-14-6">| 56789012E | María Cuadrado  | Ventas       | 2013-04-02 | COM  |
+</span><span id="__span-14-7">| 12345678A | Alberto Gil     | Contable     | 2010-12-10 | CONT |
+</span><span id="__span-14-8">| 23456789B | Mariano Sanz    | Informática  | 2011-10-04 | INF  |
+</span><span id="__span-14-9">| 45678901D | Ana Silván      | Informática  | 2012-11-25 | INF  |
+</span><span id="__span-14-10">+-----------+-----------------+--------------+------------+------+
+</span><span id="__span-14-11">5 rows in set (0,00 sec)
+</span><span id="__span-14-12">mysql&gt; -- Mismo resultado
+</span><span id="__span-14-13">mysql&gt; SELECT * FROM empleados WHERE dpt = 'INF' OR dpt = 'COM' OR dpt = 'CONT';
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar los datos de los empleados que no pertenezcan a los departamentos de informática, comercial ni contabilidad.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-15-1">mysql&gt; SELECT * FROM empleados WHERE dpt NOT IN ('INF', 'COM', 'CONT');
+</span><span id="__span-15-2">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-15-3">| dni       | nombre_emp     | especialidad | fecha_alta | dpt  |
+</span><span id="__span-15-4">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-15-5">| 67890123A | Roberto Milán  | Logística    | 2010-02-05 | ALM  |
+</span><span id="__span-15-6">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-15-7">1 row in set (0,00 sec)
+</span><span id="__span-15-8">mysql&gt; -- Mismo resultado
+</span><span id="__span-15-9">mysql&gt; SELECT * FROM empleados WHERE dpt&lt;&gt;'INF' AND dpt&lt;&gt;'COM' AND dpt&lt;&gt;'CONT';
+</span></code></pre></div>
+</li>
+</ul>
+<h2 id="66-not-like">6.6. [NOT] LIKE</h2>
+<p><strong><code>LIKE</code> permite filtrar campos de tipo texto usando patrones</strong> en vez de valores concretos. Se usa del siguiente modo: <code>expr_col [NOT] LIKE 'Patrón'</code>.</p>
+<p>El patrón de búsqueda puede contener cualquier combinación de caracteres y comodines entre comillas simples (también dobles en MySQL). Los comodines son dos:</p>
+<ul>
+<li><code>_</code> Representa cualquier carácter</li>
+<li><code>%</code> Representa cualquier conjunto de caracteres.</li>
+</ul>
+<p>Por ejemplo, <code>LIKE 'C_M'</code> busca todas las palabras de <em>3 letras</em> que empiecen por <em>C</em> y acaben en <em>M</em>, mientras que <code>LIKE 'C%M'</code> busca todas las palabras que empiecen por <em>C</em> y acaben en <em>M</em>. Se pueden usar y combinar tantos comodines como se desee.</p>
+<ul>
+<li>
+<p>Mostrar todos los empleados cuyo nombre empiece por <em>'A'</em>.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-16-1">mysql&gt; SELECT * FROM empleados WHERE nombre_emp LIKE 'A%';
+</span><span id="__span-16-2">+-----------+-------------+--------------+------------+------+
+</span><span id="__span-16-3">| dni       | nombre_emp  | especialidad | fecha_alta | dpt  |
+</span><span id="__span-16-4">+-----------+-------------+--------------+------------+------+
+</span><span id="__span-16-5">| 12345678A | Alberto Gil | Contable     | 2010-12-10 | CONT |
+</span><span id="__span-16-6">| 45678901D | Ana Silván  | Informática  | 2012-11-25 | INF  |
+</span><span id="__span-16-7">+-----------+-------------+--------------+------------+------+
+</span><span id="__span-16-8">2 rows in set (0,01 sec)
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar los empleados cuyo nombre (completo, por tanto el apellido) acabe en <em>'n'</em>.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-17-1">mysql&gt; SELECT * FROM empleados WHERE nombre_emp LIKE '%n';
+</span><span id="__span-17-2">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-17-3">| dni       | nombre_emp     | especialidad | fecha_alta | dpt  |
+</span><span id="__span-17-4">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-17-5">| 45678901D | Ana Silván     | Informática  | 2012-11-25 | INF  |
+</span><span id="__span-17-6">| 67890123A | Roberto Milán  | Logística    | 2010-02-05 | ALM  |
+</span><span id="__span-17-7">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-17-8">2 rows in set (0,01 sec)
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar los empleados cuyo nombre (completo) contenga la cadena <em>'il'</em>.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-18-1">mysql&gt; SELECT * FROM empleados WHERE nombre_emp LIKE '%il%';
+</span><span id="__span-18-2">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-18-3">| dni       | nombre_emp     | especialidad | fecha_alta | dpt  |
+</span><span id="__span-18-4">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-18-5">| 12345678A | Alberto Gil    | Contable     | 2010-12-10 | CONT |
+</span><span id="__span-18-6">| 45678901D | Ana Silván     | Informática  | 2012-11-25 | INF  |
+</span><span id="__span-18-7">| 67890123A | Roberto Milán  | Logística    | 2010-02-05 | ALM  |
+</span><span id="__span-18-8">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-18-9">3 rows in set (0,00 sec)
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar los departamentos cuyo código tenga 4 letras.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-19-1">mysql&gt; SELECT * FROM departamentos WHERE cod_dpt LIKE '____';
+</span><span id="__span-19-2">+---------+--------------+------------------+
+</span><span id="__span-19-3">| cod_dpt | nombre_dpt   | ubicacion        |
+</span><span id="__span-19-4">+---------+--------------+------------------+
+</span><span id="__span-19-5">| CONT    | Contabilidad | Planta quinta U1 |
+</span><span id="__span-19-6">+---------+--------------+------------------+
+</span><span id="__span-19-7">1 row in set (0,00 sec)
+</span></code></pre></div>
+</li>
+<li>
+<p>Mostrar los empleados cuyo nombre completo tenga <em>'to'</em> como sexta y séptima letra.</p>
+<div class="language-text cmd highlight"><pre><span></span><code><span id="__span-20-1">mysql&gt; SELECT * FROM empleados WHERE nombre_emp LIKE '_____to%';
+</span><span id="__span-20-2">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-20-3">| dni       | nombre_emp     | especialidad | fecha_alta | dpt  |
+</span><span id="__span-20-4">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-20-5">| 12345678A | Alberto Gil    | Contable     | 2010-12-10 | CONT |
+</span><span id="__span-20-6">| 67890123A | Roberto Milán  | Logística    | 2010-02-05 | ALM  |
+</span><span id="__span-20-7">+-----------+----------------+--------------+------------+------+
+</span><span id="__span-20-8">2 rows in set (0,00 sec)
+</span></code></pre></div>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "content.code.annotate", "navigation.tracking", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../js/toc-toggle.js"></script>
+      
+    
+  </body>
+</html>
