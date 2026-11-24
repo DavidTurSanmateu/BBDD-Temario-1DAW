@@ -3614,11 +3614,13 @@
 </div>
 <p>Los índices se almacenan aparte de la tabla a la que hace referencia, lo que permite crearlos y borrarlos en cualquier momento. No sólo agilizan las búsquedas ordenadas sino cualquier búsqueda que filtre usando el campo o los campos en el índice.</p>
 <p>La mayoría de los índices se crean de manera implícita (automática), como consecuencia de las restricciones <code>PRIMARY KEY</code>, <code>UNIQUE</code> y <code>FOREIGN KEY</code>. Estos son índices obligatorios, por lo que los crea el propio SGBD. Por ejemplo en la tabla anterior se crean todos estos elementos automáticamente:</p>
-<p>La tabla <code>ESTUDIANTES</code>.
-Una estructura indexada ordenada por la <strong>PK <code>DNI</code></strong>.
-Una estructura indexada ordenada por la <strong>FK <code>id_ciudad</code></strong>.
-Una estructura indexada ordenada por la <strong>UK <code>{nombre, apellidos}</code></strong>.
-De esta manera, cada vez que hagamos una operación <em>DML</em> (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) sobre esa tabla tendremos que reconstruir todos esos objetos por lo que <strong>los índices son recomendados solo cuando las operaciones DML son infinitamente menores que las de consulta</strong> (<em>DQL</em> o <code>SELECT</code>).</p>
+<ul>
+<li>La tabla <code>ESTUDIANTES</code>.</li>
+<li>Una estructura indexada ordenada por la <strong>PK <code>DNI</code></strong>.</li>
+<li>Una estructura indexada ordenada por la <strong>FK <code>id_ciudad</code></strong>.</li>
+<li>Una estructura indexada ordenada por la <strong>UK <code>{nombre, apellidos}</code></strong>.</li>
+</ul>
+<p>De esta manera, cada vez que hagamos una operación <em>DML</em> (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) sobre esa tabla tendremos que reconstruir todos esos objetos por lo que <strong>los índices son recomendados solo cuando las operaciones DML son infinitamente menores que las de consulta</strong> (<em>DQL</em> o <code>SELECT</code>).</p>
 <p>Por tanto:</p>
 <ul>
 <li>Los índices realizan una lista ordenada por la que el SGBD puede acceder para facilitar la búsqueda y ordenación de los datos. <strong>Ayudan a acelerar ciertas consultas</strong>.</li>
