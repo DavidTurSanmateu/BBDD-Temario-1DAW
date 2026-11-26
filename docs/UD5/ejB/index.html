@@ -2957,6 +2957,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-empleados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 3. Empleados
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3587,6 +3598,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#ejercicio-3-empleados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio 3. Empleados
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3913,6 +3935,224 @@
 <p>9. <b>Cambiar el correo electrónico de Pablo Díaz a <code>pablo.diaz@gmail.com</code>.</b></p>
 <p>10. <b>Eliminar la reserva número 4.</b></p>
 <p>11. <b>Eliminar los destinos que no tengan ninguna plaza disponible.</b></p>
+<h2 id="ejercicio-3-empleados">Ejercicio 3. Empleados</h2>
+<p>Descarga y ejecuta el script proporcionado, y realiza las acciones que se piden a continuación, escribiendo las instrucciones DML correspondientes.</p>
+<p><a href="../src/ejB-empleados.sql" download class="md-button md-button--primary">
+    <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.75 14A1.75 1.75 0 0 1 1 12.25v-2.5a.75.75 0 0 1 1.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 0 0 .25-.25v-2.5a.75.75 0 0 1 1.5 0v2.5A1.75 1.75 0 0 1 13.25 14Z"/><path d="M7.25 7.689V2a.75.75 0 0 1 1.5 0v5.689l1.97-1.969a.749.749 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 6.78a.749.749 0 1 1 1.06-1.06z"/></svg></span> Descargar script
+</a></p>
+<table>
+<thead>
+<tr>
+<th>ID_EMPLEADO</th>
+<th>NOMBRE</th>
+<th>APELLIDO</th>
+<th>EMAIL</th>
+<th>TELEFONO</th>
+<th>FECHA_EMPLEADO</th>
+<th>ID_TRABAJO</th>
+<th>SALARIO</th>
+<th>COMISION_PCT</th>
+<th>ID_MANAGER</th>
+<th>ID_DEPARTAMENTO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>Steven</td>
+<td>King</td>
+<td>SKING</td>
+<td>515.123.4567</td>
+<td>1987-06-17</td>
+<td>AD_PRES</td>
+<td>24000.00</td>
+<td>0.00</td>
+<td>0</td>
+<td>90</td>
+</tr>
+<tr>
+<td>101</td>
+<td>Neena</td>
+<td>Kochhar</td>
+<td>NKOCHHAR</td>
+<td>515.123.4568</td>
+<td>1987-06-18</td>
+<td>AD_VP</td>
+<td>17000.00</td>
+<td>0.00</td>
+<td>100</td>
+<td>90</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Lex</td>
+<td>De Haan</td>
+<td>LDEHAAN</td>
+<td>515.123.4569</td>
+<td>1987-06-19</td>
+<td>AD_VP</td>
+<td>17000.00</td>
+<td>0.00</td>
+<td>100</td>
+<td>90</td>
+</tr>
+<tr>
+<td>103</td>
+<td>Alexander</td>
+<td>Hunold</td>
+<td>AHUNOLD</td>
+<td>590.423.4567</td>
+<td>1987-06-20</td>
+<td>IT_PROG</td>
+<td>9000.00</td>
+<td>0.00</td>
+<td>102</td>
+<td>60</td>
+</tr>
+<tr>
+<td>104</td>
+<td>Bruce</td>
+<td>Ernst</td>
+<td>BERNST</td>
+<td>590.423.4568</td>
+<td>1987-06-21</td>
+<td>IT_PROG</td>
+<td>6000.00</td>
+<td>0.00</td>
+<td>103</td>
+<td>60</td>
+</tr>
+<tr>
+<td>105</td>
+<td>David</td>
+<td>Austin</td>
+<td>DAUSTIN</td>
+<td>590.423.4569</td>
+<td>1987-06-22</td>
+<td>IT_PROG</td>
+<td>4800.00</td>
+<td>0.00</td>
+<td>103</td>
+<td>60</td>
+</tr>
+<tr>
+<td>106</td>
+<td>Valli</td>
+<td>Pataballa</td>
+<td>VPATABAL</td>
+<td>590.423.4560</td>
+<td>1987-06-23</td>
+<td>IT_PROG</td>
+<td>4800.00</td>
+<td>0.00</td>
+<td>103</td>
+<td>60</td>
+</tr>
+<tr>
+<td>107</td>
+<td>Diana</td>
+<td>Lorentz</td>
+<td>DLORENTZ</td>
+<td>590.423.5567</td>
+<td>1987-06-24</td>
+<td>IT_PROG</td>
+<td>4200.00</td>
+<td>0.00</td>
+<td>103</td>
+<td>60</td>
+</tr>
+<tr>
+<td>108</td>
+<td>Nancy</td>
+<td>Greenberg</td>
+<td>NGREENBE</td>
+<td>515.124.4569</td>
+<td>1987-06-25</td>
+<td>FI_MGR</td>
+<td>12000.00</td>
+<td>0.00</td>
+<td>101</td>
+<td>100</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>206</td>
+<td>William</td>
+<td>Gietz</td>
+<td>WGIETZ</td>
+<td>515.123.8181</td>
+<td>1987-10-01</td>
+<td>AC_ACCOUNT</td>
+<td>8300.00</td>
+<td>0.00</td>
+<td>205</td>
+<td>110</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Modificar datos</strong>:</p>
+<ol>
+<li>
+<p>Escribe una sentencia SQL para modificar la columna <code>email</code> de la tabla <em>empleados</em>, asignando el valor "no disponible" a todos los empleados.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar las columnas <code>email</code> y <code>comision_pct</code> de la tabla <em>empleados</em>, asignando los valores "no disponible" y 0.10, respectivamente, a todos los empleados.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar las columnas <code>email</code> y <code>comision_pct</code> de la tabla <em>empleados</em>, asignando los valores "no disponible" y 0.10, respectivamente, a los empleados cuyo <code>id_departamento</code> sea 110.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar la columna <code>email</code> de la tabla <em>empleados</em>, asignando el valor "no disponible" a los empleados cuyo <code>id_departamento</code> sea 80 y cuya <code>comision_pct</code> sea inferior a 0.20.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar el <code>salario</code> del empleado cuyo <code>id_empleado</code> sea 105, estableciéndolo en 8000, siempre que su salario actual sea inferior a 5000.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para incrementar el <code>salario</code> en 500 unidades a los empleados que pertenezcan al departamento 60 y cuyo salario actual sea inferior a 6000, o que pertenezcan al departamento 90 y tengan un salario inferior a 15000.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar la comisión (<code>comision_pct</code>) de los empleados que pertenezcan a los departamentos 50, 60 o 80 y cuyo salario sea superior a 5000, asignándoles un valor de 0.15.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar el <code>email</code> y el teléfono de los empleados cuyo identificador sea 105 o 106, o que pertenezcan al departamento 100 y tengan un salario superior a 5000. Se asignará el valor "no disponible" al email y "999.999.999" al teléfono.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para incrementar el <code>salario</code> un 10 % a los empleados que pertenezcan al departamento 60 y tengan un salario inferior a 5000, o que pertenezcan al departamento 90 y tengan un <code>salario</code> inferior a 15000.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar el identificador del departamento de los empleados que tengan un salario superior a 10000 y cuyo identificador de puesto de trabajo sea distinto de "AD_PRES" y "AD_VP", asignándoles el departamento 90.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar el <code>salario</code> de los empleados que pertenezcan al departamento 50 o 60, siempre que su salario sea inferior a 4000 o superior a 8000, estableciéndolo en 5000.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar el <code>email</code> y la comisión de los empleados que pertenezcan al departamento 80 y tengan un salario superior a 7000, o que pertenezcan al departamento 90 y tengan un salario inferior a 12000. Se asignará el valor "no disponible" al email y 0.10 a la comisión.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para incrementar el <code>salario</code> un 15 % a los empleados que pertenezcan al departamento 60, 80 o 90, siempre que su salario actual sea inferior a 10000 y su identificador de puesto de trabajo sea distinto de "AD_PRES".</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar el identificador del manager de los empleados que pertenezcan al departamento 60 y tengan un salario superior a 5000, o que pertenezcan al departamento 100 y tengan un salario inferior a 10000. Asigna el identificador 103.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para modificar el <code>salario</code> y la comisión de los empleados que pertenezcan al departamento 80 y tengan una comisión superior a 0.10, o que pertenezcan al departamento 90 y tengan una comisión igual a 0.00. Establece el salario en 6000 y la comisión en 0.15.</p>
+</li>
+<li>
+<p>Escribe una sentencia SQL para incrementar un 20 % el salario de los empleados que pertenezcan al departamento 50 o 60 y tengan un salario inferior a 5000, o que pertenezcan al departamento 90 y tengan un salario inferior a 15000.</p>
+</li>
+</ol>
 <p><a class="md-button md-button--primary" href="../../Soluciones/sol_ud5/sol-boletinB">Soluciones</a></p>
 
 
